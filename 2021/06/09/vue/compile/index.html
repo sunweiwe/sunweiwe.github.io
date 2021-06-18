@@ -1,0 +1,149 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>compile | 孙小文的个人网站</title><meta name="keywords" content="vue"><meta name="author" content="Sun Weiwei,sunweiwei.lin@foxmail.com"><meta name="copyright" content="Sun Weiwei"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Complieweb enteryexport function compile(  template: string,  options: CompilerOptions &#x3D; &amp;#123;&amp;#125;): CodegenResult &amp;#123;  return baseCompile(    template,    extend(&amp;#123;&amp;#125;, parserOptions, op">
+<meta property="og:type" content="article">
+<meta property="og:title" content="compile">
+<meta property="og:url" content="https://sunweiwe.github.io/2021/06/09/vue/compile/index.html">
+<meta property="og:site_name" content="孙小文的个人网站">
+<meta property="og:description" content="Complieweb enteryexport function compile(  template: string,  options: CompilerOptions &#x3D; &amp;#123;&amp;#125;): CodegenResult &amp;#123;  return baseCompile(    template,    extend(&amp;#123;&amp;#125;, parserOptions, op">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg">
+<meta property="article:published_time" content="2021-06-09T12:46:25.000Z">
+<meta property="article:modified_time" content="2021-06-18T15:15:59.224Z">
+<meta property="article:author" content="Sun Weiwei">
+<meta property="article:tag" content="vue">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://sunweiwe.github.io/2021/06/09/vue/compile/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-06-18 23:15:59'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    })(window)</script><meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="孙小文的个人网站" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="https://cdn.jsdelivr.net/gh/sunweiwe/image_store/blog/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">22</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">18</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">孙小文的个人网站</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">compile</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-06-09T12:46:25.000Z" title="发表于 2021-06-09 20:46:25">2021-06-09</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-06-18T15:15:59.224Z" title="更新于 2021-06-18 23:15:59">2021-06-18</time></span></div><div class="meta-secondline"></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="Complie"><a href="#Complie" class="headerlink" title="Complie"></a>Complie</h2><h3 id="web-entery"><a href="#web-entery" class="headerlink" title="web entery"></a>web entery</h3><figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">compile</span>(<span class="params"></span></span></span><br><span class="line"><span class="params"><span class="function">  template: <span class="built_in">string</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">  options: CompilerOptions = &#123;&#125;</span></span></span><br><span class="line"><span class="params"><span class="function"></span>): <span class="title">CodegenResult</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> baseCompile(</span><br><span class="line">    template,</span><br><span class="line">    extend(&#123;&#125;, parserOptions, options, &#123;</span><br><span class="line">      <span class="attr">nodeTransforms</span>: [</span><br><span class="line">        ignoreSideEffectTags,</span><br><span class="line">        ...DOMNodeTransforms,</span><br><span class="line">        ...(options.nodeTransforms || [])</span><br><span class="line">      ],</span><br><span class="line">      <span class="attr">directiveTransforms</span>: extend(</span><br><span class="line">        &#123;&#125;,</span><br><span class="line">        DOMDirectiveTransforms,</span><br><span class="line">        options.directiveTransforms || &#123;&#125;</span><br><span class="line">      ),</span><br><span class="line">      <span class="attr">transformHoist</span>: __BROWSER__ ? <span class="literal">null</span> : stringifyStatic</span><br><span class="line">    &#125;)</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<blockquote>
+<p>解析 template 生成 AST，AST 转换和生成代码。</p>
+</blockquote>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/vue/">vue</a></div><div class="post_share"></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2021/05/26/css/BFC/"><img class="next-cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">bfc</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2021/05/18/reactivity/reactivity解析/" title="reactivity解析"><img class="cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-05-18</div><div class="title">reactivity解析</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" src="https://cdn.jsdelivr.net/gh/sunweiwe/image_store/blog/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">Sun Weiwei</div><div class="author-info__description">已识乾坤大，尤怜草木清。</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">22</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">18</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/sunweiwe"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="/f" target="_blank" title=""><i></i></a><a class="social-icon" href="/a" target="_blank" title=""><i class="1"></i></a><a class="social-icon" href="/b" target="_blank" title=""><i class="2"></i></a><a class="social-icon" href="/" target="_blank" title=""><i class="3"></i></a><a class="social-icon" href="/f" target="_blank" title=""><i class="4"></i></a><a class="social-icon" href="/a" target="_blank" title=""><i class="5"></i></a><a class="social-icon" href="/-" target="_blank" title=""><i class="6"></i></a><a class="social-icon" href="/g" target="_blank" title=""><i class="7"></i></a><a class="social-icon" href="/i" target="_blank" title=""><i class="8"></i></a><a class="social-icon" href="/t" target="_blank" title=""><i class="9"></i></a><a class="social-icon" href="/h" target="_blank" title=""><i class="10"></i></a><a class="social-icon" href="/u" target="_blank" title=""><i class="11"></i></a><a class="social-icon" href="/b" target="_blank" title=""><i class="12"></i></a><a class="social-icon" href="/:" target="_blank" title=""><i class="13"></i></a><a class="social-icon" href="/h" target="_blank" title=""><i class="14"></i></a><a class="social-icon" href="/t" target="_blank" title=""><i class="15"></i></a><a class="social-icon" href="/t" target="_blank" title=""><i class="16"></i></a><a class="social-icon" href="/p" target="_blank" title=""><i class="17"></i></a><a class="social-icon" href="/s" target="_blank" title=""><i class="18"></i></a><a class="social-icon" href="/:" target="_blank" title=""><i class="19"></i></a><a class="social-icon" href="/" target="_blank" title=""><i class="20"></i></a><a class="social-icon" href="/" target="_blank" title=""><i class="21"></i></a><a class="social-icon" href="/g" target="_blank" title=""><i class="22"></i></a><a class="social-icon" href="/i" target="_blank" title=""><i class="23"></i></a><a class="social-icon" href="/t" target="_blank" title=""><i class="24"></i></a><a class="social-icon" href="/h" target="_blank" title=""><i class="25"></i></a><a class="social-icon" href="/u" target="_blank" title=""><i class="26"></i></a><a class="social-icon" href="/b" target="_blank" title=""><i class="27"></i></a><a class="social-icon" href="/." target="_blank" title=""><i class="28"></i></a><a class="social-icon" href="/c" target="_blank" title=""><i class="29"></i></a><a class="social-icon" href="/o" target="_blank" title=""><i class="30"></i></a><a class="social-icon" href="/m" target="_blank" title=""><i class="31"></i></a><a class="social-icon" href="/" target="_blank" title=""><i class="32"></i></a><a class="social-icon" href="/s" target="_blank" title=""><i class="33"></i></a><a class="social-icon" href="/u" target="_blank" title=""><i class="34"></i></a><a class="social-icon" href="/n" target="_blank" title=""><i class="35"></i></a><a class="social-icon" href="/w" target="_blank" title=""><i class="36"></i></a><a class="social-icon" href="/e" target="_blank" title=""><i class="37"></i></a><a class="social-icon" href="/i" target="_blank" title=""><i class="38"></i></a><a class="social-icon" href="/w" target="_blank" title=""><i class="39"></i></a><a class="social-icon" href="/e" target="_blank" title=""><i class="40"></i></a><a class="social-icon" href="/" target="_blank" title=""><i class="41"></i></a><a class="social-icon" href="/%7C" target="_blank" title=""><i class="42"></i></a><a class="social-icon" href="/%7C" target="_blank" title=""><i class="43"></i></a><a class="social-icon" href="/" target="_blank" title=""><i class="44"></i></a><a class="social-icon" href="/G" target="_blank" title=""><i class="45"></i></a><a class="social-icon" href="/i" target="_blank" title=""><i class="46"></i></a><a class="social-icon" href="/t" target="_blank" title=""><i class="47"></i></a><a class="social-icon" href="/h" target="_blank" title=""><i class="48"></i></a><a class="social-icon" href="/u" target="_blank" title=""><i class="49"></i></a><a class="social-icon" href="/b" target="_blank" title=""><i class="50"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">天行健，君子以自强不息。地势坤，君子以厚德载物。</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Complie"><span class="toc-number">1.</span> <span class="toc-text">Complie</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#web-entery"><span class="toc-number">1.1.</span> <span class="toc-text">web entery</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2021/06/09/vue/compile/" title="compile"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="compile"/></a><div class="content"><a class="title" href="/2021/06/09/vue/compile/" title="compile">compile</a><time datetime="2021-06-09T12:46:25.000Z" title="发表于 2021-06-09 20:46:25">2021-06-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/05/26/css/BFC/" title="bfc"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="bfc"/></a><div class="content"><a class="title" href="/2021/05/26/css/BFC/" title="bfc">bfc</a><time datetime="2021-05-26T12:55:16.000Z" title="发表于 2021-05-26 20:55:16">2021-05-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/05/18/reactivity/reactivity%E8%A7%A3%E6%9E%90/" title="reactivity解析"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="reactivity解析"/></a><div class="content"><a class="title" href="/2021/05/18/reactivity/reactivity%E8%A7%A3%E6%9E%90/" title="reactivity解析">reactivity解析</a><time datetime="2021-05-18T09:59:57.000Z" title="发表于 2021-05-18 17:59:57">2021-05-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/03/04/es/ES6/" title="ES6"><img src="https://cdn.jsdelivr.net/gh/sunweiwe/image_store/blog/pad.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="ES6"/></a><div class="content"><a class="title" href="/2021/03/04/es/ES6/" title="ES6">ES6</a><time datetime="2021-03-04T04:00:00.000Z" title="发表于 2021-03-04 12:00:00">2021-03-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/03/01/Babel/" title="babel"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="babel"/></a><div class="content"><a class="title" href="/2021/03/01/Babel/" title="babel">babel</a><time datetime="2021-02-28T16:00:00.000Z" title="发表于 2021-03-01 00:00:00">2021-03-01</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2021 By Sun Weiwei</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div></div></body></html>

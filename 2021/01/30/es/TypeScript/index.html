@@ -1,0 +1,224 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>typescript | 孙小文的个人网站</title><meta name="keywords" content="typeScript"><meta name="author" content="Sun Weiwei,sunweiwei.lin@foxmail.com"><meta name="copyright" content="Sun Weiwei"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="声明空间 在 TypeScript 里存在两种声明空间：类型声明空间与变量声明空间。  类型声明空间 类型声明空间包含用来当做类型注解的内容，例如下面的类型声明：  class Foo &amp;#123;&amp;#125;interface Bar &amp;#123;&amp;#125;type Bas &#x3D; &amp;#123;&amp;#125;;  你可以将 Foo, Bar, Bas 作为类型注解使用，示例如下：  let foo:">
+<meta property="og:type" content="article">
+<meta property="og:title" content="typescript">
+<meta property="og:url" content="https://sunweiwe.github.io/2021/01/30/es/TypeScript/index.html">
+<meta property="og:site_name" content="孙小文的个人网站">
+<meta property="og:description" content="声明空间 在 TypeScript 里存在两种声明空间：类型声明空间与变量声明空间。  类型声明空间 类型声明空间包含用来当做类型注解的内容，例如下面的类型声明：  class Foo &amp;#123;&amp;#125;interface Bar &amp;#123;&amp;#125;type Bas &#x3D; &amp;#123;&amp;#125;;  你可以将 Foo, Bar, Bas 作为类型注解使用，示例如下：  let foo:">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/sunweiwe/image_store/blog/pad.png">
+<meta property="article:published_time" content="2021-01-30T13:58:09.000Z">
+<meta property="article:modified_time" content="2021-06-18T15:06:33.612Z">
+<meta property="article:author" content="Sun Weiwei">
+<meta property="article:tag" content="typeScript">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/sunweiwe/image_store/blog/pad.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://sunweiwe.github.io/2021/01/30/es/TypeScript/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-06-18 23:06:33'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    })(window)</script><meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="孙小文的个人网站" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="https://cdn.jsdelivr.net/gh/sunweiwe/image_store/blog/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">22</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">18</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.jsdelivr.net/gh/sunweiwe/image_store/blog/pad.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">孙小文的个人网站</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">typescript</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-01-30T13:58:09.000Z" title="发表于 2021-01-30 21:58:09">2021-01-30</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-06-18T15:06:33.612Z" title="更新于 2021-06-18 23:06:33">2021-06-18</time></span></div><div class="meta-secondline"></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="声明空间"><a href="#声明空间" class="headerlink" title="声明空间"></a>声明空间</h2><blockquote>
+<p>在 TypeScript 里存在两种声明空间：类型声明空间与变量声明空间。</p>
+</blockquote>
+<h3 id="类型声明空间"><a href="#类型声明空间" class="headerlink" title="类型声明空间"></a>类型声明空间</h3><blockquote>
+<p>类型声明空间包含用来当做类型注解的内容，例如下面的类型声明：</p>
+</blockquote>
+<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span> </span>&#123;&#125;</span><br><span class="line"><span class="keyword">interface</span> Bar &#123;&#125;</span><br><span class="line"><span class="keyword">type</span> Bas = &#123;&#125;;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>你可以将 Foo, Bar, Bas 作为类型注解使用，示例如下：</p>
+</blockquote>
+<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> foo: Foo;</span><br><span class="line"><span class="keyword">let</span> bar: Bar;</span><br><span class="line"><span class="keyword">let</span> bas: Bas;</span><br></pre></td></tr></table></figure>
+<h3 id="变量声明空间"><a href="#变量声明空间" class="headerlink" title="变量声明空间"></a>变量声明空间</h3><blockquote>
+<p>变量声明空间包含可用作变量的内容</p>
+</blockquote>
+<h2 id="TypeScript-类型系统"><a href="#TypeScript-类型系统" class="headerlink" title="TypeScript 类型系统"></a>TypeScript 类型系统</h2><ul>
+<li>TypeScript 的类型系统被设计为可选的，因此，你的 JavaScript 就是 TypeScript;</li>
+<li>TypeScript 不会阻止 JavaScript 的运行，即使存在类型错误也不例外，这能让你的 JavaScript 逐步迁移至 TypeScript。</li>
+</ul>
+<h3 id="基本注解"><a href="#基本注解" class="headerlink" title="基本注解"></a>基本注解</h3><blockquote>
+<p>类型注解使用 :TypeAnnotation 语法。在类型声明空间中可用的任何内容都可以用作类型注解。</p>
+</blockquote>
+<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> num: <span class="built_in">number</span> = <span class="number">123</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">identity</span>(<span class="params">num: <span class="built_in">number</span></span>): <span class="title">number</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> num;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="原始类型"><a href="#原始类型" class="headerlink" title="原始类型"></a>原始类型</h3><h4 id="基本类型"><a href="#基本类型" class="headerlink" title="基本类型"></a>基本类型</h4><blockquote>
+<p>JavaScript 原始类型也同样适应于 TypeScript 的类型系统，因此 string、number、boolean 也可以被用作类型注解</p>
+</blockquote>
+<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> num: <span class="built_in">number</span>;</span><br><span class="line"><span class="keyword">let</span> str: <span class="built_in">string</span>;</span><br><span class="line"><span class="keyword">let</span> bool: <span class="built_in">boolean</span>;</span><br><span class="line"></span><br><span class="line">num = <span class="number">123</span>;</span><br><span class="line">num = <span class="number">123.456</span>;</span><br><span class="line">num = <span class="string">&#x27;123&#x27;</span>; <span class="comment">// Error</span></span><br><span class="line"></span><br><span class="line">str = <span class="string">&#x27;123&#x27;</span>;</span><br><span class="line">str = <span class="number">123</span>; <span class="comment">// Error</span></span><br><span class="line"></span><br><span class="line">bool = <span class="literal">true</span>;</span><br><span class="line">bool = <span class="literal">false</span>;</span><br><span class="line">bool = <span class="string">&#x27;false&#x27;</span>; <span class="comment">// Error</span></span><br></pre></td></tr></table></figure>
+<h4 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h4><figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> array: <span class="built_in">boolean</span>[];</span><br></pre></td></tr></table></figure>
+<h4 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h4><blockquote>
+<p>接口是 TypeScript 的一个核心知识，它能合并众多类型声明至一个类型声明：</p>
+</blockquote>
+<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">interface</span> Name &#123;</span><br><span class="line">  <span class="attr">first</span>: <span class="built_in">string</span>;</span><br><span class="line">  second: <span class="built_in">string</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> name: Name;</span><br></pre></td></tr></table></figure>
+<h5 id="类可以实现接口"><a href="#类可以实现接口" class="headerlink" title="类可以实现接口"></a>类可以实现接口</h5><figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">interface</span> Point &#123;</span><br><span class="line">  <span class="attr">x</span>: <span class="built_in">number</span>;</span><br><span class="line">  y: <span class="built_in">number</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyPoint</span> <span class="title">implements</span> <span class="title">Point</span> </span>&#123;</span><br><span class="line">  <span class="attr">x</span>: <span class="built_in">number</span>;</span><br><span class="line">  y: <span class="built_in">number</span>; <span class="comment">// Same as Point</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="内联类型注解"><a href="#内联类型注解" class="headerlink" title="内联类型注解"></a>内联类型注解</h4><blockquote>
+<p>可以使用内联注解语法注解任何内容：:{ /<em>Structure</em>/ },内联类型能为你快速的提供一个类型注解。它可以帮助你省去为类型起名的麻烦（你可能会使用一个很糟糕的名称）。然而，如果你发现需要多次使用相同的内联注解时，那么考虑把它重构为一个接口或者是 type alias</p>
+</blockquote>
+<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> name: &#123;</span><br><span class="line">  <span class="attr">first</span>: <span class="built_in">string</span>;</span><br><span class="line">  second: <span class="built_in">string</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">name = &#123;</span><br><span class="line">  <span class="attr">first</span>: <span class="string">&#x27;John&#x27;</span>,</span><br><span class="line">  <span class="attr">second</span>: <span class="string">&#x27;Doe&#x27;</span>,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">name = &#123;</span><br><span class="line">  <span class="comment">// Error: &#x27;Second is missing&#x27;</span></span><br><span class="line">  <span class="attr">first</span>: <span class="string">&#x27;John&#x27;</span>,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">name = &#123;</span><br><span class="line">  <span class="comment">// Error: &#x27;Second is the wrong type&#x27;</span></span><br><span class="line">  <span class="attr">first</span>: <span class="string">&#x27;John&#x27;</span>,</span><br><span class="line">  <span class="attr">second</span>: <span class="number">1337</span>,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h4 id="any"><a href="#any" class="headerlink" title="any"></a>any</h4><blockquote>
+<p>在类型系统里 any 能够兼容所有的类型（包括它自己）</p>
+</blockquote>
+<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> power: <span class="built_in">any</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 赋值任意类型</span></span><br><span class="line">power = <span class="string">&#x27;123&#x27;</span>;</span><br><span class="line">power = <span class="number">123</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 它也兼容任何类型</span></span><br><span class="line"><span class="keyword">let</span> num: <span class="built_in">number</span>;</span><br><span class="line">power = num;</span><br><span class="line">num = power;</span><br></pre></td></tr></table></figure>
+<h4 id="null-和-undefined"><a href="#null-和-undefined" class="headerlink" title="null 和 undefined"></a>null 和 undefined</h4><blockquote>
+<p>null 和 undefined 字面量和其他被标注了 any 类型的变量一样，都能被赋值给任意类型的变量.</p>
+</blockquote>
+<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> num: <span class="built_in">number</span>;</span><br><span class="line"><span class="keyword">let</span> str: <span class="built_in">string</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 这些类型能被赋予</span></span><br><span class="line">num = <span class="literal">null</span>;</span><br><span class="line">str = <span class="literal">undefined</span>;</span><br></pre></td></tr></table></figure>
+<h4 id="void"><a href="#void" class="headerlink" title="void"></a>void</h4><blockquote>
+<p>使用 :void 来表示一个函数没有一个返回值</p>
+</blockquote>
+<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">log</span>(<span class="params">message: <span class="built_in">string</span></span>): <span class="title">void</span> </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(message);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="泛型"><a href="#泛型" class="headerlink" title="泛型"></a>泛型</h3><figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">reverse</span>&lt;<span class="title">T</span>&gt;(<span class="params">items: T[]</span>): <span class="title">T</span>[] </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> result = [];</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = items.length - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">    result.push(items[i]);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="联合类型"><a href="#联合类型" class="headerlink" title="联合类型"></a>联合类型</h3><blockquote>
+<p>使用 | 作为标记，如 string | number</p>
+</blockquote>
+<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">formatCommandline</span>(<span class="params">command: <span class="built_in">string</span>[] | <span class="built_in">string</span></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> line = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> command === <span class="string">&#x27;string&#x27;</span>) &#123;</span><br><span class="line">    line = command.trim();</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    line = command.join(<span class="string">&#x27; &#x27;</span>).trim();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Do stuff with line: string</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="交叉类型"><a href="#交叉类型" class="headerlink" title="交叉类型"></a>交叉类型</h3><blockquote>
+<p>在 JavaScript 中， extend 是一种非常常见的模式，在这种模式中，你可以从两个对象中创建一个新对象，新对象拥有着两个对象所有的功能。交叉类型可以让你安全的使用此种模式。</p>
+</blockquote>
+<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">extend</span>&lt;<span class="title">T</span> <span class="title">extends</span> <span class="title">object</span>, <span class="title">U</span> <span class="title">extends</span> <span class="title">object</span>&gt;(<span class="params"></span></span></span><br><span class="line"><span class="params"><span class="function">  first: T,</span></span></span><br><span class="line"><span class="params"><span class="function">  second: U</span></span></span><br><span class="line"><span class="params"><span class="function"></span>): <span class="title">T</span> &amp; <span class="title">U</span> </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> result = &lt;T &amp; U&gt;&#123;&#125;;</span><br><span class="line">  for (let id in first) &#123;</span><br><span class="line">    (&lt;T&gt;result)[id] = first[id];</span><br><span class="line">  &#125;</span><br><span class="line">  for (let id in second) &#123;</span><br><span class="line">    if (!result.hasOwnProperty(id)) &#123;</span><br><span class="line">      (&lt;U&gt;result)[id] = second[id];</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  return result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">const x = extend(&#123; a: &#x27;hello&#x27; &#125;, &#123; b: 42 &#125;);</span><br><span class="line"></span><br><span class="line">// 现在 x 拥有了 a 属性与 b 属性</span><br><span class="line">const a = x.a;</span><br><span class="line">const b = x.b;</span><br></pre></td></tr></table></figure>
+<h3 id="元组类型"><a href="#元组类型" class="headerlink" title="元组类型"></a>元组类型</h3><blockquote>
+<p>使用 :[typeofmember1, typeofmember2] 的形式，为元组添加类型注解，元组可以包含任意数量的成员。</p>
+</blockquote>
+<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> nameNumber: [<span class="built_in">string</span>, <span class="built_in">number</span>];</span><br><span class="line">nameNumber = [<span class="string">&#x27;Jenny&#x27;</span>, <span class="number">221345</span>];</span><br></pre></td></tr></table></figure>
+<h3 id="类型别名"><a href="#类型别名" class="headerlink" title="类型别名"></a>类型别名</h3><blockquote>
+<p>TypeScript 提供了为类型注解设置别名的便捷语法，你可以使用 type SomeName = someValidTypeAnnotation 来创建别名。</p>
+</blockquote>
+<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">type</span> StrOrNum = <span class="built_in">string</span> | <span class="built_in">number</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用</span></span><br><span class="line"><span class="keyword">let</span> sample: StrOrNum;</span><br><span class="line">sample = <span class="number">123</span>;</span><br><span class="line">sample = <span class="string">&#x27;123&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 会检查类型</span></span><br><span class="line">sample = <span class="literal">true</span>; <span class="comment">// Error</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>TIP<br>如果你需要使用类型注解的层次结构，请使用接口。它能使用 implements 和 extends<br>为一个简单的对象类型（如上面例子中的 Coordinates）使用类型别名，只需要给它一个语义化的名字即可。另外，当你想给联合类型和交叉类型提供一个语义化的名称时，一个类型别名将会是一个好的选择。</p>
+</blockquote>
+<h3 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h3><figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">enum</span> Color &#123;</span><br><span class="line">  Red,</span><br><span class="line">  Green,</span><br><span class="line">  Blue,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> col = Color.Red;</span><br><span class="line">col = <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="类型断言"><a href="#类型断言" class="headerlink" title="类型断言"></a>类型断言</h3><blockquote>
+<p>TypeScript 允许你覆盖它的推断，并且能以你任何你想要的方式分析它，这种机制被称为「类型断言」。TypeScript 类型断言用来告诉编译器你比它更了解这个类型，并且它不应该再发出错误。<br>as 或者 &lt; type &gt;</p>
+</blockquote>
+<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">interface</span> Foo &#123;</span><br><span class="line">  <span class="attr">bar</span>: <span class="built_in">number</span>;</span><br><span class="line">  bas: <span class="built_in">string</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> foo = &#123;&#125; <span class="keyword">as</span> Foo;</span><br><span class="line">foo.bar = <span class="number">123</span>;</span><br><span class="line">foo.bas = <span class="string">&#x27;hello&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> foo: <span class="built_in">any</span>;</span><br><span class="line"><span class="keyword">let</span> bar = &lt;<span class="built_in">string</span>&gt;foo; <span class="comment">// 现在 bar 的类型是 &#x27;string&#x27;</span></span><br></pre></td></tr></table></figure>
+<h3 id="泛型-1"><a href="#泛型-1" class="headerlink" title="泛型"></a>泛型</h3><p>设计泛型的关键目的是在成员之间提供有意义的约束，这些成员可以是。</p>
+<ul>
+<li>类的实例成员</li>
+<li>类的方法</li>
+<li>函数参数</li>
+<li>函数返回值</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 创建一个泛型类</span><br><span class="line">class Queue&lt;T&gt; &#123;</span><br><span class="line">  private data: T[] = [];</span><br><span class="line">  push = (item: T) =&gt; this.data.push(item);</span><br><span class="line">  pop = (): T | undefined =&gt; this.data.shift();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 简单的使用</span><br><span class="line">const queue = new Queue&lt;number&gt;();</span><br><span class="line">queue.push(0);</span><br><span class="line">queue.push(&#x27;1&#x27;); // Error：不能推入一个 `string`，只有 number 类型被允许</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="TypeScript-编译原理"><a href="#TypeScript-编译原理" class="headerlink" title="TypeScript 编译原理"></a>TypeScript 编译原理</h2></article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/typeScript/">typeScript</a></div><div class="post_share"></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2021/02/01/html/HTML/"><img class="prev-cover" src="https://cdn.jsdelivr.net/gh/sunweiwe/image_store/blog/html.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">html5</div></div></a></div><div class="next-post pull-right"><a href="/2021/01/29/es/%E8%B7%AF%E7%94%B1/"><img class="next-cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">路由</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" src="https://cdn.jsdelivr.net/gh/sunweiwe/image_store/blog/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">Sun Weiwei</div><div class="author-info__description">已识乾坤大，尤怜草木清。</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">22</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">18</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/sunweiwe"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="/f" target="_blank" title=""><i></i></a><a class="social-icon" href="/a" target="_blank" title=""><i class="1"></i></a><a class="social-icon" href="/b" target="_blank" title=""><i class="2"></i></a><a class="social-icon" href="/" target="_blank" title=""><i class="3"></i></a><a class="social-icon" href="/f" target="_blank" title=""><i class="4"></i></a><a class="social-icon" href="/a" target="_blank" title=""><i class="5"></i></a><a class="social-icon" href="/-" target="_blank" title=""><i class="6"></i></a><a class="social-icon" href="/g" target="_blank" title=""><i class="7"></i></a><a class="social-icon" href="/i" target="_blank" title=""><i class="8"></i></a><a class="social-icon" href="/t" target="_blank" title=""><i class="9"></i></a><a class="social-icon" href="/h" target="_blank" title=""><i class="10"></i></a><a class="social-icon" href="/u" target="_blank" title=""><i class="11"></i></a><a class="social-icon" href="/b" target="_blank" title=""><i class="12"></i></a><a class="social-icon" href="/:" target="_blank" title=""><i class="13"></i></a><a class="social-icon" href="/h" target="_blank" title=""><i class="14"></i></a><a class="social-icon" href="/t" target="_blank" title=""><i class="15"></i></a><a class="social-icon" href="/t" target="_blank" title=""><i class="16"></i></a><a class="social-icon" href="/p" target="_blank" title=""><i class="17"></i></a><a class="social-icon" href="/s" target="_blank" title=""><i class="18"></i></a><a class="social-icon" href="/:" target="_blank" title=""><i class="19"></i></a><a class="social-icon" href="/" target="_blank" title=""><i class="20"></i></a><a class="social-icon" href="/" target="_blank" title=""><i class="21"></i></a><a class="social-icon" href="/g" target="_blank" title=""><i class="22"></i></a><a class="social-icon" href="/i" target="_blank" title=""><i class="23"></i></a><a class="social-icon" href="/t" target="_blank" title=""><i class="24"></i></a><a class="social-icon" href="/h" target="_blank" title=""><i class="25"></i></a><a class="social-icon" href="/u" target="_blank" title=""><i class="26"></i></a><a class="social-icon" href="/b" target="_blank" title=""><i class="27"></i></a><a class="social-icon" href="/." target="_blank" title=""><i class="28"></i></a><a class="social-icon" href="/c" target="_blank" title=""><i class="29"></i></a><a class="social-icon" href="/o" target="_blank" title=""><i class="30"></i></a><a class="social-icon" href="/m" target="_blank" title=""><i class="31"></i></a><a class="social-icon" href="/" target="_blank" title=""><i class="32"></i></a><a class="social-icon" href="/s" target="_blank" title=""><i class="33"></i></a><a class="social-icon" href="/u" target="_blank" title=""><i class="34"></i></a><a class="social-icon" href="/n" target="_blank" title=""><i class="35"></i></a><a class="social-icon" href="/w" target="_blank" title=""><i class="36"></i></a><a class="social-icon" href="/e" target="_blank" title=""><i class="37"></i></a><a class="social-icon" href="/i" target="_blank" title=""><i class="38"></i></a><a class="social-icon" href="/w" target="_blank" title=""><i class="39"></i></a><a class="social-icon" href="/e" target="_blank" title=""><i class="40"></i></a><a class="social-icon" href="/" target="_blank" title=""><i class="41"></i></a><a class="social-icon" href="/%7C" target="_blank" title=""><i class="42"></i></a><a class="social-icon" href="/%7C" target="_blank" title=""><i class="43"></i></a><a class="social-icon" href="/" target="_blank" title=""><i class="44"></i></a><a class="social-icon" href="/G" target="_blank" title=""><i class="45"></i></a><a class="social-icon" href="/i" target="_blank" title=""><i class="46"></i></a><a class="social-icon" href="/t" target="_blank" title=""><i class="47"></i></a><a class="social-icon" href="/h" target="_blank" title=""><i class="48"></i></a><a class="social-icon" href="/u" target="_blank" title=""><i class="49"></i></a><a class="social-icon" href="/b" target="_blank" title=""><i class="50"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">天行健，君子以自强不息。地势坤，君子以厚德载物。</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A3%B0%E6%98%8E%E7%A9%BA%E9%97%B4"><span class="toc-number">1.</span> <span class="toc-text">声明空间</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B1%BB%E5%9E%8B%E5%A3%B0%E6%98%8E%E7%A9%BA%E9%97%B4"><span class="toc-number">1.1.</span> <span class="toc-text">类型声明空间</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%98%E9%87%8F%E5%A3%B0%E6%98%8E%E7%A9%BA%E9%97%B4"><span class="toc-number">1.2.</span> <span class="toc-text">变量声明空间</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TypeScript-%E7%B1%BB%E5%9E%8B%E7%B3%BB%E7%BB%9F"><span class="toc-number">2.</span> <span class="toc-text">TypeScript 类型系统</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%B3%A8%E8%A7%A3"><span class="toc-number">2.1.</span> <span class="toc-text">基本注解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%9F%E5%A7%8B%E7%B1%BB%E5%9E%8B"><span class="toc-number">2.2.</span> <span class="toc-text">原始类型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B"><span class="toc-number">2.2.1.</span> <span class="toc-text">基本类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E7%BB%84"><span class="toc-number">2.2.2.</span> <span class="toc-text">数组</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8E%A5%E5%8F%A3"><span class="toc-number">2.2.3.</span> <span class="toc-text">接口</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%B1%BB%E5%8F%AF%E4%BB%A5%E5%AE%9E%E7%8E%B0%E6%8E%A5%E5%8F%A3"><span class="toc-number">2.2.3.1.</span> <span class="toc-text">类可以实现接口</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%86%85%E8%81%94%E7%B1%BB%E5%9E%8B%E6%B3%A8%E8%A7%A3"><span class="toc-number">2.2.4.</span> <span class="toc-text">内联类型注解</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#any"><span class="toc-number">2.2.5.</span> <span class="toc-text">any</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#null-%E5%92%8C-undefined"><span class="toc-number">2.2.6.</span> <span class="toc-text">null 和 undefined</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#void"><span class="toc-number">2.2.7.</span> <span class="toc-text">void</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%9B%E5%9E%8B"><span class="toc-number">2.3.</span> <span class="toc-text">泛型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%81%94%E5%90%88%E7%B1%BB%E5%9E%8B"><span class="toc-number">2.4.</span> <span class="toc-text">联合类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%A4%E5%8F%89%E7%B1%BB%E5%9E%8B"><span class="toc-number">2.5.</span> <span class="toc-text">交叉类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%83%E7%BB%84%E7%B1%BB%E5%9E%8B"><span class="toc-number">2.6.</span> <span class="toc-text">元组类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B1%BB%E5%9E%8B%E5%88%AB%E5%90%8D"><span class="toc-number">2.7.</span> <span class="toc-text">类型别名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%9A%E4%B8%BE"><span class="toc-number">2.8.</span> <span class="toc-text">枚举</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B1%BB%E5%9E%8B%E6%96%AD%E8%A8%80"><span class="toc-number">2.9.</span> <span class="toc-text">类型断言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%9B%E5%9E%8B-1"><span class="toc-number">2.10.</span> <span class="toc-text">泛型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TypeScript-%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86"><span class="toc-number">3.</span> <span class="toc-text">TypeScript 编译原理</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2021/06/09/vue/compile/" title="compile"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="compile"/></a><div class="content"><a class="title" href="/2021/06/09/vue/compile/" title="compile">compile</a><time datetime="2021-06-09T12:46:25.000Z" title="发表于 2021-06-09 20:46:25">2021-06-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/05/26/css/BFC/" title="bfc"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="bfc"/></a><div class="content"><a class="title" href="/2021/05/26/css/BFC/" title="bfc">bfc</a><time datetime="2021-05-26T12:55:16.000Z" title="发表于 2021-05-26 20:55:16">2021-05-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/05/18/reactivity/reactivity%E8%A7%A3%E6%9E%90/" title="reactivity解析"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="reactivity解析"/></a><div class="content"><a class="title" href="/2021/05/18/reactivity/reactivity%E8%A7%A3%E6%9E%90/" title="reactivity解析">reactivity解析</a><time datetime="2021-05-18T09:59:57.000Z" title="发表于 2021-05-18 17:59:57">2021-05-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/03/04/es/ES6/" title="ES6"><img src="https://cdn.jsdelivr.net/gh/sunweiwe/image_store/blog/pad.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="ES6"/></a><div class="content"><a class="title" href="/2021/03/04/es/ES6/" title="ES6">ES6</a><time datetime="2021-03-04T04:00:00.000Z" title="发表于 2021-03-04 12:00:00">2021-03-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/03/01/Babel/" title="babel"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="babel"/></a><div class="content"><a class="title" href="/2021/03/01/Babel/" title="babel">babel</a><time datetime="2021-02-28T16:00:00.000Z" title="发表于 2021-03-01 00:00:00">2021-03-01</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2021 By Sun Weiwei</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div></div></body></html>
