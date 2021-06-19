@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://sunweiwe.github.io/"/>
-  <updated>2021-06-19T10:12:19.105Z</updated>
+  <updated>2021-06-19T10:26:10.240Z</updated>
   <id>https://sunweiwe.github.io/</id>
   
   <author>
@@ -21,15 +21,15 @@
     <link href="https://sunweiwe.github.io/2021/06/09/vue/compile/"/>
     <id>https://sunweiwe.github.io/2021/06/09/vue/compile/</id>
     <published>2021-06-09T12:46:25.000Z</published>
-    <updated>2021-06-19T10:12:19.105Z</updated>
+    <updated>2021-06-19T10:26:10.240Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="Complie"><a href="#Complie" class="headerlink" title="Complie"></a>Complie</h2><h3 id="web-entry"><a href="#web-entry" class="headerlink" title="web entry"></a>web entry</h3><figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">compile</span>(<span class="params"></span></span></span><br><span class="line"><span class="params"><span class="function">  template: <span class="built_in">string</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">  options: CompilerOptions = &#123;&#125;</span></span></span><br><span class="line"><span class="params"><span class="function"></span>): <span class="title">CodegenResult</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> baseCompile(</span><br><span class="line">    template,</span><br><span class="line">    extend(&#123;&#125;, parserOptions, options, &#123;</span><br><span class="line">      <span class="attr">nodeTransforms</span>: [</span><br><span class="line">        ignoreSideEffectTags,</span><br><span class="line">        ...DOMNodeTransforms,</span><br><span class="line">        ...(options.nodeTransforms || [])</span><br><span class="line">      ],</span><br><span class="line">      <span class="attr">directiveTransforms</span>: extend(</span><br><span class="line">        &#123;&#125;,</span><br><span class="line">        DOMDirectiveTransforms,</span><br><span class="line">        options.directiveTransforms || &#123;&#125;</span><br><span class="line">      ),</span><br><span class="line">      <span class="attr">transformHoist</span>: __BROWSER__ ? <span class="literal">null</span> : stringifyStatic</span><br><span class="line">    &#125;)</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><blockquote><p>解析 template 生成 AST，AST 转换和生成代码。</p></blockquote>]]></content>
+    <content type="html"><![CDATA[<h2 id="Compile"><a href="#Compile" class="headerlink" title="Compile"></a>Compile</h2><h3 id="web-entry"><a href="#web-entry" class="headerlink" title="web entry"></a>web entry</h3><figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">compile</span>(<span class="params"></span></span></span><br><span class="line"><span class="params"><span class="function">  template: <span class="built_in">string</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">  options: CompilerOptions = &#123;&#125;</span></span></span><br><span class="line"><span class="params"><span class="function"></span>): <span class="title">CodegenResult</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> baseCompile(</span><br><span class="line">    template,</span><br><span class="line">    extend(&#123;&#125;, parserOptions, options, &#123;</span><br><span class="line">      <span class="attr">nodeTransforms</span>: [</span><br><span class="line">        ignoreSideEffectTags,</span><br><span class="line">        ...DOMNodeTransforms,</span><br><span class="line">        ...(options.nodeTransforms || [])</span><br><span class="line">      ],</span><br><span class="line">      <span class="attr">directiveTransforms</span>: extend(</span><br><span class="line">        &#123;&#125;,</span><br><span class="line">        DOMDirectiveTransforms,</span><br><span class="line">        options.directiveTransforms || &#123;&#125;</span><br><span class="line">      ),</span><br><span class="line">      <span class="attr">transformHoist</span>: __BROWSER__ ? <span class="literal">null</span> : stringifyStatic</span><br><span class="line">    &#125;)</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><blockquote><p>解析 template 生成 AST，AST 转换和生成代码。</p></blockquote>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;h2 id=&quot;Complie&quot;&gt;&lt;a href=&quot;#Complie&quot; class=&quot;headerlink&quot; title=&quot;Complie&quot;&gt;&lt;/a&gt;Complie&lt;/h2&gt;&lt;h3 id=&quot;web-entry&quot;&gt;&lt;a href=&quot;#web-entry&quot; class=&quot;header
+        &lt;h2 id=&quot;Compile&quot;&gt;&lt;a href=&quot;#Compile&quot; class=&quot;headerlink&quot; title=&quot;Compile&quot;&gt;&lt;/a&gt;Compile&lt;/h2&gt;&lt;h3 id=&quot;web-entry&quot;&gt;&lt;a href=&quot;#web-entry&quot; class=&quot;header
       
     
     </summary>
@@ -87,9 +87,9 @@
     
     
     
-      <category term="reactivity" scheme="https://sunweiwe.github.io/tags/reactivity/"/>
-    
       <category term="vue" scheme="https://sunweiwe.github.io/tags/vue/"/>
+    
+      <category term="reactivity" scheme="https://sunweiwe.github.io/tags/reactivity/"/>
     
   </entry>
   
