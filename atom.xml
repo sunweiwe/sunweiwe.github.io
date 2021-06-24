@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://sunweiwe.github.io/"/>
-  <updated>2021-06-24T07:36:44.573Z</updated>
+  <updated>2021-06-24T07:37:19.144Z</updated>
   <id>https://sunweiwe.github.io/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="https://sunweiwe.github.io/2021/06/24/%E6%B5%8F%E8%A7%88%E5%99%A8/%E5%9B%9E%E6%B5%81%E5%92%8C%E9%87%8D%E7%BB%98/"/>
     <id>https://sunweiwe.github.io/2021/06/24/%E6%B5%8F%E8%A7%88%E5%99%A8/%E5%9B%9E%E6%B5%81%E5%92%8C%E9%87%8D%E7%BB%98/</id>
     <published>2021-06-24T15:26:17.000Z</published>
-    <updated>2021-06-24T07:36:44.573Z</updated>
+    <updated>2021-06-24T07:37:19.144Z</updated>
     
-    <content type="html"><![CDATA[<h3 id="回流"><a href="#回流" class="headerlink" title="回流"></a>回流</h3><blockquote><p>英文叫reflow，指的是当渲染树中的节点信息发生了大小、边距等问题，需要重新计算各节点和css具体的大小和位置。</p></blockquote><p>回流这一阶段主要是计算节点的位置和几何信息，那么当页面布局和几何信息发生变化的时候，就需要回流。比如以下情况：</p><ul><li>添加或删除可见的DOM元素</li><li>元素的位置发生变化</li><li>元素的尺寸发生变化（包括外边距、内边框、边框大小、高度和宽度等）</li><li>内容发生变化，比如文本变化或图片被另一个不同尺寸的图片所替代。</li><li>页面一开始渲染的时候</li><li>浏览器的窗口尺寸变化</li></ul><p>根据改变的范围和程度，渲染树中或大或小的部分需要重新计算，有些改变会触发整个页面的重排，比如，滚动条出现的时候或者修改了根节点。</p><h3 id="重绘"><a href="#重绘" class="headerlink" title="重绘"></a>重绘</h3><blockquote><p>英文叫repaint，当节点的部分属性发生变化，但不影响布局，只需要重新计算节点在屏幕中的绝对位置并渲染的过程，就叫重绘。比如：改变元素的背景颜色、字体颜色等操作会造成重绘。回流一定会触发重绘，而重绘不一定会回流</p></blockquote><h3 id="浏览器的优化机制"><a href="#浏览器的优化机制" class="headerlink" title="浏览器的优化机制"></a>浏览器的优化机制</h3><blockquote><p>由于每次重排都会造成额外的计算消耗，因此大多数浏览器都会通过队列化修改并批量执行来优化重排过程。浏览器会将修改操作放入到队列里，直到过了一段时间或者操作达到了一个阈值，才清空队列。但是！当你获取布局信息的操作的时候，会强制队列刷新，比如当你访问以下属性或者使用以下方法：</p></blockquote><ul><li>offsetTop、offsetLeft、offsetWidth、offsetHeight</li><li>scrollTop、scrollLeft、scrollWidth、scrollHeight</li><li>clientTop、clientLeft、clientWidth、clientHeight</li><li>getComputedStyle()</li><li>getBoundingClientRect()</li></ul><p>以上属性和方法都需要返回最新的布局信息，因此浏览器不得不清空队列，触发回流重绘来返回正确的值。因此，我们在修改样式的时候，<strong>最好避免使用上面列出的属性，他们都会刷新渲染队列。</strong>如果要使用它们，最好将值缓存起来</p><h3 id="减少回流和重绘"><a href="#减少回流和重绘" class="headerlink" title="减少回流和重绘"></a>减少回流和重绘</h3><ul><li>合并样式修改</li><li>使用 transform 替代 top；</li><li>离线操作 DOM或者批量操作DOM：把元素脱离文档流，然后对元素进行修改，这样只会导致重绘，而不会造成回流。<ul><li>display:none：临时把元素 脱离文档流，进行批量操作后再放回。这样只会有一次回流；</li><li>createDocumentFragment：创建文档片段，一次性把内容放进文档；</li></ul></li><li>将动画效果应用到 position 属性为 absolute 或 fixed 的元素上，避免影响其他元素的布局，这样只是一个重绘，而不是回流；</li><li>CSS3 硬件加速（GPU 加速）；</li><li>尽可能在 DOM 树的最末端改变 class：减小回流的范围；</li></ul>]]></content>
+    <content type="html"><![CDATA[<h3 id="回流"><a href="#回流" class="headerlink" title="回流"></a>回流</h3><blockquote><p>英文叫reflow，指的是当渲染树中的节点信息发生了大小、边距等问题，需要重新计算各节点和css具体的大小和位置。</p></blockquote><p>回流这一阶段主要是计算节点的位置和几何信息，那么当页面布局和几何信息发生变化的时候，就需要回流。比如以下情况：</p><ul><li>添加或删除可见的DOM元素</li><li>元素的位置发生变化</li><li>元素的尺寸发生变化（包括外边距、内边框、边框大小、高度和宽度等）</li><li>内容发生变化，比如文本变化或图片被另一个不同尺寸的图片所替代。</li><li>页面一开始渲染的时候</li><li>浏览器的窗口尺寸变化</li></ul><p>根据改变的范围和程度，渲染树中或大或小的部分需要重新计算，有些改变会触发整个页面的重排，比如，滚动条出现的时候或者修改了根节点。</p><h3 id="重绘"><a href="#重绘" class="headerlink" title="重绘"></a>重绘</h3><blockquote><p>英文叫repaint，当节点的部分属性发生变化，但不影响布局，只需要重新计算节点在屏幕中的绝对位置并渲染的过程，就叫重绘。比如：改变元素的背景颜色、字体颜色等操作会造成重绘。回流一定会触发重绘，而重绘不一定会回流</p></blockquote><h3 id="浏览器的优化机制"><a href="#浏览器的优化机制" class="headerlink" title="浏览器的优化机制"></a>浏览器的优化机制</h3><blockquote><p>由于每次重排都会造成额外的计算消耗，因此大多数浏览器都会通过队列化修改并批量执行来优化重排过程。浏览器会将修改操作放入到队列里，直到过了一段时间或者操作达到了一个阈值，才清空队列。但是！当你获取布局信息的操作的时候，会强制队列刷新，比如当你访问以下属性或者使用以下方法：</p></blockquote><ul><li>offsetTop、offsetLeft、offsetWidth、offsetHeight</li><li>scrollTop、scrollLeft、scrollWidth、scrollHeight</li><li>clientTop、clientLeft、clientWidth、clientHeight</li><li>getComputedStyle()</li><li>getBoundingClientRect()</li></ul><p>以上属性和方法都需要返回最新的布局信息，因此浏览器不得不清空队列，触发回流重绘来返回正确的值。因此，我们在修改样式的时候，<strong>最好避免使用上面列出的属性，他们都会刷新渲染队列。</strong>如果要使用它们，最好将值缓存起来</p><h3 id="减少回流和重绘"><a href="#减少回流和重绘" class="headerlink" title="减少回流和重绘"></a>减少回流和重绘</h3><ul><li>合并样式修改</li><li>使用 transform 替代 top；</li><li>离线操作 DOM或者批量操作DOM：把元素脱离文档流，然后对元素进行修改，这样只会导致重绘，而不会造成回流。<ul><li>display:none：临时把元素 脱离文档流，进行批量操作后再放回。这样只会有一次回流；</li><li>createDocumentFragment：创建文档片段，一次性把内容放进文档；</li></ul></li><li>将动画效果应用到 position 属性为 absolute 或 fixed 的元素上，避免影响其他元素的布局，这样只是一个重绘，而不是回流；</li><li>CSS3 硬件加速（GPU 加速）</li><li>尽可能在 DOM 树的最末端改变 class：减小回流的范围；</li></ul>]]></content>
     
     <summary type="html">
     
@@ -38,6 +38,29 @@
     
     
       <category term="浏览器" scheme="https://sunweiwe.github.io/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>防抖和节流</title>
+    <link href="https://sunweiwe.github.io/2021/06/24/es/%E9%98%B2%E6%8A%96%E5%92%8C%E8%8A%82%E6%B5%81/"/>
+    <id>https://sunweiwe.github.io/2021/06/24/es/%E9%98%B2%E6%8A%96%E5%92%8C%E8%8A%82%E6%B5%81/</id>
+    <published>2021-06-24T11:38:17.000Z</published>
+    <updated>2021-06-24T12:02:28.458Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="防抖（debounce）"><a href="#防抖（debounce）" class="headerlink" title="防抖（debounce）"></a>防抖（debounce）</h3><blockquote><p>防抖指触发事件后 n 秒后才执行函数，如果在 n 秒内又触发了事件，则会重新计算函数执行时间。</p></blockquote><h3 id="非立即执行"><a href="#非立即执行" class="headerlink" title="非立即执行"></a>非立即执行</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">debounce</span>(<span class="params">func, wait</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> timeout;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> context = <span class="built_in">this</span>;</span><br><span class="line">    <span class="keyword">const</span> args = [...arguments];</span><br><span class="line">    <span class="keyword">if</span> (timeout) <span class="built_in">clearTimeout</span>(timeout);</span><br><span class="line">    timeout = <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      func.apply(context, args);</span><br><span class="line">    &#125;, wait);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="立即执行"><a href="#立即执行" class="headerlink" title="立即执行"></a>立即执行</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">debounce</span>(<span class="params">func, wait</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> timeout;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> context = <span class="built_in">this</span>;</span><br><span class="line">    <span class="keyword">const</span> args = [...arguments];</span><br><span class="line">    <span class="keyword">if</span> (timeout) <span class="built_in">clearTimeout</span>(timeout);</span><br><span class="line">    <span class="keyword">const</span> callNow = !timeout;</span><br><span class="line">    timeout = <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      timeout = <span class="literal">null</span>;</span><br><span class="line">    &#125;, wait);</span><br><span class="line">    <span class="keyword">if</span> (callNow) func.apply(context, args);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@desc </span>函数防抖</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param </span>func 函数</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param </span>wait 延迟执行毫秒数</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param </span>immediate true 表立即执行，false 表非立即执行</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">debounce</span>(<span class="params">func, wait, immediate</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> timeout;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> context = <span class="built_in">this</span>;</span><br><span class="line">    <span class="keyword">const</span> args = [...arguments];</span><br><span class="line">    <span class="keyword">if</span> (timeout) <span class="built_in">clearTimeout</span>(timeout);</span><br><span class="line">    <span class="keyword">if</span> (immediate) &#123;</span><br><span class="line">      <span class="keyword">const</span> callNow = !timeout;</span><br><span class="line">      timeout = <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        timeout = <span class="literal">null</span>;</span><br><span class="line">      &#125;, wait);</span><br><span class="line">      <span class="keyword">if</span> (callNow) func.apply(context, args);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      timeout = <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        func.apply(context, args);</span><br><span class="line">      &#125;, wait);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="节流（throttle）"><a href="#节流（throttle）" class="headerlink" title="节流（throttle）"></a>节流（throttle）</h3><blockquote><p>节流指连续触发事件但是在 n 秒中只执行一次函数。 节流会稀释函数的执行频率。</p></blockquote><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">throttle</span>(<span class="params">func, wait</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> timeout;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> context = <span class="built_in">this</span>;</span><br><span class="line">    <span class="keyword">let</span> args = <span class="built_in">arguments</span>;</span><br><span class="line">    <span class="keyword">if</span> (!timeout) &#123;</span><br><span class="line">      timeout = <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        timeout = <span class="literal">null</span>;</span><br><span class="line">        func.apply(context, args);</span><br><span class="line">      &#125;, wait);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;防抖（debounce）&quot;&gt;&lt;a href=&quot;#防抖（debounce）&quot; class=&quot;headerlink&quot; title=&quot;防抖（debounce）&quot;&gt;&lt;/a&gt;防抖（debounce）&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;防抖指触发事件后 n 秒后才执行函
+      
+    
+    </summary>
+    
+    
     
   </entry>
   
@@ -70,7 +93,7 @@
     <link href="https://sunweiwe.github.io/2021/06/22/es/%E7%BC%93%E5%AD%98/"/>
     <id>https://sunweiwe.github.io/2021/06/22/es/%E7%BC%93%E5%AD%98/</id>
     <published>2021-06-22T13:23:51.000Z</published>
-    <updated>2021-06-22T15:02:45.023Z</updated>
+    <updated>2021-06-23T15:21:07.127Z</updated>
     
     <content type="html"><![CDATA[<h2 id="前端缓存"><a href="#前端缓存" class="headerlink" title="前端缓存"></a>前端缓存</h2><blockquote><p>缓存分为强缓存和协商缓存两种。两者的主要区别是使用本地缓存的时候，是否需要向服务器验证本地缓存是否依旧有效。顾名思义，协商缓存，就是需要和服务器进行协商，最终确定是否使用本地缓存。</p></blockquote><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">expires: Sun, 27 Oct 2030 14:45:38 GMT</span><br><span class="line">cache-control: max-age=30</span><br></pre></td></tr></table></figure><h3 id="强缓存"><a href="#强缓存" class="headerlink" title="强缓存"></a>强缓存</h3><blockquote><p>通过两种响应头实现：expires 和 cache-control 。强缓存表示在缓存期间不需要请求，state code 为 200</p></blockquote><h3 id="协商缓存"><a href="#协商缓存" class="headerlink" title="协商缓存"></a>协商缓存</h3><blockquote><p>通过两种响应头实现：last-modified 和 etag 。协商缓存需要请求，如果缓存有效会返回 304</p></blockquote><ul><li>last-modified 和 if-modified-since：表示本地文件最后修改日期，有更新就返回新资源</li><li>etag 和 if-none-match：类似于文件指纹，有更新就返回新资源</li><li>etag &gt; last-modified</li></ul><h3 id="cache-control-一些属性"><a href="#cache-control-一些属性" class="headerlink" title="cache-control 一些属性"></a>cache-control 一些属性</h3><ul><li>no-cache：无论缓存是否过期，都要对请求进行校验 </li><li>no-store：请求报文中可能存在机密信息，不可缓存 （缓存字段中优先级最高）</li><li>max-age=[秒]：资源x秒后过期，未过期则使用缓存 </li><li>no-transform：禁止代理改变实体主体的媒体类型，也包括压缩 </li><li>cache-extension： 自定义拓展值，如果缓存服务器不能理解，则忽略</li></ul>]]></content>
     
@@ -210,9 +233,9 @@
     
     
     
-      <category term="vue" scheme="https://sunweiwe.github.io/tags/vue/"/>
-    
       <category term="reactivity" scheme="https://sunweiwe.github.io/tags/reactivity/"/>
+    
+      <category term="vue" scheme="https://sunweiwe.github.io/tags/vue/"/>
     
   </entry>
   
@@ -489,27 +512,6 @@
     
     
       <category term="docker" scheme="https://sunweiwe.github.io/tags/docker/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>flex</title>
-    <link href="https://sunweiwe.github.io/2020/09/21/css/Flex/"/>
-    <id>https://sunweiwe.github.io/2020/09/21/css/Flex/</id>
-    <published>2020-09-21T08:33:03.000Z</published>
-    <updated>2021-06-08T06:58:55.788Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="Flex-容器"><a href="#Flex-容器" class="headerlink" title="Flex 容器"></a>Flex 容器</h2><p>容器可以设置:<code>flex-direction, flex-wrap,flex-shrink, flex-grow, justify-content, align-items, align-content</code></p><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex; <span class="comment">/* or inline-flex */</span></span><br><span class="line">  <span class="comment">/* 主轴，从而确定了内部元素放置在伸缩容器中的方向 */</span></span><br><span class="line">  <span class="attribute">flex-direction</span>: row | row-reverse | column | column-reverse;</span><br><span class="line">  <span class="comment">/* 是否换行内部元素 */</span></span><br><span class="line">  <span class="attribute">flex-wrap</span>: nowrap | wrap | wrap-reverse;</span><br><span class="line">  <span class="comment">/*  */</span></span><br><span class="line">  <span class="attribute">flex-shrink</span>: <span class="number">3</span>; <span class="comment">/* default 1 */</span></span><br><span class="line">  <span class="comment">/*  */</span></span><br><span class="line">  <span class="attribute">flex-grow</span>: <span class="number">3</span>; <span class="comment">/* default 1 */</span></span><br><span class="line">  <span class="comment">/*  */</span></span><br><span class="line">  <span class="attribute">justify-content</span>: flex-start | flex-end | center | space-between | space-round</span><br><span class="line">    | space-evenly;</span><br><span class="line">  <span class="comment">/*  */</span></span><br><span class="line">  <span class="attribute">align-items</span>: flex-start | flex-end | center | baseline | stretch;</span><br><span class="line">  <span class="comment">/*  */</span></span><br><span class="line">  <span class="attribute">align-content</span>: flex-start | flex-end | center | space-between | space-around |</span><br><span class="line">    stretch;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="flex-direction-和-flex-flow-简写"><a href="#flex-direction-和-flex-flow-简写" class="headerlink" title="flex-direction 和 flex-flow 简写"></a>flex-direction 和 flex-flow 简写</h2><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">  <span class="attribute">flex-flow</span>: column wrap;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="flex-Item"><a href="#flex-Item" class="headerlink" title="flex Item"></a>flex Item</h2><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.item</span> &#123;</span><br><span class="line">  <span class="attribute">order</span>: &lt;number&gt;;</span><br><span class="line">  <span class="comment">/*功能：定义项目的规模，并根据比例为项目分配空间。*/</span></span><br><span class="line">  <span class="attribute">flex-grow</span>: &lt;number&gt;;</span><br><span class="line">  <span class="comment">/*功能：定义项目的收缩率，并根据该比例为项目分配空间。*/</span></span><br><span class="line">  <span class="attribute">flex-shrink</span>: &lt;number&gt;;</span><br><span class="line">  <span class="comment">/* 功能：在分配多余空间之前定义项目占用的主轴空间。基于此属性，浏览器将计算主轴是否具有额外的空间。*/</span></span><br><span class="line">  <span class="attribute">flex-basis</span>: &lt;length&gt; | auto;</span><br><span class="line">  <span class="comment">/*功能：定义单个项目的对齐方式以覆盖align-items属性。*/</span></span><br><span class="line">  <span class="attribute">align-self</span>: auto | flex-start | flex-end | center | baseline | stretch;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="flex-简写"><a href="#flex-简写" class="headerlink" title="flex 简写"></a>flex 简写</h3><p>CSS 属性 flex 规定了弹性元素如何伸长或缩短以适应 flex 容器中的可用空间。这是一个简写属性，用来设置 flex-grow, flex-shrink 与 flex-basis。</p><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="attribute">flex</span>: <span class="number">1</span>;</span><br><span class="line"><span class="attribute">flex</span>: none | [ &lt; <span class="string">&#x27;flex-grow&#x27;</span> &gt; &lt; <span class="string">&#x27;flex-shrink&#x27;</span> &gt;? || &lt; <span class="string">&#x27;flex-basis&#x27;</span> &gt; ];</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">flex-grow:0</span></span><br><span class="line"><span class="comment">flex-shrink:1</span></span><br><span class="line"><span class="comment">flex-basis: auto;</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      flex使用
-    
-    </summary>
-    
-    
-    
-      <category term="flex" scheme="https://sunweiwe.github.io/tags/flex/"/>
     
   </entry>
   
