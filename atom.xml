@@ -93,7 +93,7 @@
     <link href="https://sunweiwe.github.io/2021/06/22/es/%E7%BC%93%E5%AD%98/"/>
     <id>https://sunweiwe.github.io/2021/06/22/es/%E7%BC%93%E5%AD%98/</id>
     <published>2021-06-22T13:23:51.000Z</published>
-    <updated>2021-06-22T15:02:45.023Z</updated>
+    <updated>2021-06-23T15:21:07.127Z</updated>
     
     <content type="html"><![CDATA[<h2 id="前端缓存"><a href="#前端缓存" class="headerlink" title="前端缓存"></a>前端缓存</h2><blockquote><p>缓存分为强缓存和协商缓存两种。两者的主要区别是使用本地缓存的时候，是否需要向服务器验证本地缓存是否依旧有效。顾名思义，协商缓存，就是需要和服务器进行协商，最终确定是否使用本地缓存。</p></blockquote><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">expires: Sun, 27 Oct 2030 14:45:38 GMT</span><br><span class="line">cache-control: max-age=30</span><br></pre></td></tr></table></figure><h3 id="强缓存"><a href="#强缓存" class="headerlink" title="强缓存"></a>强缓存</h3><blockquote><p>通过两种响应头实现：expires 和 cache-control 。强缓存表示在缓存期间不需要请求，state code 为 200</p></blockquote><h3 id="协商缓存"><a href="#协商缓存" class="headerlink" title="协商缓存"></a>协商缓存</h3><blockquote><p>通过两种响应头实现：last-modified 和 etag 。协商缓存需要请求，如果缓存有效会返回 304</p></blockquote><ul><li>last-modified 和 if-modified-since：表示本地文件最后修改日期，有更新就返回新资源</li><li>etag 和 if-none-match：类似于文件指纹，有更新就返回新资源</li><li>etag &gt; last-modified</li></ul><h3 id="cache-control-一些属性"><a href="#cache-control-一些属性" class="headerlink" title="cache-control 一些属性"></a>cache-control 一些属性</h3><ul><li>no-cache：无论缓存是否过期，都要对请求进行校验 </li><li>no-store：请求报文中可能存在机密信息，不可缓存 （缓存字段中优先级最高）</li><li>max-age=[秒]：资源x秒后过期，未过期则使用缓存 </li><li>no-transform：禁止代理改变实体主体的媒体类型，也包括压缩 </li><li>cache-extension： 自定义拓展值，如果缓存服务器不能理解，则忽略</li></ul>]]></content>
     
