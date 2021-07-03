@@ -57,37 +57,61 @@
         <div id="header-post">
   <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
   <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
-  <a id="top-icon-tablet" href="#" "Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" "Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
+    style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
   <span id="menu">
     <span id="nav">
       <ul>
-         
-          <li><a href="/">首页</a></li>
-         
-          <li><a href="/archives/">归档</a></li>
-         
-          <li><a href="/about/">关于</a></li>
-         
-          <li><a href="/tags/">标签</a></li>
         
+          <li><a href="/">
+              首页
+            </a></li>
+          
+          <li><a href="/archives/">
+              归档
+            </a></li>
+          
+          <li><a href="/about/">
+              关于
+            </a></li>
+          
+          <li><a href="/tags/">
+              标签
+            </a></li>
+          
       </ul>
     </span>
-    <br/>
+    <br />
     <span id="actions">
       <ul>
         
-        
-        <li><a class="icon" aria-label="下一篇 " href="/2021/06/24/%E6%B5%8F%E8%A7%88%E5%99%A8/%E5%9B%9E%E6%B5%81%E5%92%8C%E9%87%8D%E7%BB%98/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
-        
-        <li><a class="icon" aria-label="返回顶部 " href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
-        <li><a class="icon" aria-label="分享文章 " href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+            
+              <li><a class="icon" aria-label="下一篇 " href="/2021/06/24/%E6%B5%8F%E8%A7%88%E5%99%A8/%E5%9B%9E%E6%B5%81%E5%92%8C%E9%87%8D%E7%BB%98/"><i
+                    class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();"
+                    onmouseout="$('#i-next').toggle();"></i></a></li>
+              
+                <li><a class="icon" aria-label="返回顶部 " href="#"
+                    onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up"
+                      aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a>
+                </li>
+                <!-- <li><a class="icon" aria-label="分享文章 " href="#"><i class="fas fa-share-alt"
+                      aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();"
+                      onclick="$('#share').toggle();return false;"></i></a></li> -->
       </ul>
-      <span id="i-prev" class="info" style="display:none;">上一篇</span>
-      <span id="i-next" class="info" style="display:none;">下一篇</span>
-      <span id="i-top" class="info" style="display:none;">返回顶部</span>
-      <span id="i-share" class="info" style="display:none;">分享文章</span>
+      <span id="i-prev" class="info" style="display:none;">
+        上一篇
+      </span>
+      <span id="i-next" class="info" style="display:none;">
+        下一篇
+      </span>
+      <span id="i-top" class="info" style="display:none;">
+        返回顶部
+      </span>
+      <span id="i-share" class="info" style="display:none;">
+        分享文章
+      </span>
     </span>
-    <br/>
+    <br />
     <div id="share" style="display: none">
       <ul>
   <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sunweiwe.github.io/2021/06/27/react/%E4%BA%8B%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
@@ -109,7 +133,6 @@
     </div>
   </span>
 </div>
-
           
             <div class="content index py4">
               
@@ -167,15 +190,23 @@
 
     <div id="nav-footer" style="display: none">
       <ul>
-         
-          <li><a href="/">首页</a></li>
-         
-          <li><a href="/archives/">归档</a></li>
-         
-          <li><a href="/about/">关于</a></li>
-         
-          <li><a href="/tags/">标签</a></li>
         
+          <li><a href="/">
+              首页
+            </a></li>
+          
+          <li><a href="/archives/">
+              归档
+            </a></li>
+          
+          <li><a href="/about/">
+              关于
+            </a></li>
+          
+          <li><a href="/tags/">
+              标签
+            </a></li>
+          
       </ul>
     </div>
 
@@ -183,7 +214,7 @@
       <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#DOM-%E4%BA%8B%E4%BB%B6%E6%B5%81"><span class="toc-number">1.</span> <span class="toc-text">DOM 事件流</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E5%86%92%E6%B3%A1%E5%92%8C%E4%BA%8B%E4%BB%B6%E6%8D%95%E8%8E%B7"><span class="toc-number">1.1.</span> <span class="toc-text">事件冒泡和事件捕获</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E4%BB%A3%E7%90%86%EF%BC%88%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98%EF%BC%89"><span class="toc-number">1.2.</span> <span class="toc-text">事件代理（事件委托）</span></a></li></ol></li></ol>
     </div>
 
-    <div id="share-footer" style="display: none">
+    <!-- <div id="share-footer" style="display: none">
       <ul>
   <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sunweiwe.github.io/2021/06/27/react/%E4%BA%8B%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
   <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sunweiwe.github.io/2021/06/27/react/%E4%BA%8B%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/&text=事件系统原理"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
@@ -198,18 +229,26 @@
   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sunweiwe.github.io/2021/06/27/react/%E4%BA%8B%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/&t=事件系统原理"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
-    </div>
+    </div> -->
 
     <div id="actions-footer">
-        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
-        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
-        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
-        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+      <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg"
+          aria-hidden="true"></i>
+        菜单
+      </a>
+      <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg"
+          aria-hidden="true"></i>
+        目录
+      </a>
+      <a id="top" style="display:none" class="icon" href="#"
+        onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg"
+          aria-hidden="true"></i>
+        返回顶部
+      </a>
     </div>
 
   </div>
 </div>
-
                           
                             <footer id="footer">
   <div class="footer-left">

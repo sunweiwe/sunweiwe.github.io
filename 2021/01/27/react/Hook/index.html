@@ -58,39 +58,65 @@
         <div id="header-post">
   <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
   <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
-  <a id="top-icon-tablet" href="#" "Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" "Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
+    style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
   <span id="menu">
     <span id="nav">
       <ul>
-         
-          <li><a href="/">首页</a></li>
-         
-          <li><a href="/archives/">归档</a></li>
-         
-          <li><a href="/about/">关于</a></li>
-         
-          <li><a href="/tags/">标签</a></li>
         
+          <li><a href="/">
+              首页
+            </a></li>
+          
+          <li><a href="/archives/">
+              归档
+            </a></li>
+          
+          <li><a href="/about/">
+              关于
+            </a></li>
+          
+          <li><a href="/tags/">
+              标签
+            </a></li>
+          
       </ul>
     </span>
-    <br/>
+    <br />
     <span id="actions">
       <ul>
         
-        <li><a class="icon" aria-label="上一篇 " href="/2021/01/29/es/%E8%B7%AF%E7%94%B1/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
-        
-        
-        <li><a class="icon" aria-label="下一篇 " href="/2020/12/15/golang/golang%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
-        
-        <li><a class="icon" aria-label="返回顶部 " href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
-        <li><a class="icon" aria-label="分享文章 " href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+          <li><a class="icon" aria-label="上一篇 " href="/2021/01/29/es/%E8%B7%AF%E7%94%B1/"><i
+                class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();"
+                onmouseout="$('#i-prev').toggle();"></i></a></li>
+          
+            
+              <li><a class="icon" aria-label="下一篇 " href="/2020/12/15/golang/golang%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/"><i
+                    class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();"
+                    onmouseout="$('#i-next').toggle();"></i></a></li>
+              
+                <li><a class="icon" aria-label="返回顶部 " href="#"
+                    onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up"
+                      aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a>
+                </li>
+                <!-- <li><a class="icon" aria-label="分享文章 " href="#"><i class="fas fa-share-alt"
+                      aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();"
+                      onclick="$('#share').toggle();return false;"></i></a></li> -->
       </ul>
-      <span id="i-prev" class="info" style="display:none;">上一篇</span>
-      <span id="i-next" class="info" style="display:none;">下一篇</span>
-      <span id="i-top" class="info" style="display:none;">返回顶部</span>
-      <span id="i-share" class="info" style="display:none;">分享文章</span>
+      <span id="i-prev" class="info" style="display:none;">
+        上一篇
+      </span>
+      <span id="i-next" class="info" style="display:none;">
+        下一篇
+      </span>
+      <span id="i-top" class="info" style="display:none;">
+        返回顶部
+      </span>
+      <span id="i-share" class="info" style="display:none;">
+        分享文章
+      </span>
     </span>
-    <br/>
+    <br />
     <div id="share" style="display: none">
       <ul>
   <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sunweiwe.github.io/2021/01/27/react/Hook/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
@@ -112,7 +138,6 @@
     </div>
   </span>
 </div>
-
           
             <div class="content index py4">
               
@@ -197,15 +222,23 @@
 
     <div id="nav-footer" style="display: none">
       <ul>
-         
-          <li><a href="/">首页</a></li>
-         
-          <li><a href="/archives/">归档</a></li>
-         
-          <li><a href="/about/">关于</a></li>
-         
-          <li><a href="/tags/">标签</a></li>
         
+          <li><a href="/">
+              首页
+            </a></li>
+          
+          <li><a href="/archives/">
+              归档
+            </a></li>
+          
+          <li><a href="/about/">
+              关于
+            </a></li>
+          
+          <li><a href="/tags/">
+              标签
+            </a></li>
+          
       </ul>
     </div>
 
@@ -213,7 +246,7 @@
       <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#useState"><span class="toc-number">1.</span> <span class="toc-text">useState</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#basic-usage"><span class="toc-number">1.1.</span> <span class="toc-text">basic usage</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9B%B4%E6%96%B0"><span class="toc-number">1.2.</span> <span class="toc-text">更新</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%83%B0%E6%80%A7%E5%88%9D%E5%A7%8B%E5%8C%96-state"><span class="toc-number">1.3.</span> <span class="toc-text">惰性初始化 state</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#useEffect"><span class="toc-number">2.</span> <span class="toc-text">useEffect</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="toc-number">2.1.</span> <span class="toc-text">基本使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5"><span class="toc-number">2.2.</span> <span class="toc-text">最佳实践</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#memo"><span class="toc-number">3.</span> <span class="toc-text">memo</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8-1"><span class="toc-number">3.1.</span> <span class="toc-text">基本使用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#useMemo"><span class="toc-number">4.</span> <span class="toc-text">useMemo</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC"><span class="toc-number">4.1.</span> <span class="toc-text">基本</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#useCallback"><span class="toc-number">5.</span> <span class="toc-text">useCallback</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8-2"><span class="toc-number">5.1.</span> <span class="toc-text">基本使用</span></a></li></ol></li></ol>
     </div>
 
-    <div id="share-footer" style="display: none">
+    <!-- <div id="share-footer" style="display: none">
       <ul>
   <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sunweiwe.github.io/2021/01/27/react/Hook/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
   <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sunweiwe.github.io/2021/01/27/react/Hook/&text=hook"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
@@ -228,18 +261,26 @@
   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sunweiwe.github.io/2021/01/27/react/Hook/&t=hook"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
-    </div>
+    </div> -->
 
     <div id="actions-footer">
-        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
-        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
-        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
-        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+      <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg"
+          aria-hidden="true"></i>
+        菜单
+      </a>
+      <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg"
+          aria-hidden="true"></i>
+        目录
+      </a>
+      <a id="top" style="display:none" class="icon" href="#"
+        onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg"
+          aria-hidden="true"></i>
+        返回顶部
+      </a>
     </div>
 
   </div>
 </div>
-
                           
                             <footer id="footer">
   <div class="footer-left">
