@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang=zh>
+  <head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="DOM 事件流 事件流向分为三个阶段：捕获阶段，目标阶段，冒泡阶段。  事件冒泡和事件捕获通过 element.addEventListener() 设置一个元素的事件模型为冒泡事件或者捕获事件。先来看一下 addEventListener 函数的语法 element.addEventListener(type, listener, useCapture);  type监听事件类型的字符串 lis">
+<meta property="og:type" content="article">
+<meta property="og:title" content="事件系统原理">
+<meta property="og:url" content="https://sunweiwe.github.io/2021/06/27/react/%E4%BA%8B%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/index.html">
+<meta property="og:site_name" content="孙小文的个人网站">
+<meta property="og:description" content="DOM 事件流 事件流向分为三个阶段：捕获阶段，目标阶段，冒泡阶段。  事件冒泡和事件捕获通过 element.addEventListener() 设置一个元素的事件模型为冒泡事件或者捕获事件。先来看一下 addEventListener 函数的语法 element.addEventListener(type, listener, useCapture);  type监听事件类型的字符串 lis">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-06-27T12:00:39.000Z">
+<meta property="article:modified_time" content="2021-06-27T14:15:24.015Z">
+<meta property="article:author" content="Sun Weiwei">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>事件系统原理</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="孙小文的个人网站" type="application/atom+xml">
+</head>
+
+
+    <body class="max-width mx-auto px3 ltr">
+      
+        <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" "Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="下一篇 " href="/2021/06/24/%E6%B5%8F%E8%A7%88%E5%99%A8/%E5%9B%9E%E6%B5%81%E5%92%8C%E9%87%8D%E7%BB%98/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="返回顶部 " href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章 " href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sunweiwe.github.io/2021/06/27/react/%E4%BA%8B%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sunweiwe.github.io/2021/06/27/react/%E4%BA%8B%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/&text=事件系统原理"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sunweiwe.github.io/2021/06/27/react/%E4%BA%8B%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/&title=事件系统原理"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sunweiwe.github.io/2021/06/27/react/%E4%BA%8B%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/&is_video=false&description=事件系统原理"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=事件系统原理&body=Check out this article: https://sunweiwe.github.io/2021/06/27/react/%E4%BA%8B%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sunweiwe.github.io/2021/06/27/react/%E4%BA%8B%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/&title=事件系统原理"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sunweiwe.github.io/2021/06/27/react/%E4%BA%8B%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/&title=事件系统原理"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sunweiwe.github.io/2021/06/27/react/%E4%BA%8B%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/&title=事件系统原理"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sunweiwe.github.io/2021/06/27/react/%E4%BA%8B%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/&title=事件系统原理"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sunweiwe.github.io/2021/06/27/react/%E4%BA%8B%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/&name=事件系统原理&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sunweiwe.github.io/2021/06/27/react/%E4%BA%8B%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/&t=事件系统原理"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#DOM-%E4%BA%8B%E4%BB%B6%E6%B5%81"><span class="toc-number">1.</span> <span class="toc-text">DOM 事件流</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E5%86%92%E6%B3%A1%E5%92%8C%E4%BA%8B%E4%BB%B6%E6%8D%95%E8%8E%B7"><span class="toc-number">1.1.</span> <span class="toc-text">事件冒泡和事件捕获</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E4%BB%A3%E7%90%86%EF%BC%88%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98%EF%BC%89"><span class="toc-number">1.2.</span> <span class="toc-text">事件代理（事件委托）</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+          
+            <div class="content index py4">
+              
+                    <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        事件系统原理
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Sun Weiwei</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-06-27T12:00:39.000Z" itemprop="datePublished">2021-06-27</time>
+        
+      
+    </div>
+
+
+      
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="DOM-事件流"><a href="#DOM-事件流" class="headerlink" title="DOM 事件流"></a>DOM 事件流</h2><blockquote>
+<p>事件流向分为三个阶段：捕获阶段，目标阶段，冒泡阶段。</p>
+</blockquote>
+<h3 id="事件冒泡和事件捕获"><a href="#事件冒泡和事件捕获" class="headerlink" title="事件冒泡和事件捕获"></a>事件冒泡和事件捕获</h3><p>通过 element.addEventListener() 设置一个元素的事件模型为冒泡事件或者捕获事件。<br>先来看一下 addEventListener 函数的语法</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">element.addEventListener(type, listener, useCapture);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>type<br>监听事件类型的字符串</li>
+<li>listener<br>事件监听回调函数，即事件触发后要处理的函数</li>
+<li>useCapture<br>默认值 false，表示事件冒泡；设为 true 时，表示事件捕获</li>
+</ul>
+<h3 id="事件代理（事件委托）"><a href="#事件代理（事件委托）" class="headerlink" title="事件代理（事件委托）"></a>事件代理（事件委托）</h3><p>事件代理就是利用事件冒泡或事件捕获的机制把一系列的内层元素事件绑定到外层元素。</p>
+
+  </div>
+</article>
+
+
+
+                      
+                        <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#DOM-%E4%BA%8B%E4%BB%B6%E6%B5%81"><span class="toc-number">1.</span> <span class="toc-text">DOM 事件流</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E5%86%92%E6%B3%A1%E5%92%8C%E4%BA%8B%E4%BB%B6%E6%8D%95%E8%8E%B7"><span class="toc-number">1.1.</span> <span class="toc-text">事件冒泡和事件捕获</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E4%BB%A3%E7%90%86%EF%BC%88%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98%EF%BC%89"><span class="toc-number">1.2.</span> <span class="toc-text">事件代理（事件委托）</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sunweiwe.github.io/2021/06/27/react/%E4%BA%8B%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sunweiwe.github.io/2021/06/27/react/%E4%BA%8B%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/&text=事件系统原理"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sunweiwe.github.io/2021/06/27/react/%E4%BA%8B%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/&title=事件系统原理"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sunweiwe.github.io/2021/06/27/react/%E4%BA%8B%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/&is_video=false&description=事件系统原理"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=事件系统原理&body=Check out this article: https://sunweiwe.github.io/2021/06/27/react/%E4%BA%8B%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sunweiwe.github.io/2021/06/27/react/%E4%BA%8B%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/&title=事件系统原理"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sunweiwe.github.io/2021/06/27/react/%E4%BA%8B%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/&title=事件系统原理"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sunweiwe.github.io/2021/06/27/react/%E4%BA%8B%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/&title=事件系统原理"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sunweiwe.github.io/2021/06/27/react/%E4%BA%8B%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/&title=事件系统原理"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sunweiwe.github.io/2021/06/27/react/%E4%BA%8B%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/&name=事件系统原理&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sunweiwe.github.io/2021/06/27/react/%E4%BA%8B%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/&t=事件系统原理"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+                          
+                            <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+      
+        
+          2019-2021
+            Sun Weiwei
+  </div>
+
+</footer>
+            </div>
+            <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+              <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+    </body>
+
+    </html>

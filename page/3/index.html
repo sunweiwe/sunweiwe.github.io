@@ -1,288 +1,620 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>孙小文的个人网站 - Sun Weiwei's Blog</title><meta name="author" content="Sun Weiwei,sunweiwei.lin@foxmail.com"><meta name="copyright" content="Sun Weiwei"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="已识乾坤大，尤怜草木清。">
+<!DOCTYPE html>
+<html lang=zh>
+  <head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="已识乾坤大，尤怜草木清。">
 <meta property="og:type" content="website">
 <meta property="og:title" content="孙小文的个人网站">
 <meta property="og:url" content="https://sunweiwe.github.io/page/3/index.html">
 <meta property="og:site_name" content="孙小文的个人网站">
 <meta property="og:description" content="已识乾坤大，尤怜草木清。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/sunweiwe/image_store/blog/avatar.png">
 <meta property="article:author" content="Sun Weiwei">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/sunweiwe/image_store/blog/avatar.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://sunweiwe.github.io/page/3/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
-  root: '/',
-  algolia: undefined,
-  localSearch: undefined,
-  translate: undefined,
-  noticeOutdate: undefined,
-  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
-  copy: {
-    success: '复制成功',
-    error: '复制错误',
-    noSupport: '浏览器不支持'
-  },
-  relativeDate: {
-    homepage: false,
-    post: false
-  },
-  runtime: '',
-  date_suffix: {
-    just: '刚刚',
-    min: '分钟前',
-    hour: '小时前',
-    day: '天前',
-    month: '个月前'
-  },
-  copyright: undefined,
-  lightbox: 'fancybox',
-  Snackbar: undefined,
-  source: {
-    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
-    justifiedGallery: {
-      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
-      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
-    },
-    fancybox: {
-      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
-      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
-    }
-  },
-  isPhotoFigcaption: false,
-  islazyload: false,
-  isanchor: false
-}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = { 
-  isPost: false,
-  isHome: true,
-  isHighlightShrink: false,
-  isToc: false,
-  postUpdate: '2021-06-24 20:34:16'
-}</script><noscript><style type="text/css">
-  #nav {
-    opacity: 1
-  }
-  .justified-gallery img {
-    opacity: 1
-  }
-
-  #recent-posts time,
-  #post-meta time {
-    display: inline !important
-  }
-</style></noscript><script>(win=>{
-    win.saveToLocal = {
-      set: function setWithExpiry(key, value, ttl) {
-        if (ttl === 0) return
-        const now = new Date()
-        const expiryDay = ttl * 86400000
-        const item = {
-          value: value,
-          expiry: now.getTime() + expiryDay,
-        }
-        localStorage.setItem(key, JSON.stringify(item))
-      },
-
-      get: function getWithExpiry(key) {
-        const itemStr = localStorage.getItem(key)
-
-        if (!itemStr) {
-          return undefined
-        }
-        const item = JSON.parse(itemStr)
-        const now = new Date()
-
-        if (now.getTime() > item.expiry) {
-          localStorage.removeItem(key)
-          return undefined
-        }
-        return item.value
-      }
-    }
-  
-    win.getScript = url => new Promise((resolve, reject) => {
-      const script = document.createElement('script')
-      script.src = url
-      script.async = true
-      script.onerror = reject
-      script.onload = script.onreadystatechange = function() {
-        const loadState = this.readyState
-        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
-        script.onload = script.onreadystatechange = null
-        resolve()
-      }
-      document.head.appendChild(script)
-    })
-  
-      win.activateDarkMode = function () {
-        document.documentElement.setAttribute('data-theme', 'dark')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
-        }
-      }
-      win.activateLightMode = function () {
-        document.documentElement.setAttribute('data-theme', 'light')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
-        }
-      }
-      const t = saveToLocal.get('theme')
     
-          if (t === 'dark') activateDarkMode()
-          else if (t === 'light') activateLightMode()
+    
+      
         
-      const asideStatus = saveToLocal.get('aside-status')
-      if (asideStatus !== undefined) {
-        if (asideStatus === 'hide') {
-          document.documentElement.classList.add('hide-aside')
-        } else {
-          document.documentElement.classList.remove('hide-aside')
-        }
-      }
-    })(window)</script><meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="孙小文的个人网站" type="application/atom+xml">
-</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="https://cdn.jsdelivr.net/gh/sunweiwe/image_store/blog/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">28</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">19</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">孙小文的个人网站</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="post_cover left_radius"><a href="/2020/09/21/css/Flex/" title="flex">     <img class="post_bg" src="https://cdn.jsdelivr.net/gh/sunweiwe/image_store/blog/nasa.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="flex"></a></div><div class="recent-post-info"><a class="article-title" href="/2020/09/21/css/Flex/" title="flex">flex</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-09-21T08:33:03.000Z" title="发表于 2020-09-21 16:33:03">2020-09-21</time></span></div><div class="content">Flex 容器容器可以设置:flex-direction, flex-wrap,flex-shrink, flex-grow, justify-content, align-items, align-content
-.container &#123;  display: flex; /* or inline-flex */  /* 主轴，从而确定了内部元素放置在伸缩容器中的方向 */  flex-direction: row | row-reverse | column | column-reverse;  /* 是否换行内部元素 */  flex-wrap: nowrap | wrap | wrap-reverse;  /*  */  flex-shrink: 3; /* default 1 */  /*  */  flex-grow: 3; /* default 1 */  /*  */  justify-content: flex-start | flex-end | center | space-between | space-round    | space-evenly;  ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/2020/09/10/webpack/webpack/" title="webpack">     <img class="post_bg" src="https://cdn.jsdelivr.net/gh/sunweiwe/image_store/blog/webpack.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="webpack"></a></div><div class="recent-post-info"><a class="article-title" href="/2020/09/10/webpack/webpack/" title="webpack">webpack</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-09-10T13:20:44.000Z" title="发表于 2020-09-10 21:20:44">2020-09-10</time></span></div><div class="content">webpack 可以用来做什么？
-Tree shaking 是一个通常用于描述移除 JavaScript 上下文中的未引用代码(dead-code) 行为的术语。
-懒加载 (按需加载)
-代码分割（code splittings）
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>孙小文的个人网站</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
 
-懒加载 (按需加载)
-懒加载或者按需加载，是一种很好的优化网页或应用的方式。这种方式实际上是先把你的代码在一些逻辑断点处分离开，然后在一些代码块中完成某些操作后，立即引用或即将引用另外一些新的代码块。这样加快了应用的初始加载速度，减轻了它的总体体积，因为某些代码块可能永远不会被加载。
-
-动态导入(dynamic import)当涉及到动态代码拆分时，webpack 提供了两个类似的技术。
-
-使用符合 ECMAScript 提案 的 import() 语法 来实现动态导入.
-webpack 的遗留功能，使用 webpack 特定的 require.ensure。
-
-
-Warningimport() 调用会在内部用到 promises。如果在旧版本浏览器中（例如，IE 11）使用 import()，记得使用一个 polyfill 库（例如 es6-promise ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/2020/09/08/p02.gitmoji/" title="gitmoji 使用">     <img class="post_bg" src="https://cdn.jsdelivr.net/gh/sunweiwe/image_store/blog/pad.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="gitmoji 使用"></a></div><div class="recent-post-info"><a class="article-title" href="/2020/09/08/p02.gitmoji/" title="gitmoji 使用">gitmoji 使用</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-09-07T16:00:00.000Z" title="发表于 2020-09-08 00:00:00">2020-09-08</time></span></div><div class="content">gitmoji如何使用git commit -m :art: 
-文档
-
-
-gitmoji
-代码
-说明
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="孙小文的个人网站" type="application/atom+xml">
+</head>
 
 
+    <body class="max-width mx-auto px3 ltr">
+      
+            <div class="content index py4">
+              
+                <header id="header">
+  <a href="/">
+  
+    
+      <div id="logo" style="background-image: url(/images/logo.png);"></div>
+    
+  
+    <div id="title">
+      <h1>孙小文的个人网站</h1>
+    </div>
+  </a>
+  <div id="nav">
+    <ul>
+      <li class="icon">
+        <a href="#" aria-label="Menu"><i class="fas fa-bars fa-2x"></i></a>
+      </li>
+       
+        <li><a href="/">首页</a></li>
+       
+        <li><a href="/archives/">归档</a></li>
+       
+        <li><a href="/about/">关于</a></li>
+      
+    </ul>
+  </div>
+</header>
 
-🎨
-:art:
-改进代码结构/代码格式
+                  
+                    <section id="about">
+  
+    <p>已识乾坤大，尤怜草木清。</p>
 
+      
+        
+          <p>
+            在这里找到我：
+              
+                
+                  
+                    
+                          <a class="icon" target="_blank" rel="noopener" href="https://github.com/sunweiwe"
+                            aria-label="github">
+                            <i class="fab fa-github"></i>
+                          </a>
+                          
+                               
+                                
+                                  
+                    
+                      <a class="icon" target="_blank" rel="noopener" href="mailto:sun_weiwe@163.com"
+                        aria-label="mail">
+                        <i class="fas fa-envelope"></i>
+                      </a>
+                      
+                             .
+                                
+                                  
+          </p>
+          
+</section>
 
-💄
-:lipstick:
-添加或更新 UI 和样式文件
-
-
-⚡️
-:zap:
-提高性能
-
-
-🔥
-:fire:
-删除代码或文件
-
-
-🚑
-:ambulance:
-关键修补程序
-
-
-✨
-:sparkles:
-引入新功能
-
-
-📝
-:pencil:
-编写文档
-
-
-🚀
-:rocket:
-部署东西
-
-
-🎉
-:tada:
-开始一个项目
-
-
-✅
-:white_check_mark:
-添加或更新测试
-
-
-🔒
-:lock:
-解决安全问题
-
-
-🔖
-:bookmark:
-发布/版本标签
-
-
-🚧
-:construction:
-工作正在进行中
-
-
-💩
-:poop:
-编写需要改进的错误代码
-
-
-💚
-:green_heart:
-修复 CI 构建
-
-
-👷
-:construction_worker:
-添加或更新 CI 构建系统
-
-
-⬇️
-:arrow_down:
-降级依赖项
-
-
-⬆️
-:arrow_up:
-升级依赖项
+<section id="writing">
+  <span class="h1"><a href="/archives/">
+      文章
+    </a></span>
+  
+      <ul class="post-list">
+        
+          
+                
+                  
+                    
+                      <li class="post-item">
+                        
+    <div class="meta">
+      
+        
+          <time datetime="2021-06-27T12:00:39.000Z" itemprop="datePublished">2021-06-27</time>
+        
+      
+    </div>
 
 
-📌
-:pushpin:
- ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/2020/04/15/p01.zshrc/" title="zshrc 配置">     <img class="post_bg" src="https://cdn.jsdelivr.net/gh/sunweiwe/image_store/blog/sam-moqadam-VwHzE0aFQfY-unsplash.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="zshrc 配置"></a></div><div class="recent-post-info"><a class="article-title" href="/2020/04/15/p01.zshrc/" title="zshrc 配置">zshrc 配置</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-04-14T16:00:00.000Z" title="发表于 2020-04-15 00:00:00">2020-04-15</time></span></div><div class="content">Zinit#!usr/bin/env zsh# - - - - - - - - - - - - - - - - - - - -# Profiling Tools# - - - - - - - - - - - - - - - - - - - -PROFILE_STARTUP=falseif [[ &quot;$PROFILE_STARTUP&quot; == true ]]; then    zmodload zsh/zprof    # http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html    PS4=$&#x27;%D&#123;%M%S%.&#125; %N:%i&gt; &#x27;    exec 3&gt;&amp;2 2&gt;$HOME/startlog.$$    setopt xtrace prompt_substfi# - - - - - - - - - - - - - - - - - - - -# Instant Prompt# - - - - - - - - - - - - - - - - - ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/2019/10/31/html/HTMLCollection/" title="HTMLCollection">     <img class="post_bg" src="https://cdn.jsdelivr.net/gh/sunweiwe/image_store/blog/pad.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="HTMLCollection"></a></div><div class="recent-post-info"><a class="article-title" href="/2019/10/31/html/HTMLCollection/" title="HTMLCollection">HTMLCollection</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2019-10-31T12:46:25.000Z" title="发表于 2019-10-31 20:46:25">2019-10-31</time></span></div><div class="content">类数组对象 HTMLCollection
+                          <span>
+                            
+    
+        <a class="" href="/2021/06/27/react/%E4%BA%8B%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/">事件系统原理</a>
+    
 
-elem.getElementsByTagName();
-document.scripts;//返回页面里所有的 script 元素的集合。
-document.links;//返回全部 a 元素。
-document.images;//返回所有图片元素
-document.forms;//返回所有 form 元素。
-tr.cells;//返回所有 tr 内的所有 td 子元素的集合。
-select.options;//返回 select 的全部选项。
 
-</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/2019/10/28/es/%E9%81%8D%E5%8E%86%E6%96%B9%E6%B3%95/" title="遍历方法">     <img class="post_bg" src="https://cdn.jsdelivr.net/gh/sunweiwe/image_store/blog/tamanna-rumee-1frDT3DVDl0-unsplash.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="遍历方法"></a></div><div class="recent-post-info"><a class="article-title" href="/2019/10/28/es/%E9%81%8D%E5%8E%86%E6%96%B9%E6%B3%95/" title="遍历方法">遍历方法</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2019-10-28T12:46:25.000Z" title="发表于 2019-10-28 20:46:25">2019-10-28</time></span></div><div class="content">遍历对象Object.keys使用 Object.keys()遍历 返回一个数组,包括对象自身的(不含继承的)所有可枚举属性(不含 Symbol 属性).
-let obj = &#123; 0: &#x27;a&#x27;, 1: &#x27;b&#x27;, 2: &#x27;c&#x27; &#125;;Object.keys(obj).forEach(function (key) &#123;  console.log(key, obj[key]);&#125;);
-for..in..使用 for..in..遍历循环遍历对象自身的和继承的可枚举属性(不含 Symbol 属性).for … in 是为遍历对象属性而构建的，不建议与数组一起使用，数组可以用 Array.prototype.forEach()和 for …of
-let obj = &#123; 0: &#x27;a&#x27;, 1: &#x27;b&#x27;, 2: &#x27;c&#x27; &#125;;for (let i in obj) &#123;  console.log(i, &#x27;:&#x27 ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/2019/10/26/html/HTML5%E5%AD%98%E5%82%A8/" title="html5存储">     <img class="post_bg" src="https://cdn.jsdelivr.net/gh/sunweiwe/image_store/blog/sam-moqadam-VwHzE0aFQfY-unsplash.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="html5存储"></a></div><div class="recent-post-info"><a class="article-title" href="/2019/10/26/html/HTML5%E5%AD%98%E5%82%A8/" title="html5存储">html5存储</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2019-10-26T12:46:25.000Z" title="发表于 2019-10-26 20:46:25">2019-10-26</time></span></div><div class="content">HTML5 存储web storage 和 cookie 的区别:
-cookie 的大小是受限的
-每次你请求一个新的页面的时候 Cookie 都会被发送过去，这样无形中浪费了带宽
-Web Storage 自身拥有 setItem,getItem,removeItem,clear 等方法，cookie 需要前端开发者自己封装像 setCookie，getCookie 等方法。
-cookie 的作用是与服务器进行交互，作为 HTTP 规范的一部分而存在 ，而 Web Storage 仅仅是为了在本地“存储”数据而生。
 
-localStorage 和 sessionStorage 本地存储和离线存储相同的使用方法：
-setItem 方法设置存储内容。
-getItem 方法获取存储内容。
-使用 removeItem 方法删除存储内容。localStorage.setItem(‘Key 名’, ‘Value 值’);localStorage.getItem(‘Key 名’);//返回 value 值。localStorage.removeItem(‘Key 名’);//删除这个 key 的数据。 ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/2019/10/20/webpack/eslint/" title="eslint">     <img class="post_bg" src="https://cdn.jsdelivr.net/gh/sunweiwe/image_store/blog/nasa.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="eslint"></a></div><div class="recent-post-info"><a class="article-title" href="/2019/10/20/webpack/eslint/" title="eslint">eslint</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2019-10-20T11:09:25.000Z" title="发表于 2019-10-20 19:09:25">2019-10-20</time></span></div><div class="content">
-本地安装 eslintnpm install eslint --save-devnpm install –save-dev babel-eslint eslint-config-airbnb eslint-plugin-import eslint-plugin-react eslint-plugin-jsx-a11y eslint-plugin-react-hooks
+                          </span>
+                      </li>
+                      
+                      <li class="post-item">
+                        
+    <div class="meta">
+      
+        
+          <time datetime="2021-06-24T15:26:17.000Z" itemprop="datePublished">2021-06-24</time>
+        
+      
+    </div>
 
-创建基础的 .eslintrc.jseslint --fix
 
-package.json
-&quot;lint&quot;: &quot;eslint --ext .js --ext .jsx src&quot;,&quot;lint-fix&quot;: &quot;eslint --fix --ext .js --fix --ext .jsx src&quot;,
-pre-commit如果项目使用了 git,可以通过使用 pre-commit 钩子在每次提交前检测，如果检测失败则禁止提交。可以在很大一定程度上保证代码质量。npm install pre-commit –save-dev`,也可以使用 husky
- ...</div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/2/"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" src="https://cdn.jsdelivr.net/gh/sunweiwe/image_store/blog/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">Sun Weiwei</div><div class="author-info__description">已识乾坤大，尤怜草木清。</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">28</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">19</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/sunweiwe"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="/f" target="_blank" title=""><i></i></a><a class="social-icon" href="/a" target="_blank" title=""><i class="1"></i></a><a class="social-icon" href="/b" target="_blank" title=""><i class="2"></i></a><a class="social-icon" href="/" target="_blank" title=""><i class="3"></i></a><a class="social-icon" href="/f" target="_blank" title=""><i class="4"></i></a><a class="social-icon" href="/a" target="_blank" title=""><i class="5"></i></a><a class="social-icon" href="/-" target="_blank" title=""><i class="6"></i></a><a class="social-icon" href="/g" target="_blank" title=""><i class="7"></i></a><a class="social-icon" href="/i" target="_blank" title=""><i class="8"></i></a><a class="social-icon" href="/t" target="_blank" title=""><i class="9"></i></a><a class="social-icon" href="/h" target="_blank" title=""><i class="10"></i></a><a class="social-icon" href="/u" target="_blank" title=""><i class="11"></i></a><a class="social-icon" href="/b" target="_blank" title=""><i class="12"></i></a><a class="social-icon" href="/:" target="_blank" title=""><i class="13"></i></a><a class="social-icon" href="/h" target="_blank" title=""><i class="14"></i></a><a class="social-icon" href="/t" target="_blank" title=""><i class="15"></i></a><a class="social-icon" href="/t" target="_blank" title=""><i class="16"></i></a><a class="social-icon" href="/p" target="_blank" title=""><i class="17"></i></a><a class="social-icon" href="/s" target="_blank" title=""><i class="18"></i></a><a class="social-icon" href="/:" target="_blank" title=""><i class="19"></i></a><a class="social-icon" href="/" target="_blank" title=""><i class="20"></i></a><a class="social-icon" href="/" target="_blank" title=""><i class="21"></i></a><a class="social-icon" href="/g" target="_blank" title=""><i class="22"></i></a><a class="social-icon" href="/i" target="_blank" title=""><i class="23"></i></a><a class="social-icon" href="/t" target="_blank" title=""><i class="24"></i></a><a class="social-icon" href="/h" target="_blank" title=""><i class="25"></i></a><a class="social-icon" href="/u" target="_blank" title=""><i class="26"></i></a><a class="social-icon" href="/b" target="_blank" title=""><i class="27"></i></a><a class="social-icon" href="/." target="_blank" title=""><i class="28"></i></a><a class="social-icon" href="/c" target="_blank" title=""><i class="29"></i></a><a class="social-icon" href="/o" target="_blank" title=""><i class="30"></i></a><a class="social-icon" href="/m" target="_blank" title=""><i class="31"></i></a><a class="social-icon" href="/" target="_blank" title=""><i class="32"></i></a><a class="social-icon" href="/s" target="_blank" title=""><i class="33"></i></a><a class="social-icon" href="/u" target="_blank" title=""><i class="34"></i></a><a class="social-icon" href="/n" target="_blank" title=""><i class="35"></i></a><a class="social-icon" href="/w" target="_blank" title=""><i class="36"></i></a><a class="social-icon" href="/e" target="_blank" title=""><i class="37"></i></a><a class="social-icon" href="/i" target="_blank" title=""><i class="38"></i></a><a class="social-icon" href="/w" target="_blank" title=""><i class="39"></i></a><a class="social-icon" href="/e" target="_blank" title=""><i class="40"></i></a><a class="social-icon" href="/" target="_blank" title=""><i class="41"></i></a><a class="social-icon" href="/%7C" target="_blank" title=""><i class="42"></i></a><a class="social-icon" href="/%7C" target="_blank" title=""><i class="43"></i></a><a class="social-icon" href="/" target="_blank" title=""><i class="44"></i></a><a class="social-icon" href="/G" target="_blank" title=""><i class="45"></i></a><a class="social-icon" href="/i" target="_blank" title=""><i class="46"></i></a><a class="social-icon" href="/t" target="_blank" title=""><i class="47"></i></a><a class="social-icon" href="/h" target="_blank" title=""><i class="48"></i></a><a class="social-icon" href="/u" target="_blank" title=""><i class="49"></i></a><a class="social-icon" href="/b" target="_blank" title=""><i class="50"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">天行健，君子以自强不息。地势坤，君子以厚德载物。</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2021/06/24/%E6%B5%8F%E8%A7%88%E5%99%A8/%E5%9B%9E%E6%B5%81%E5%92%8C%E9%87%8D%E7%BB%98/" title="回流和重绘"><img src="https://cdn.jsdelivr.net/gh/sunweiwe/image_store/blog/pad.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="回流和重绘"/></a><div class="content"><a class="title" href="/2021/06/24/%E6%B5%8F%E8%A7%88%E5%99%A8/%E5%9B%9E%E6%B5%81%E5%92%8C%E9%87%8D%E7%BB%98/" title="回流和重绘">回流和重绘</a><time datetime="2021-06-24T15:26:17.000Z" title="发表于 2021-06-24 23:26:17">2021-06-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/06/24/es/%E9%98%B2%E6%8A%96%E5%92%8C%E8%8A%82%E6%B5%81/" title="防抖和节流"><img src="https://cdn.jsdelivr.net/gh/sunweiwe/image_store/blog/nasa.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="防抖和节流"/></a><div class="content"><a class="title" href="/2021/06/24/es/%E9%98%B2%E6%8A%96%E5%92%8C%E8%8A%82%E6%B5%81/" title="防抖和节流">防抖和节流</a><time datetime="2021-06-24T11:38:17.000Z" title="发表于 2021-06-24 19:38:17">2021-06-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/06/23/%E6%B5%8F%E8%A7%88%E5%99%A8/%E5%AF%BC%E8%88%AA%E6%B8%B2%E6%9F%93%E6%B5%81%E7%A8%8B/" title="导航渲染流程"><img src="https://cdn.jsdelivr.net/gh/sunweiwe/image_store/blog/tamanna-rumee-1frDT3DVDl0-unsplash.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="导航渲染流程"/></a><div class="content"><a class="title" href="/2021/06/23/%E6%B5%8F%E8%A7%88%E5%99%A8/%E5%AF%BC%E8%88%AA%E6%B8%B2%E6%9F%93%E6%B5%81%E7%A8%8B/" title="导航渲染流程">导航渲染流程</a><time datetime="2021-06-23T14:32:42.000Z" title="发表于 2021-06-23 22:32:42">2021-06-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/06/22/es/%E7%BC%93%E5%AD%98/" title="前端缓存"><img src="https://cdn.jsdelivr.net/gh/sunweiwe/image_store/blog/tamanna-rumee-1frDT3DVDl0-unsplash.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="前端缓存"/></a><div class="content"><a class="title" href="/2021/06/22/es/%E7%BC%93%E5%AD%98/" title="前端缓存">前端缓存</a><time datetime="2021-06-22T13:23:51.000Z" title="发表于 2021-06-22 21:23:51">2021-06-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/06/20/es/%E7%BB%A7%E6%89%BF/" title="JS 继承"><img src="https://cdn.jsdelivr.net/gh/sunweiwe/image_store/blog/tamanna-rumee-1frDT3DVDl0-unsplash.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="JS 继承"/></a><div class="content"><a class="title" href="/2021/06/20/es/%E7%BB%A7%E6%89%BF/" title="JS 继承">JS 继承</a><time datetime="2021-06-20T12:55:16.000Z" title="发表于 2021-06-20 20:55:16">2021-06-20</time></div></div></div></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/ES6/" style="font-size: 1.1em; color: #999">ES6</a> <a href="/tags/HTML/" style="font-size: 1.5em; color: #99a9bf">HTML</a> <a href="/tags/Hook/" style="font-size: 1.3em; color: #99a1ac">Hook</a> <a href="/tags/JS/" style="font-size: 1.5em; color: #99a9bf">JS</a> <a href="/tags/babel/" style="font-size: 1.1em; color: #999">babel</a> <a href="/tags/css/" style="font-size: 1.1em; color: #999">css</a> <a href="/tags/docker/" style="font-size: 1.1em; color: #999">docker</a> <a href="/tags/eslint/" style="font-size: 1.1em; color: #999">eslint</a> <a href="/tags/flex/" style="font-size: 1.1em; color: #999">flex</a> <a href="/tags/go/" style="font-size: 1.1em; color: #999">go</a> <a href="/tags/node/" style="font-size: 1.1em; color: #999">node</a> <a href="/tags/react/" style="font-size: 1.1em; color: #999">react</a> <a href="/tags/reactivity/" style="font-size: 1.1em; color: #999">reactivity</a> <a href="/tags/ts/" style="font-size: 1.1em; color: #999">ts</a> <a href="/tags/vue/" style="font-size: 1.3em; color: #99a1ac">vue</a> <a href="/tags/webpack/" style="font-size: 1.3em; color: #99a1ac">webpack</a> <a href="/tags/%E4%B8%AA%E4%BA%BA%E9%85%8D%E7%BD%AE/" style="font-size: 1.3em; color: #99a1ac">个人配置</a> <a href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" style="font-size: 1.3em; color: #99a1ac">浏览器</a> <a href="/tags/%E8%B7%AF%E7%94%B1/" style="font-size: 1.1em; color: #999">路由</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
-    <i class="fas fa-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/06/"><span class="card-archive-list-date">六月 2021</span><span class="card-archive-list-count">7</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/05/"><span class="card-archive-list-date">五月 2021</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/03/"><span class="card-archive-list-date">三月 2021</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/02/"><span class="card-archive-list-date">二月 2021</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/01/"><span class="card-archive-list-date">一月 2021</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/12/"><span class="card-archive-list-date">十二月 2020</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/11/"><span class="card-archive-list-date">十一月 2020</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/09/"><span class="card-archive-list-date">九月 2020</span><span class="card-archive-list-count">3</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">28</div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2021-06-24T12:34:16.363Z"></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2021 By Sun Weiwei</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div></div></body></html>
+                          <span>
+                            
+    
+        <a class="" href="/2021/06/24/%E6%B5%8F%E8%A7%88%E5%99%A8/%E5%9B%9E%E6%B5%81%E5%92%8C%E9%87%8D%E7%BB%98/">回流和重绘</a>
+    
+
+
+
+                          </span>
+                      </li>
+                      
+                      <li class="post-item">
+                        
+    <div class="meta">
+      
+        
+          <time datetime="2021-06-24T11:38:17.000Z" itemprop="datePublished">2021-06-24</time>
+        
+      
+    </div>
+
+
+                          <span>
+                            
+    
+        <a class="" href="/2021/06/24/es/%E9%98%B2%E6%8A%96%E5%92%8C%E8%8A%82%E6%B5%81/">防抖和节流</a>
+    
+
+
+
+                          </span>
+                      </li>
+                      
+                      <li class="post-item">
+                        
+    <div class="meta">
+      
+        
+          <time datetime="2021-06-23T14:32:42.000Z" itemprop="datePublished">2021-06-23</time>
+        
+      
+    </div>
+
+
+                          <span>
+                            
+    
+        <a class="" href="/2021/06/23/%E6%B5%8F%E8%A7%88%E5%99%A8/%E5%AF%BC%E8%88%AA%E6%B8%B2%E6%9F%93%E6%B5%81%E7%A8%8B/">导航渲染流程</a>
+    
+
+
+
+                          </span>
+                      </li>
+                      
+                      <li class="post-item">
+                        
+    <div class="meta">
+      
+        
+          <time datetime="2021-06-22T13:23:51.000Z" itemprop="datePublished">2021-06-22</time>
+        
+      
+    </div>
+
+
+                          <span>
+                            
+    
+        <a class="" href="/2021/06/22/es/%E7%BC%93%E5%AD%98/">前端缓存</a>
+    
+
+
+
+                          </span>
+                      </li>
+                      
+                      <li class="post-item">
+                        
+    <div class="meta">
+      
+        
+          <time datetime="2021-06-20T12:55:16.000Z" itemprop="datePublished">2021-06-20</time>
+        
+      
+    </div>
+
+
+                          <span>
+                            
+    
+        <a class="" href="/2021/06/20/es/%E7%BB%A7%E6%89%BF/">JS 继承</a>
+    
+
+
+
+                          </span>
+                      </li>
+                      
+                      <li class="post-item">
+                        
+    <div class="meta">
+      
+        
+          <time datetime="2021-06-19T13:20:44.000Z" itemprop="datePublished">2021-06-19</time>
+        
+      
+    </div>
+
+
+                          <span>
+                            
+    
+        <a class="" href="/2021/06/19/webpack/webpack-dev-server/">webpack-dev-server</a>
+    
+
+
+
+                          </span>
+                      </li>
+                      
+                      <li class="post-item">
+                        
+    <div class="meta">
+      
+        
+          <time datetime="2021-06-09T12:46:25.000Z" itemprop="datePublished">2021-06-09</time>
+        
+      
+    </div>
+
+
+                          <span>
+                            
+    
+        <a class="" href="/2021/06/09/vue/compile/">compile</a>
+    
+
+
+
+                          </span>
+                      </li>
+                      
+                      <li class="post-item">
+                        
+    <div class="meta">
+      
+        
+          <time datetime="2021-05-26T12:55:16.000Z" itemprop="datePublished">2021-05-26</time>
+        
+      
+    </div>
+
+
+                          <span>
+                            
+    
+        <a class="" href="/2021/05/26/css/BFC/">BFC</a>
+    
+
+
+
+                          </span>
+                      </li>
+                      
+                      <li class="post-item">
+                        
+    <div class="meta">
+      
+        
+          <time datetime="2021-05-18T09:59:57.000Z" itemprop="datePublished">2021-05-18</time>
+        
+      
+    </div>
+
+
+                          <span>
+                            
+    
+        <a class="" href="/2021/05/18/reactivity/reactivity%E8%A7%A3%E6%9E%90/">reactivity解析</a>
+    
+
+
+
+                          </span>
+                      </li>
+                      
+                      <li class="post-item">
+                        
+    <div class="meta">
+      
+        
+          <time datetime="2021-03-04T04:00:00.000Z" itemprop="datePublished">2021-03-04</time>
+        
+      
+    </div>
+
+
+                          <span>
+                            
+    
+        <a class="" href="/2021/03/04/es/ES6/">ES6</a>
+    
+
+
+
+                          </span>
+                      </li>
+                      
+                      <li class="post-item">
+                        
+    <div class="meta">
+      
+        
+          <time datetime="2021-02-28T16:00:00.000Z" itemprop="datePublished">2021-03-01</time>
+        
+      
+    </div>
+
+
+                          <span>
+                            
+    
+        <a class="" href="/2021/03/01/webpack/babel/">babel</a>
+    
+
+
+
+                          </span>
+                      </li>
+                      
+                      <li class="post-item">
+                        
+    <div class="meta">
+      
+        
+          <time datetime="2021-02-21T09:59:57.000Z" itemprop="datePublished">2021-02-21</time>
+        
+      
+    </div>
+
+
+                          <span>
+                            
+    
+        <a class="" href="/2021/02/21/react/react-source-code/">react-source-code</a>
+    
+
+
+
+                          </span>
+                      </li>
+                      
+                      <li class="post-item">
+                        
+    <div class="meta">
+      
+        
+          <time datetime="2021-02-09T12:47:31.000Z" itemprop="datePublished">2021-02-09</time>
+        
+      
+    </div>
+
+
+                          <span>
+                            
+    
+        <a class="" href="/2021/02/09/react/useEffect%E7%B2%BE%E8%AF%BB/">useEffect精读</a>
+    
+
+
+
+                          </span>
+                      </li>
+                      
+                      <li class="post-item">
+                        
+    <div class="meta">
+      
+        
+          <time datetime="2021-02-01T12:47:31.000Z" itemprop="datePublished">2021-02-01</time>
+        
+      
+    </div>
+
+
+                          <span>
+                            
+    
+        <a class="" href="/2021/02/01/html/HTML/">HTML</a>
+    
+
+
+
+                          </span>
+                      </li>
+                      
+                      <li class="post-item">
+                        
+    <div class="meta">
+      
+        
+          <time datetime="2021-01-30T13:58:09.000Z" itemprop="datePublished">2021-01-30</time>
+        
+      
+    </div>
+
+
+                          <span>
+                            
+    
+        <a class="" href="/2021/01/30/es/TypeScript/">typescript</a>
+    
+
+
+
+                          </span>
+                      </li>
+                      
+                      <li class="post-item">
+                        
+    <div class="meta">
+      
+        
+          <time datetime="2021-01-29T12:55:16.000Z" itemprop="datePublished">2021-01-29</time>
+        
+      
+    </div>
+
+
+                          <span>
+                            
+    
+        <a class="" href="/2021/01/29/es/%E8%B7%AF%E7%94%B1/">路由</a>
+    
+
+
+
+                          </span>
+                      </li>
+                      
+                      <li class="post-item">
+                        
+    <div class="meta">
+      
+        
+          <time datetime="2021-01-27T15:02:21.000Z" itemprop="datePublished">2021-01-27</time>
+        
+      
+    </div>
+
+
+                          <span>
+                            
+    
+        <a class="" href="/2021/01/27/react/Hook/">hook</a>
+    
+
+
+
+                          </span>
+                      </li>
+                      
+                      <li class="post-item">
+                        
+    <div class="meta">
+      
+        
+          <time datetime="2020-12-15T05:15:14.000Z" itemprop="datePublished">2020-12-15</time>
+        
+      
+    </div>
+
+
+                          <span>
+                            
+    
+        <a class="" href="/2020/12/15/golang/golang%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/">golang基础语法</a>
+    
+
+
+
+                          </span>
+                      </li>
+                      
+                      <li class="post-item">
+                        
+    <div class="meta">
+      
+        
+          <time datetime="2020-11-22T11:58:40.000Z" itemprop="datePublished">2020-11-22</time>
+        
+      
+    </div>
+
+
+                          <span>
+                            
+    
+        <a class="" href="/2020/11/22/golang/node/">node</a>
+    
+
+
+
+                          </span>
+                      </li>
+                      
+      </ul>
+      
+</section>
+
+
+                      
+                            <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+      
+        
+          2019-2021
+            Sun Weiwei
+  </div>
+
+</footer>
+            </div>
+            <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+              <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+    </body>
+
+    </html>

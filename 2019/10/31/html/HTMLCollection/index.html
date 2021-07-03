@@ -1,146 +1,156 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>HTMLCollection | 孙小文的个人网站</title><meta name="keywords" content="HTML"><meta name="author" content="Sun Weiwei,sunweiwei.lin@foxmail.com"><meta name="copyright" content="Sun Weiwei"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="类数组对象 HTMLCollection  elem.getElementsByTagName(); document.scripts;&#x2F;&#x2F;返回页面里所有的 script 元素的集合。 document.links;&#x2F;&#x2F;返回全部 a 元素。 document.images;&#x2F;&#x2F;返回所有图片元素 document.forms;&#x2F;&#x2F;返回所有 form 元素。 tr.cells;&#x2F;&#x2F;返回所有 tr 内的">
+<!DOCTYPE html>
+<html lang=zh>
+  <head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="类数组对象 HTMLCollection  elem.getElementsByTagName(); document.scripts;&#x2F;&#x2F;返回页面里所有的 script 元素的集合。 document.links;&#x2F;&#x2F;返回全部 a 元素。 document.images;&#x2F;&#x2F;返回所有图片元素 document.forms;&#x2F;&#x2F;返回所有 form 元素。 tr.cells;&#x2F;&#x2F;返回所有 tr 内的">
 <meta property="og:type" content="article">
 <meta property="og:title" content="HTMLCollection">
 <meta property="og:url" content="https://sunweiwe.github.io/2019/10/31/html/HTMLCollection/index.html">
 <meta property="og:site_name" content="孙小文的个人网站">
 <meta property="og:description" content="类数组对象 HTMLCollection  elem.getElementsByTagName(); document.scripts;&#x2F;&#x2F;返回页面里所有的 script 元素的集合。 document.links;&#x2F;&#x2F;返回全部 a 元素。 document.images;&#x2F;&#x2F;返回所有图片元素 document.forms;&#x2F;&#x2F;返回所有 form 元素。 tr.cells;&#x2F;&#x2F;返回所有 tr 内的">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/sunweiwe/image_store/blog/pad.png">
 <meta property="article:published_time" content="2019-10-31T12:46:25.000Z">
 <meta property="article:modified_time" content="2021-06-18T14:45:13.977Z">
 <meta property="article:author" content="Sun Weiwei">
 <meta property="article:tag" content="HTML">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/sunweiwe/image_store/blog/pad.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://sunweiwe.github.io/2019/10/31/html/HTMLCollection/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
-  root: '/',
-  algolia: undefined,
-  localSearch: undefined,
-  translate: undefined,
-  noticeOutdate: undefined,
-  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
-  copy: {
-    success: '复制成功',
-    error: '复制错误',
-    noSupport: '浏览器不支持'
-  },
-  relativeDate: {
-    homepage: false,
-    post: false
-  },
-  runtime: '',
-  date_suffix: {
-    just: '刚刚',
-    min: '分钟前',
-    hour: '小时前',
-    day: '天前',
-    month: '个月前'
-  },
-  copyright: undefined,
-  lightbox: 'fancybox',
-  Snackbar: undefined,
-  source: {
-    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
-    justifiedGallery: {
-      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
-      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
-    },
-    fancybox: {
-      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
-      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
-    }
-  },
-  isPhotoFigcaption: false,
-  islazyload: false,
-  isanchor: false
-}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = { 
-  isPost: true,
-  isHome: false,
-  isHighlightShrink: false,
-  isToc: false,
-  postUpdate: '2021-06-18 22:45:13'
-}</script><noscript><style type="text/css">
-  #nav {
-    opacity: 1
-  }
-  .justified-gallery img {
-    opacity: 1
-  }
-
-  #recent-posts time,
-  #post-meta time {
-    display: inline !important
-  }
-</style></noscript><script>(win=>{
-    win.saveToLocal = {
-      set: function setWithExpiry(key, value, ttl) {
-        if (ttl === 0) return
-        const now = new Date()
-        const expiryDay = ttl * 86400000
-        const item = {
-          value: value,
-          expiry: now.getTime() + expiryDay,
-        }
-        localStorage.setItem(key, JSON.stringify(item))
-      },
-
-      get: function getWithExpiry(key) {
-        const itemStr = localStorage.getItem(key)
-
-        if (!itemStr) {
-          return undefined
-        }
-        const item = JSON.parse(itemStr)
-        const now = new Date()
-
-        if (now.getTime() > item.expiry) {
-          localStorage.removeItem(key)
-          return undefined
-        }
-        return item.value
-      }
-    }
-  
-    win.getScript = url => new Promise((resolve, reject) => {
-      const script = document.createElement('script')
-      script.src = url
-      script.async = true
-      script.onerror = reject
-      script.onload = script.onreadystatechange = function() {
-        const loadState = this.readyState
-        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
-        script.onload = script.onreadystatechange = null
-        resolve()
-      }
-      document.head.appendChild(script)
-    })
-  
-      win.activateDarkMode = function () {
-        document.documentElement.setAttribute('data-theme', 'dark')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
-        }
-      }
-      win.activateLightMode = function () {
-        document.documentElement.setAttribute('data-theme', 'light')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
-        }
-      }
-      const t = saveToLocal.get('theme')
     
-          if (t === 'dark') activateDarkMode()
-          else if (t === 'light') activateLightMode()
+    
+      
         
-      const asideStatus = saveToLocal.get('aside-status')
-      if (asideStatus !== undefined) {
-        if (asideStatus === 'hide') {
-          document.documentElement.classList.add('hide-aside')
-        } else {
-          document.documentElement.classList.remove('hide-aside')
-        }
-      }
-    })(window)</script><meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="孙小文的个人网站" type="application/atom+xml">
-</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="https://cdn.jsdelivr.net/gh/sunweiwe/image_store/blog/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">28</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">19</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">孙小文的个人网站</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">HTMLCollection</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2019-10-31T12:46:25.000Z" title="发表于 2019-10-31 20:46:25">2019-10-31</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-06-18T14:45:13.977Z" title="更新于 2021-06-18 22:45:13">2021-06-18</time></span></div><div class="meta-secondline"></div></div></div><article class="post-content" id="article-container"><p>类数组对象 HTMLCollection</p>
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>HTMLCollection</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="孙小文的个人网站" type="application/atom+xml">
+</head>
+
+
+    <body class="max-width mx-auto px3 ltr">
+      
+        <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" "Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="上一篇 " href="/2020/04/15/p01.zshrc/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="下一篇 " href="/2019/10/28/es/%E9%81%8D%E5%8E%86%E6%96%B9%E6%B3%95/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="返回顶部 " href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章 " href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sunweiwe.github.io/2019/10/31/html/HTMLCollection/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sunweiwe.github.io/2019/10/31/html/HTMLCollection/&text=HTMLCollection"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sunweiwe.github.io/2019/10/31/html/HTMLCollection/&title=HTMLCollection"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sunweiwe.github.io/2019/10/31/html/HTMLCollection/&is_video=false&description=HTMLCollection"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=HTMLCollection&body=Check out this article: https://sunweiwe.github.io/2019/10/31/html/HTMLCollection/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sunweiwe.github.io/2019/10/31/html/HTMLCollection/&title=HTMLCollection"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sunweiwe.github.io/2019/10/31/html/HTMLCollection/&title=HTMLCollection"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sunweiwe.github.io/2019/10/31/html/HTMLCollection/&title=HTMLCollection"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sunweiwe.github.io/2019/10/31/html/HTMLCollection/&title=HTMLCollection"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sunweiwe.github.io/2019/10/31/html/HTMLCollection/&name=HTMLCollection&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sunweiwe.github.io/2019/10/31/html/HTMLCollection/&t=HTMLCollection"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      
+    </div>
+  </span>
+</div>
+
+          
+            <div class="content index py4">
+              
+                    <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        HTMLCollection
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Sun Weiwei</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2019-10-31T12:46:25.000Z" itemprop="datePublished">2019-10-31</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/HTML/" rel="tag">HTML</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>类数组对象 HTMLCollection</p>
 <ul>
 <li>elem.getElementsByTagName();</li>
 <li>document.scripts;//返回页面里所有的 script 元素的集合。</li>
@@ -150,4 +160,126 @@
 <li>tr.cells;//返回所有 tr 内的所有 td 子元素的集合。</li>
 <li>select.options;//返回 select 的全部选项。</li>
 </ul>
-</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/HTML/">HTML</a></div><div class="post_share"></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2020/04/15/p01.zshrc/"><img class="prev-cover" src="https://cdn.jsdelivr.net/gh/sunweiwe/image_store/blog/sam-moqadam-VwHzE0aFQfY-unsplash.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">zshrc 配置</div></div></a></div><div class="next-post pull-right"><a href="/2019/10/28/es/%E9%81%8D%E5%8E%86%E6%96%B9%E6%B3%95/"><img class="next-cover" src="https://cdn.jsdelivr.net/gh/sunweiwe/image_store/blog/tamanna-rumee-1frDT3DVDl0-unsplash.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">遍历方法</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" src="https://cdn.jsdelivr.net/gh/sunweiwe/image_store/blog/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">Sun Weiwei</div><div class="author-info__description">已识乾坤大，尤怜草木清。</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">28</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">19</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/sunweiwe"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="/f" target="_blank" title=""><i></i></a><a class="social-icon" href="/a" target="_blank" title=""><i class="1"></i></a><a class="social-icon" href="/b" target="_blank" title=""><i class="2"></i></a><a class="social-icon" href="/" target="_blank" title=""><i class="3"></i></a><a class="social-icon" href="/f" target="_blank" title=""><i class="4"></i></a><a class="social-icon" href="/a" target="_blank" title=""><i class="5"></i></a><a class="social-icon" href="/-" target="_blank" title=""><i class="6"></i></a><a class="social-icon" href="/g" target="_blank" title=""><i class="7"></i></a><a class="social-icon" href="/i" target="_blank" title=""><i class="8"></i></a><a class="social-icon" href="/t" target="_blank" title=""><i class="9"></i></a><a class="social-icon" href="/h" target="_blank" title=""><i class="10"></i></a><a class="social-icon" href="/u" target="_blank" title=""><i class="11"></i></a><a class="social-icon" href="/b" target="_blank" title=""><i class="12"></i></a><a class="social-icon" href="/:" target="_blank" title=""><i class="13"></i></a><a class="social-icon" href="/h" target="_blank" title=""><i class="14"></i></a><a class="social-icon" href="/t" target="_blank" title=""><i class="15"></i></a><a class="social-icon" href="/t" target="_blank" title=""><i class="16"></i></a><a class="social-icon" href="/p" target="_blank" title=""><i class="17"></i></a><a class="social-icon" href="/s" target="_blank" title=""><i class="18"></i></a><a class="social-icon" href="/:" target="_blank" title=""><i class="19"></i></a><a class="social-icon" href="/" target="_blank" title=""><i class="20"></i></a><a class="social-icon" href="/" target="_blank" title=""><i class="21"></i></a><a class="social-icon" href="/g" target="_blank" title=""><i class="22"></i></a><a class="social-icon" href="/i" target="_blank" title=""><i class="23"></i></a><a class="social-icon" href="/t" target="_blank" title=""><i class="24"></i></a><a class="social-icon" href="/h" target="_blank" title=""><i class="25"></i></a><a class="social-icon" href="/u" target="_blank" title=""><i class="26"></i></a><a class="social-icon" href="/b" target="_blank" title=""><i class="27"></i></a><a class="social-icon" href="/." target="_blank" title=""><i class="28"></i></a><a class="social-icon" href="/c" target="_blank" title=""><i class="29"></i></a><a class="social-icon" href="/o" target="_blank" title=""><i class="30"></i></a><a class="social-icon" href="/m" target="_blank" title=""><i class="31"></i></a><a class="social-icon" href="/" target="_blank" title=""><i class="32"></i></a><a class="social-icon" href="/s" target="_blank" title=""><i class="33"></i></a><a class="social-icon" href="/u" target="_blank" title=""><i class="34"></i></a><a class="social-icon" href="/n" target="_blank" title=""><i class="35"></i></a><a class="social-icon" href="/w" target="_blank" title=""><i class="36"></i></a><a class="social-icon" href="/e" target="_blank" title=""><i class="37"></i></a><a class="social-icon" href="/i" target="_blank" title=""><i class="38"></i></a><a class="social-icon" href="/w" target="_blank" title=""><i class="39"></i></a><a class="social-icon" href="/e" target="_blank" title=""><i class="40"></i></a><a class="social-icon" href="/" target="_blank" title=""><i class="41"></i></a><a class="social-icon" href="/%7C" target="_blank" title=""><i class="42"></i></a><a class="social-icon" href="/%7C" target="_blank" title=""><i class="43"></i></a><a class="social-icon" href="/" target="_blank" title=""><i class="44"></i></a><a class="social-icon" href="/G" target="_blank" title=""><i class="45"></i></a><a class="social-icon" href="/i" target="_blank" title=""><i class="46"></i></a><a class="social-icon" href="/t" target="_blank" title=""><i class="47"></i></a><a class="social-icon" href="/h" target="_blank" title=""><i class="48"></i></a><a class="social-icon" href="/u" target="_blank" title=""><i class="49"></i></a><a class="social-icon" href="/b" target="_blank" title=""><i class="50"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">天行健，君子以自强不息。地势坤，君子以厚德载物。</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2021/06/24/%E6%B5%8F%E8%A7%88%E5%99%A8/%E5%9B%9E%E6%B5%81%E5%92%8C%E9%87%8D%E7%BB%98/" title="回流和重绘"><img src="https://cdn.jsdelivr.net/gh/sunweiwe/image_store/blog/pad.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="回流和重绘"/></a><div class="content"><a class="title" href="/2021/06/24/%E6%B5%8F%E8%A7%88%E5%99%A8/%E5%9B%9E%E6%B5%81%E5%92%8C%E9%87%8D%E7%BB%98/" title="回流和重绘">回流和重绘</a><time datetime="2021-06-24T15:26:17.000Z" title="发表于 2021-06-24 23:26:17">2021-06-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/06/24/es/%E9%98%B2%E6%8A%96%E5%92%8C%E8%8A%82%E6%B5%81/" title="防抖和节流"><img src="https://cdn.jsdelivr.net/gh/sunweiwe/image_store/blog/nasa.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="防抖和节流"/></a><div class="content"><a class="title" href="/2021/06/24/es/%E9%98%B2%E6%8A%96%E5%92%8C%E8%8A%82%E6%B5%81/" title="防抖和节流">防抖和节流</a><time datetime="2021-06-24T11:38:17.000Z" title="发表于 2021-06-24 19:38:17">2021-06-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/06/23/%E6%B5%8F%E8%A7%88%E5%99%A8/%E5%AF%BC%E8%88%AA%E6%B8%B2%E6%9F%93%E6%B5%81%E7%A8%8B/" title="导航渲染流程"><img src="https://cdn.jsdelivr.net/gh/sunweiwe/image_store/blog/tamanna-rumee-1frDT3DVDl0-unsplash.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="导航渲染流程"/></a><div class="content"><a class="title" href="/2021/06/23/%E6%B5%8F%E8%A7%88%E5%99%A8/%E5%AF%BC%E8%88%AA%E6%B8%B2%E6%9F%93%E6%B5%81%E7%A8%8B/" title="导航渲染流程">导航渲染流程</a><time datetime="2021-06-23T14:32:42.000Z" title="发表于 2021-06-23 22:32:42">2021-06-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/06/22/es/%E7%BC%93%E5%AD%98/" title="前端缓存"><img src="https://cdn.jsdelivr.net/gh/sunweiwe/image_store/blog/tamanna-rumee-1frDT3DVDl0-unsplash.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="前端缓存"/></a><div class="content"><a class="title" href="/2021/06/22/es/%E7%BC%93%E5%AD%98/" title="前端缓存">前端缓存</a><time datetime="2021-06-22T13:23:51.000Z" title="发表于 2021-06-22 21:23:51">2021-06-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/06/20/es/%E7%BB%A7%E6%89%BF/" title="JS 继承"><img src="https://cdn.jsdelivr.net/gh/sunweiwe/image_store/blog/tamanna-rumee-1frDT3DVDl0-unsplash.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="JS 继承"/></a><div class="content"><a class="title" href="/2021/06/20/es/%E7%BB%A7%E6%89%BF/" title="JS 继承">JS 继承</a><time datetime="2021-06-20T12:55:16.000Z" title="发表于 2021-06-20 20:55:16">2021-06-20</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2021 By Sun Weiwei</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div></div></body></html>
+
+  </div>
+</article>
+
+
+
+                      
+                        <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sunweiwe.github.io/2019/10/31/html/HTMLCollection/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sunweiwe.github.io/2019/10/31/html/HTMLCollection/&text=HTMLCollection"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sunweiwe.github.io/2019/10/31/html/HTMLCollection/&title=HTMLCollection"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sunweiwe.github.io/2019/10/31/html/HTMLCollection/&is_video=false&description=HTMLCollection"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=HTMLCollection&body=Check out this article: https://sunweiwe.github.io/2019/10/31/html/HTMLCollection/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sunweiwe.github.io/2019/10/31/html/HTMLCollection/&title=HTMLCollection"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sunweiwe.github.io/2019/10/31/html/HTMLCollection/&title=HTMLCollection"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sunweiwe.github.io/2019/10/31/html/HTMLCollection/&title=HTMLCollection"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sunweiwe.github.io/2019/10/31/html/HTMLCollection/&title=HTMLCollection"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sunweiwe.github.io/2019/10/31/html/HTMLCollection/&name=HTMLCollection&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sunweiwe.github.io/2019/10/31/html/HTMLCollection/&t=HTMLCollection"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+                          
+                            <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+      
+        
+          2019-2021
+            Sun Weiwei
+  </div>
+
+</footer>
+            </div>
+            <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+              <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+    </body>
+
+    </html>
