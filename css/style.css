@@ -643,7 +643,7 @@ body {
     display: inline-block;
   }
   #header #nav div.responsive {
-    margin: 2rem 0 0 0;
+    margin: 1rem 0 0 0;
     font-weight: 600;
   }
   #header #nav div.responsive a {
