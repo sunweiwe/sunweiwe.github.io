@@ -51,11 +51,17 @@
 .rtl article .content h2:before {
   right: 0rem;
 }
+.rtl .post-list .post-item {
+  display: flex;
+}
 .rtl .post-list .post-item .meta {
   margin-left: 16px;
   margin-right: inherit;
 }
 @media screen and (min-width: 480px) {
+  .rtl .post-list .post-item {
+    display: flex;
+  }
   .rtl .post-list .post-item .meta {
     text-align: left;
   }
