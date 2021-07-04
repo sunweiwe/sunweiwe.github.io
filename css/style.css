@@ -642,11 +642,11 @@ body {
     top: 77px;
     display: inline-block;
   }
-  #header #nav ul.responsive {
+  #header #nav div.responsive {
     margin: 2rem 0 0 0;
     font-weight: 600;
   }
-  #header #nav ul.responsive li {
+  #header #nav div.responsive a {
     display: inline-block;
   }
 }

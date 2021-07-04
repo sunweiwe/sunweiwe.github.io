@@ -65,10 +65,10 @@
     margin-left: 5rem;
     margin-right: 0;
   }
-  .rtl #header #nav ul {
+  .rtl #header #nav div {
     display: flex;
   }
-  .rtl #header #nav ul li {
+  .rtl #header #nav div li {
     right: auto;
     border: 0;
   }
