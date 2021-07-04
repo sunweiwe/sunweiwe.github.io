@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>孙小文的个人网站</title>
+  <title>孙小文</title>
   <icon>https://www.gravatar.com/avatar/725461287032ebf8915be801e42111f6</icon>
   <subtitle>Sun Weiwei&#39;s Blog</subtitle>
   <link href="/atom.xml" rel="self"/>
