@@ -643,7 +643,7 @@ body {
     display: inline-block;
   }
   #header #nav div.responsive {
-    margin: 1rem 0 0 0;
+    margin: 1.5rem 0 0 0;
     font-weight: 600;
   }
   #header #nav div.responsive a {
@@ -995,6 +995,7 @@ body {
   margin-bottom: 1rem;
   margin-left: 0;
   list-style-type: none;
+  display: flex;
 }
 .post-list .post-item .meta {
   display: block;
@@ -1155,6 +1156,7 @@ article .content .caption {
   margin-bottom: 1rem;
   margin-left: 0;
   list-style-type: none;
+  display: flex;
 }
 #archive .post-list .post-item .meta {
   display: block;
