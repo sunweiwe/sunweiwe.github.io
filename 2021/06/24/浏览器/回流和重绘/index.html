@@ -6,15 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="回流 英文叫reflow，指的是当渲染树中的节点信息发生了大小、边距等问题，需要重新计算各节点和css具体的大小和位置。  回流这一阶段主要是计算节点的位置和几何信息，那么当页面布局和几何信息发生变化的时候，就需要回流。比如以下情况：  添加或删除可见的DOM元素 元素的位置发生变化 元素的尺寸发生变化（包括外边距、内边框、边框大小、高度和宽度等） 内容发生变化，比如文本变化或图片被另一个不同尺寸">
+    <meta name="description" content="回流 reflow，指的是当渲染树中的节点信息发生了大小、边距等问题，需要重新计算各节点和 css 具体的大小和位置。  回流这一阶段主要是计算节点的位置和几何信息，那么当页面布局和几何信息发生变化的时候，就需要回流。比如以下情况：  添加或删除可见的 DOM 元素 元素的位置发生变化 元素的尺寸发生变化（包括外边距、内边框、边框大小、高度和宽度等） 内容发生变化，比如文本变化或图片被另一个不同尺">
 <meta property="og:type" content="article">
 <meta property="og:title" content="回流和重绘">
 <meta property="og:url" content="https://sunweiwe.github.io/2021/06/24/%E6%B5%8F%E8%A7%88%E5%99%A8/%E5%9B%9E%E6%B5%81%E5%92%8C%E9%87%8D%E7%BB%98/index.html">
 <meta property="og:site_name" content="孙小文">
-<meta property="og:description" content="回流 英文叫reflow，指的是当渲染树中的节点信息发生了大小、边距等问题，需要重新计算各节点和css具体的大小和位置。  回流这一阶段主要是计算节点的位置和几何信息，那么当页面布局和几何信息发生变化的时候，就需要回流。比如以下情况：  添加或删除可见的DOM元素 元素的位置发生变化 元素的尺寸发生变化（包括外边距、内边框、边框大小、高度和宽度等） 内容发生变化，比如文本变化或图片被另一个不同尺寸">
+<meta property="og:description" content="回流 reflow，指的是当渲染树中的节点信息发生了大小、边距等问题，需要重新计算各节点和 css 具体的大小和位置。  回流这一阶段主要是计算节点的位置和几何信息，那么当页面布局和几何信息发生变化的时候，就需要回流。比如以下情况：  添加或删除可见的 DOM 元素 元素的位置发生变化 元素的尺寸发生变化（包括外边距、内边框、边框大小、高度和宽度等） 内容发生变化，比如文本变化或图片被另一个不同尺">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-06-24T15:26:17.000Z">
-<meta property="article:modified_time" content="2021-06-24T07:37:19.144Z">
+<meta property="article:modified_time" content="2021-07-05T08:13:39.516Z">
 <meta property="article:author" content="Sun Weiwei">
 <meta property="article:tag" content="浏览器">
 <meta name="twitter:card" content="summary">
@@ -178,11 +178,11 @@
 
   <div class="content" itemprop="articleBody">
     <h3 id="回流"><a href="#回流" class="headerlink" title="回流"></a>回流</h3><blockquote>
-<p>英文叫reflow，指的是当渲染树中的节点信息发生了大小、边距等问题，需要重新计算各节点和css具体的大小和位置。</p>
+<p>reflow，指的是当渲染树中的节点信息发生了大小、边距等问题，需要重新计算各节点和 css 具体的大小和位置。</p>
 </blockquote>
 <p>回流这一阶段主要是计算节点的位置和几何信息，那么当页面布局和几何信息发生变化的时候，就需要回流。比如以下情况：</p>
 <ul>
-<li>添加或删除可见的DOM元素</li>
+<li>添加或删除可见的 DOM 元素</li>
 <li>元素的位置发生变化</li>
 <li>元素的尺寸发生变化（包括外边距、内边框、边框大小、高度和宽度等）</li>
 <li>内容发生变化，比如文本变化或图片被另一个不同尺寸的图片所替代。</li>
@@ -191,7 +191,7 @@
 </ul>
 <p>根据改变的范围和程度，渲染树中或大或小的部分需要重新计算，有些改变会触发整个页面的重排，比如，滚动条出现的时候或者修改了根节点。</p>
 <h3 id="重绘"><a href="#重绘" class="headerlink" title="重绘"></a>重绘</h3><blockquote>
-<p>英文叫repaint，当节点的部分属性发生变化，但不影响布局，只需要重新计算节点在屏幕中的绝对位置并渲染的过程，就叫重绘。比如：改变元素的背景颜色、字体颜色等操作会造成重绘。回流一定会触发重绘，而重绘不一定会回流</p>
+<p>repaint，当节点的部分属性发生变化，但不影响布局，只需要重新计算节点在屏幕中的绝对位置并渲染的过程，就叫重绘。比如：改变元素的背景颜色、字体颜色等操作会造成重绘。回流一定会触发重绘，而重绘不一定会回流</p>
 </blockquote>
 <h3 id="浏览器的优化机制"><a href="#浏览器的优化机制" class="headerlink" title="浏览器的优化机制"></a>浏览器的优化机制</h3><blockquote>
 <p>由于每次重排都会造成额外的计算消耗，因此大多数浏览器都会通过队列化修改并批量执行来优化重排过程。浏览器会将修改操作放入到队列里，直到过了一段时间或者操作达到了一个阈值，才清空队列。但是！当你获取布局信息的操作的时候，会强制队列刷新，比如当你访问以下属性或者使用以下方法：</p>
@@ -207,7 +207,7 @@
 <h3 id="减少回流和重绘"><a href="#减少回流和重绘" class="headerlink" title="减少回流和重绘"></a>减少回流和重绘</h3><ul>
 <li>合并样式修改</li>
 <li>使用 transform 替代 top；</li>
-<li>离线操作 DOM或者批量操作DOM：把元素脱离文档流，然后对元素进行修改，这样只会导致重绘，而不会造成回流。<ul>
+<li>离线操作 DOM 或者批量操作 DOM：把元素脱离文档流，然后对元素进行修改，这样只会导致重绘，而不会造成回流。<ul>
 <li>display:none：临时把元素 脱离文档流，进行批量操作后再放回。这样只会有一次回流；</li>
 <li>createDocumentFragment：创建文档片段，一次性把内容放进文档；</li>
 </ul>
