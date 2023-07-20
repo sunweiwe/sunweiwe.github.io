@@ -1,0 +1,132 @@
+<!doctype html><html lang=en-us>
+<head>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/lxgw-wenkai-lite-webfont@1.7.0/style.min.css>
+<link rel=stylesheet href=//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.7.0/build/styles/default.min.css>
+<script defer crossorigin=anonymous src=//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.7.0/build/highlight.min.js onload=hljs.highlightAll()></script>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<title>kubernetes 部署</title>
+<link rel=stylesheet href=https://sunweiwe.github.io/style.min.d9712c7529c6273cae9cbd0ed688f97cbe37e248317298145303b71169db98c5.css integrity="sha256-2XEsdSnGJzyunL0O1oj5fL434kgxcpgUUwO3EWnbmMU=" media=screen>
+<link rel="shortcut icon" type=image/x-icon href=favicon.ico>
+</head>
+<body>
+<script>localStorage.getItem("prefer-theme")==="light"&&document.body.classList.remove('dark')</script>
+<header>
+<div class=header-common>
+<div>
+┏━━━━━━━━━━━━━━━┓<br>
+┇ <a class=logo href=https://sunweiwe.github.io/>sunweiwe/blog</a> ┇
+<button id=theme-toggle text=toggle><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="16" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="16" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+</button>
+<br>
+┗━━━━━━━━━━━━━━━┛
+</div>
+<div>关于代码，关于生活.</div><br>
+</div>
+<p>
+<nav>
+<a href=https://sunweiwe.github.io/><b>Home</b></a>
+| <a href=/posts/><b>Posts</b></a>
+| <a href=/tags/><b>Tags</b></a>
+| <a href=/search/><b>Search</b></a>
+</nav>
+</p>
+</header>
+<main>
+<article class=post-content>
+<h1 class=title>kubernetes 部署</h1>
+<b><time>26.10.2022</time></b>
+<a href=/%20/tags/go>#Go</a>
+<a href=/%20/tags/kubernetes>#kubernetes</a>
+<div>
+<p>使用 kubeadm 在 linux 上安装 kubernetes</p>
+<h2 id=关闭防火墙>关闭防火墙 </h2><div class=highlight><pre tabindex=0 style=color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>systemctl disable firewalld
+systemctl stop firewalld
+</code></pre></div><h2 id=关闭-selinux>关闭 selinux </h2><div class=highlight><pre tabindex=0 style=color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>setenforce <span style=color:#3677a9>0</span>
+sed -i <span style=color:#ed9d13>&#39;s/SELINUX=permissive/SELINUX=disabled/&#39;</span> /etc/sysconfig/selinux
+sed -i <span style=color:#ed9d13>&#34;s/SELINUX=enforcing/SELINUX=disabled/g&#34;</span> /etc/selinux/config
+</code></pre></div><h2 id=关闭-swap>关闭 swap </h2><div class=highlight><pre tabindex=0 style=color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>swapoff -a
+sed -i <span style=color:#ed9d13>&#39;s/.*swap.*/#&amp;/&#39;</span> /etc/fstab
+</code></pre></div><h2 id=添加主机名与-ip-对应的关系>添加主机名与 IP 对应的关系 </h2><div class=highlight><pre tabindex=0 style=color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>hostnamectl set-hostname k8s-master
+
+vim /etc/hosts
+<span style=color:#999;font-style:italic>#添加如下内容：</span>
+10.0.24.13    k8s-master
+</code></pre></div><h2 id=将桥接的-ipv4-流量传递到-iptables-的链>将桥接的 IPV4 流量传递到 iptables 的链 </h2><div class=highlight><pre tabindex=0 style=color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>cat &gt; /etc/sysctl.d/k8s.conf <span style=color:#ed9d13>&lt;&lt; EOF
+</span><span style=color:#ed9d13>net.bridge.bridge-nf-call-ip6tables = 1
+</span><span style=color:#ed9d13>net.bridge.bridge-nf-call-iptables = 1
+</span><span style=color:#ed9d13>EOF</span>
+sysctl --system
+</code></pre></div><h2 id=yum>yum </h2><div class=highlight><pre tabindex=0 style=color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>**rm -rfv /etc/yum.repos.d/*
+curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-8.repo
+yum install -y yum-utils
+yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+
+<span style=color:#999;font-style:italic># 配置k8s阿里云源</span>
+cat <span style=color:#ed9d13>&lt;&lt;EOF &gt; /etc/yum.repos.d/kubernetes.repo
+</span><span style=color:#ed9d13>[kubernetes]
+</span><span style=color:#ed9d13>name=Kubernetes
+</span><span style=color:#ed9d13>baseurl=https://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64/
+</span><span style=color:#ed9d13>enabled=1
+</span><span style=color:#ed9d13>gpgcheck=1
+</span><span style=color:#ed9d13>repo_gpgcheck=1
+</span><span style=color:#ed9d13>gpgkey=https://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg https://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg
+</span><span style=color:#ed9d13>EOF</span>**
+</code></pre></div><h2 id=基础包>基础包 </h2><div class=highlight><pre tabindex=0 style=color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>yum install vim bash-completion net-tools gcc -y
+</code></pre></div><h2 id=docker>docker </h2><div class=highlight><pre tabindex=0 style=color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>yum install docker-ce
+systemctl start docker <span style=color:#999;font-style:italic># 启动Docker</span>
+systemctl <span style=color:#24909d>enable</span> docker <span style=color:#999;font-style:italic># 设置自动启动</span>
+</code></pre></div><h3 id=docker-config>docker config </h3><div class=highlight><pre tabindex=0 style=color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>/etc/docker/daemon.json
+{
+	<span style=color:#ed9d13>&#34;registry-mirrors&#34;</span>: [
+		<span style=color:#ed9d13>&#34;https://56tyyl4k.mirror.aliyuncs.com&#34;</span>
+  ],
+  <span style=color:#ed9d13>&#34;exec-opts&#34;</span>: [<span style=color:#ed9d13>&#34;native.cgroupdriver=systemd&#34;</span>]
+}
+
+systemctl daemon-reload
+systemctl restart docker
+</code></pre></div><h2 id=kubernetes-组件>kubernetes 组件 </h2><div class=highlight><pre tabindex=0 style=color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>yum install -y kubectl kubeadm kubelet
+
+systemctl <span style=color:#24909d>enable</span> kubelet &amp;&amp; systemctl start kubelet
+</code></pre></div><h2 id=初始化>初始化 </h2><div class=highlight><pre tabindex=0 style=color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubeadm init  --image-repository registry.aliyuncs.com/google_containers --kubernetes-version v1.23.1 --pod-network-cidr=10.0.24.13/16
+
+kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
+</code></pre></div><h2 id=kubectl-config>kubectl config </h2><div class=highlight><pre tabindex=0 style=color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>mkdir -p <span style=color:#40ffff>$HOME</span>/.kube
+sudo cp -i /etc/kubernetes/admin.conf <span style=color:#40ffff>$HOME</span>/.kube/config
+sudo chown <span style=color:#6ab825;font-weight:700>$(</span>id -u<span style=color:#6ab825;font-weight:700>)</span>:<span style=color:#6ab825;font-weight:700>$(</span>id -g<span style=color:#6ab825;font-weight:700>)</span> <span style=color:#40ffff>$HOME</span>/.kube/config
+
+<span style=color:#24909d>source</span> &lt;(kubectl completion bash)
+</code></pre></div><h2 id=污点>污点 </h2><div class=highlight><pre tabindex=0 style=color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl taint nodes k8s-master node-role.kubernetes.io/master:NoSchedule-
+</code></pre></div>
+</div>
+</article>
+</main>
+<aside>
+<div>
+<div>
+<h3>LATEST POSTS</h3>
+</div>
+<div>
+<ul>
+<li><a href=/image/basic/>image 基础知识</a></li>
+<li><a href=/ubuntu/>Ubuntu in docker</a></li>
+<li><a href=/kubernetes/scheduler/>kubernetes scheduler</a></li>
+<li><a href=/docker/create/>从零开始实现一个可用的 docker</a></li>
+<li><a href=/kubernetes/mount/>kubernetes 部署</a></li>
+</ul>
+</div>
+</div>
+</aside>
+<script src=https://utteranc.es/client.js repo=sunweiwe/sunweiwe.github.io issue-term=pathname label=comments theme=preferred-color-scheme crossorigin=anonymous async></script>
+<footer>
+------------------------------------------------------
+<p>&copy; 2023
+<a class=footer-link href=https://sunweiwe.github.io></a>
+| <a class=footer-link href=https://github.com/sunweiwe><b>GitHub</b></a>
+</span>
+</p>
+</footer>
+<script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove('dark'),localStorage.setItem("pref-theme",'light')):(document.body.classList.add('dark'),localStorage.setItem("pref-theme",'dark'))})</script>
+</body>
+</html>

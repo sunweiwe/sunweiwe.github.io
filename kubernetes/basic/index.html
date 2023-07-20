@@ -1,0 +1,98 @@
+<!doctype html><html lang=en-us>
+<head>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/lxgw-wenkai-lite-webfont@1.7.0/style.min.css>
+<link rel=stylesheet href=//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.7.0/build/styles/default.min.css>
+<script defer crossorigin=anonymous src=//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.7.0/build/highlight.min.js onload=hljs.highlightAll()></script>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<title>kubernetes</title>
+<link rel=stylesheet href=https://sunweiwe.github.io/style.min.d9712c7529c6273cae9cbd0ed688f97cbe37e248317298145303b71169db98c5.css integrity="sha256-2XEsdSnGJzyunL0O1oj5fL434kgxcpgUUwO3EWnbmMU=" media=screen>
+<link rel="shortcut icon" type=image/x-icon href=favicon.ico>
+</head>
+<body>
+<script>localStorage.getItem("prefer-theme")==="light"&&document.body.classList.remove('dark')</script>
+<header>
+<div class=header-common>
+<div>
+┏━━━━━━━━━━━━━━━┓<br>
+┇ <a class=logo href=https://sunweiwe.github.io/>sunweiwe/blog</a> ┇
+<button id=theme-toggle text=toggle><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="16" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="16" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+</button>
+<br>
+┗━━━━━━━━━━━━━━━┛
+</div>
+<div>关于代码，关于生活.</div><br>
+</div>
+<p>
+<nav>
+<a href=https://sunweiwe.github.io/><b>Home</b></a>
+| <a href=/posts/><b>Posts</b></a>
+| <a href=/tags/><b>Tags</b></a>
+| <a href=/search/><b>Search</b></a>
+</nav>
+</p>
+</header>
+<main>
+<article class=post-content>
+<h1 class=title>kubernetes</h1>
+<b><time>23.10.2022</time></b>
+<a href=/%20/tags/kubernetes>#kubernetes</a>
+<div>
+<p>kubernetes 基本的知识</p>
+<h2 id=pod>Pod </h2><h3 id=指定终止宽限期>指定终止宽限期 </h3><div class=highlight><pre tabindex=0 style=color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl delete po podname --grace-period=5-
+</code></pre></div><h3 id=token>token </h3><div class=highlight><pre tabindex=0 style=color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>
+kubectl -n kubernetes-dashboard get secret <span style=color:#6ab825;font-weight:700>$(</span>kubectl -n kubernetes-dashboard get sa/admin-user -o <span style=color:#40ffff>jsonpath</span>=<span style=color:#ed9d13>&#34;{.secrets[0].name}&#34;</span><span style=color:#6ab825;font-weight:700>)</span> -o go-template=<span style=color:#ed9d13>&#34;{{.data.token | base64decode}}&#34;</span>
+</code></pre></div><h3 id=docker-sercrets>docker sercrets </h3><div class=highlight><pre tabindex=0 style=color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl create secret generic docker <span style=color:#ed9d13>\
+</span><span style=color:#ed9d13></span>    --from-file=.dockerconfigjson=/root/.docker/config.json <span style=color:#ed9d13>\
+</span><span style=color:#ed9d13></span>    --type=kubernetes.io/dockerconfigjson
+</code></pre></div><h2 id=kubectl>kubectl </h2><h3 id=多集群使用-kubectl>多集群使用 kubectl </h3><div class=highlight><pre tabindex=0 style=color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yml data-lang=yml><span style=color:#6ab825;font-weight:700>apiVersion</span>:<span style=color:#666> </span>vl<span style=color:#666>
+</span><span style=color:#666></span><span style=color:#6ab825;font-weight:700>clusters</span>:<span style=color:#666>
+</span><span style=color:#666></span>- <span style=color:#6ab825;font-weight:700>cluster</span>:<span style=color:#666>
+</span><span style=color:#666>		</span><span style=color:#6ab825;font-weight:700>certificate-authority</span>:<span style=color:#666> </span>/home/sunweiwe/.minikube/ca.crt<span style=color:#666>
+</span><span style=color:#666>		</span><span style=color:#6ab825;font-weight:700>server</span>:<span style=color:#666> </span>https://192.168.99.100:8443<span style=color:#666>
+</span><span style=color:#666>	</span><span style=color:#6ab825;font-weight:700>name</span>:<span style=color:#666> </span>minikube<span style=color:#666>
+</span><span style=color:#666></span><span style=color:#6ab825;font-weight:700>contexts</span>:<span style=color:#666>
+</span><span style=color:#666></span>- <span style=color:#6ab825;font-weight:700>context</span>:<span style=color:#666>
+</span><span style=color:#666>		</span><span style=color:#6ab825;font-weight:700>cluster</span>:<span style=color:#666> </span>minikube<span style=color:#666>
+</span><span style=color:#666>		</span><span style=color:#6ab825;font-weight:700>user</span>:<span style=color:#666> </span>minikube<span style=color:#666>
+</span><span style=color:#666>		</span><span style=color:#6ab825;font-weight:700>namespace</span>:<span style=color:#666> </span>default<span style=color:#666>
+</span><span style=color:#666></span><span style=color:#6ab825;font-weight:700>name</span>:<span style=color:#666> </span>minikube<span style=color:#666>
+</span><span style=color:#666></span><span style=color:#6ab825;font-weight:700>current-context</span>:<span style=color:#666> </span>minikube<span style=color:#666>
+</span><span style=color:#666></span><span style=color:#6ab825;font-weight:700>kind</span>:<span style=color:#666> </span>Config<span style=color:#666>
+</span><span style=color:#666></span><span style=color:#6ab825;font-weight:700>preferences</span>:<span style=color:#666> </span>{}<span style=color:#666>
+</span><span style=color:#666></span><span style=color:#6ab825;font-weight:700>users</span>:<span style=color:#666>
+</span><span style=color:#666></span>- <span style=color:#6ab825;font-weight:700>name</span>:<span style=color:#666> </span>minikube<span style=color:#666>
+</span><span style=color:#666>	</span><span style=color:#6ab825;font-weight:700>user: client-certificate</span>:<span style=color:#666> </span>/home/sunweiwe/ .minikube/apiserver.crt<span style=color:#666>
+</span><span style=color:#666>	</span><span style=color:#6ab825;font-weight:700>client-key</span>:<span style=color:#666> </span>/home/sunweiwe/ .minikube/apiserver.key<span style=color:#666>
+</span></code></pre></div><h2 id=kubernetes-源码调试>kubernetes 源码调试 </h2>
+</div>
+</article>
+</main>
+<aside>
+<div>
+<div>
+<h3>LATEST POSTS</h3>
+</div>
+<div>
+<ul>
+<li><a href=/image/basic/>image 基础知识</a></li>
+<li><a href=/ubuntu/>Ubuntu in docker</a></li>
+<li><a href=/kubernetes/scheduler/>kubernetes scheduler</a></li>
+<li><a href=/docker/create/>从零开始实现一个可用的 docker</a></li>
+<li><a href=/kubernetes/mount/>kubernetes 部署</a></li>
+</ul>
+</div>
+</div>
+</aside>
+<script src=https://utteranc.es/client.js repo=sunweiwe/sunweiwe.github.io issue-term=pathname label=comments theme=preferred-color-scheme crossorigin=anonymous async></script>
+<footer>
+------------------------------------------------------
+<p>&copy; 2023
+<a class=footer-link href=https://sunweiwe.github.io></a>
+| <a class=footer-link href=https://github.com/sunweiwe><b>GitHub</b></a>
+</span>
+</p>
+</footer>
+<script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove('dark'),localStorage.setItem("pref-theme",'light')):(document.body.classList.add('dark'),localStorage.setItem("pref-theme",'dark'))})</script>
+</body>
+</html>

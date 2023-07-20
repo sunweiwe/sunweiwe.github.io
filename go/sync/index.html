@@ -1,0 +1,150 @@
+<!doctype html><html lang=en-us>
+<head>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/lxgw-wenkai-lite-webfont@1.7.0/style.min.css>
+<link rel=stylesheet href=//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.7.0/build/styles/default.min.css>
+<script defer crossorigin=anonymous src=//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.7.0/build/highlight.min.js onload=hljs.highlightAll()></script>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<title>sync</title>
+<link rel=stylesheet href=https://sunweiwe.github.io/style.min.d9712c7529c6273cae9cbd0ed688f97cbe37e248317298145303b71169db98c5.css integrity="sha256-2XEsdSnGJzyunL0O1oj5fL434kgxcpgUUwO3EWnbmMU=" media=screen>
+<link rel="shortcut icon" type=image/x-icon href=favicon.ico>
+</head>
+<body>
+<script>localStorage.getItem("prefer-theme")==="light"&&document.body.classList.remove('dark')</script>
+<header>
+<div class=header-common>
+<div>
+┏━━━━━━━━━━━━━━━┓<br>
+┇ <a class=logo href=https://sunweiwe.github.io/>sunweiwe/blog</a> ┇
+<button id=theme-toggle text=toggle><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="16" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="16" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+</button>
+<br>
+┗━━━━━━━━━━━━━━━┛
+</div>
+<div>关于代码，关于生活.</div><br>
+</div>
+<p>
+<nav>
+<a href=https://sunweiwe.github.io/><b>Home</b></a>
+| <a href=/posts/><b>Posts</b></a>
+| <a href=/tags/><b>Tags</b></a>
+| <a href=/search/><b>Search</b></a>
+</nav>
+</p>
+</header>
+<main>
+<article class=post-content>
+<h1 class=title>sync</h1>
+<b><time>23.10.2022</time></b>
+<a href=/%20/tags/go>#go</a>
+<div>
+<p>go stand library 基本的知识</p>
+<h1 id=mutex><strong>Mutex</strong> </h1><p>互斥锁</p>
+<h2 id=互斥锁的实现>互斥锁的实现 </h2><p>互斥锁是控制并发的基础手段。</p>
+<div class=highlight><pre tabindex=0 style=color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=color:#6ab825;font-weight:700>package</span> main
+
+<span style=color:#6ab825;font-weight:700>import</span> (
+	<span style=color:#ed9d13>&#34;fmt&#34;</span>
+	<span style=color:#ed9d13>&#34;sync&#34;</span>
+)
+
+<span style=color:#6ab825;font-weight:700>func</span> <span style=color:#447fcf>main</span>() {
+	<span style=color:#6ab825;font-weight:700>var</span> counter Counter
+	<span style=color:#6ab825;font-weight:700>var</span> wg sync.WaitGroup
+	wg.<span style=color:#447fcf>Add</span>(<span style=color:#3677a9>10</span>)
+
+	<span style=color:#6ab825;font-weight:700>for</span> i := <span style=color:#3677a9>0</span>; i &lt; <span style=color:#3677a9>10</span>; i++ {
+		<span style=color:#6ab825;font-weight:700>go</span> <span style=color:#6ab825;font-weight:700>func</span>() {
+			<span style=color:#6ab825;font-weight:700>defer</span> wg.<span style=color:#447fcf>Done</span>()
+			<span style=color:#6ab825;font-weight:700>for</span> j := <span style=color:#3677a9>0</span>; j &lt; <span style=color:#3677a9>10000</span>; j++ {
+				counter.<span style=color:#447fcf>Lock</span>()
+				counter.Count++
+				counter.<span style=color:#447fcf>Unlock</span>()
+			}
+		}()
+	}
+
+	wg.<span style=color:#447fcf>Wait</span>()
+	fmt.<span style=color:#447fcf>Println</span>(counter.Count)
+}
+
+<span style=color:#6ab825;font-weight:700>type</span> Counter <span style=color:#6ab825;font-weight:700>struct</span> {
+	sync.Mutex
+	Count <span style=color:#6ab825;font-weight:700>uint64</span>
+}
+</code></pre></div><h1 id=pool>Pool </h1><p>创建池化的对象</p>
+<h2 id=syncpool>sync.Pool </h2><p>sync.Pool 数据类型用来保存一组可独立访问的临时对象。</p>
+<ul>
+<li>sync.Pool 本身线程安全，多个 goroutine 可以并发地调用它的方法存取对象。</li>
+<li>sync.Pool 不可在使用之后在复制使用。</li>
+</ul>
+<h2 id=syncpool-的使用方法>sync.Pool 的使用方法 </h2><h3 id=new>new </h3><p>pool struct 包含一个 new 字段，这个字段的类型是函数 func() interface{}。当调用 get 方法从池中获取元素的时候，没有空闲的元素可返回时，便会调用 new 新建一个元素返回。</p>
+<h3 id=get>get </h3><p>调用此方法从池中取走一个元素。</p>
+<h3 id=put>put </h3><p>此方法将一个元素返还给 pool，pool 将这个元素保存到池中并且可以复用。</p>
+<h2 id=buffer-缓冲池>buffer 缓冲池 </h2><div class=highlight><pre tabindex=0 style=color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=color:#6ab825;font-weight:700>var</span> buffers ={
+	New: <span style=color:#6ab825;font-weight:700>func</span>() <span style=color:#6ab825;font-weight:700>interface</span>{}{
+		<span style=color:#6ab825;font-weight:700>return</span> <span style=color:#24909d>new</span>(bytes.Buffer)
+	},
+
+}
+
+<span style=color:#6ab825;font-weight:700>func</span> <span style=color:#447fcf>GetBuffer</span>() *bytes.Buffer{
+	<span style=color:#6ab825;font-weight:700>return</span> buffers.<span style=color:#447fcf>Get</span>().(*bytes.Buffer)
+}
+
+<span style=color:#6ab825;font-weight:700>func</span> <span style=color:#447fcf>PutBuffer</span>(buf *bytes.Buffer){
+	buf.<span style=color:#447fcf>Reset</span>()
+	buffers.<span style=color:#447fcf>Put</span>(buf)
+}
+</code></pre></div><h2 id=实现原理>实现原理 </h2><h3 id=get-方法>Get 方法 </h3><div class=highlight><pre tabindex=0 style=color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=color:#6ab825;font-weight:700>func</span> (p *Pool) <span style=color:#447fcf>Get</span>() <span style=color:#6ab825;font-weight:700>interface</span>{} {
+	<span style=color:#999;font-style:italic>// 把当前 goroutine 固定在当前的p上
+</span><span style=color:#999;font-style:italic></span>	l, pid := p.<span style=color:#447fcf>pin</span>()
+	x :=l.private  <span style=color:#999;font-style:italic>//优先从local 的 private字段取，快速
+</span><span style=color:#999;font-style:italic></span>	l.private = <span style=color:#6ab825;font-weight:700>nil</span>
+	<span style=color:#6ab825;font-weight:700>if</span> x == <span style=color:#6ab825;font-weight:700>nil</span> {
+		x,_ := l.shared.<span style=color:#447fcf>popHead</span>()
+		<span style=color:#6ab825;font-weight:700>if</span> x == <span style=color:#6ab825;font-weight:700>nil</span>{
+			x = p.<span style=color:#447fcf>getSlow</span>(pid)
+		}
+	}
+
+	<span style=color:#447fcf>runtime_procUnpin</span>()
+	<span style=color:#999;font-style:italic>// 如果没有获取到，尝试使用new函数生成一个新的
+</span><span style=color:#999;font-style:italic></span>	<span style=color:#6ab825;font-weight:700>if</span> x = <span style=color:#6ab825;font-weight:700>nil</span> &amp;&amp; p.New != <span style=color:#6ab825;font-weight:700>nil</span> {
+		x = p.<span style=color:#447fcf>New</span>()
+	}
+
+	<span style=color:#6ab825;font-weight:700>return</span> x
+}
+</code></pre></div><h2 id=内存泄露>内存泄露 </h2><p>使用 sync.Pool 回收 buffer 的时候，一定要检查回收的对象的大小。</p>
+</div>
+</article>
+</main>
+<aside>
+<div>
+<div>
+<h3>LATEST POSTS</h3>
+</div>
+<div>
+<ul>
+<li><a href=/image/basic/>image 基础知识</a></li>
+<li><a href=/ubuntu/>Ubuntu in docker</a></li>
+<li><a href=/kubernetes/scheduler/>kubernetes scheduler</a></li>
+<li><a href=/docker/create/>从零开始实现一个可用的 docker</a></li>
+<li><a href=/kubernetes/mount/>kubernetes 部署</a></li>
+</ul>
+</div>
+</div>
+</aside>
+<script src=https://utteranc.es/client.js repo=sunweiwe/sunweiwe.github.io issue-term=pathname label=comments theme=preferred-color-scheme crossorigin=anonymous async></script>
+<footer>
+------------------------------------------------------
+<p>&copy; 2023
+<a class=footer-link href=https://sunweiwe.github.io></a>
+| <a class=footer-link href=https://github.com/sunweiwe><b>GitHub</b></a>
+</span>
+</p>
+</footer>
+<script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove('dark'),localStorage.setItem("pref-theme",'light')):(document.body.classList.add('dark'),localStorage.setItem("pref-theme",'dark'))})</script>
+</body>
+</html>
