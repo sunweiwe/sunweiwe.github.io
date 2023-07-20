@@ -1,0 +1,5 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory `/Users/sunxiaowen/source/sunweiwe.github.io'
+hugo
+make: Leaving directory `/Users/sunxiaowen/source/sunweiwe.github.io'
+ 

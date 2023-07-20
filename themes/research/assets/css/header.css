@@ -1,0 +1,12 @@
+.header-common {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+
+.header-content {
+  margin: auto;
+  display: flex;
+}
