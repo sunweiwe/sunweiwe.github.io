@@ -1,7 +1,7 @@
 ---
 date: 2023-11-14T03:37:48Z
 toc: true
-slug: /basic
+slug: /autoconfig
 tags:
   - Java
 title: SpringBoot 自动装配原理
