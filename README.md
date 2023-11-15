@@ -4,4 +4,4 @@
 
 ```bash
 hugo  new posts/folder/name.md
-```f
+```
