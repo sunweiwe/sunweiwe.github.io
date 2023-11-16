@@ -1,7 +1,7 @@
 ---
 date: 2023-11-15T19:50:55+08:00
 toc: true
-slug: /stream
+slug: /java/stream
 tags:
   - Java
   - Stream

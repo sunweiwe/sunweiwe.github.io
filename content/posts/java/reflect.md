@@ -1,7 +1,7 @@
 ---
 date: 2023-11-15T02:28:38Z
 toc: true
-slug: /reflect
+slug: /java/reflect
 tags:
   - Java
   - Reflect

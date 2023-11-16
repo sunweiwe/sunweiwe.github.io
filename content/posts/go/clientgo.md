@@ -1,7 +1,7 @@
 ---
 date: 2023-01-20T16:09:28+08:00
 toc: true
-slug: /clientgo
+slug: /go/clientgo
 tags:
   - Go
 title: clientgo
