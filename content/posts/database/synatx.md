@@ -1,13 +1,12 @@
 ---
 date: 2023-11-22T07:44:47Z
 toc: true
-slug: /database/synatx
+slug: /database/syntax
 tags:
   - Database
-title: database synatx
-draft: true
+title: database syntax
+description: ""
 ---
-
 
 ## 数据库
 

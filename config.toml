@@ -1,19 +1,31 @@
 baseURL = "https://sunweiwe.github.io/"
 languageCode = "en-us"
 title = "sunweiwe/blog"
-theme = "cactus"
+theme = 'hugo-book'
+
+disablePathToLower = true
+enableGitInfo = true
 
 
 [params]
   subtitle = "关于代码，关于生活."
   dateFmt = "02.01.2006"
+   
+  BookTheme = 'dark'
+
+  BookToC = true
+
+  BookMenuBundle = '/menu'
+
+  BookSearch = true
+
+  BookDateFormat = 'January 2, 2006'
+
+  BookComments = true
+
+  BookPortableLinks = true
   
-  customCSS = true
-  mainSection = "posts"
-  mainSectionTitle = "Blog"
-  showAllPostsOnHomePage = false
-  postsOnHomePage = 5
-  tocInline = true
+  BookServiceWorker = true
 
   mathjax = true  # not required
 
@@ -47,6 +59,12 @@ theme = "cactus"
 
 
 [markup]
+  [markup.goldmark.renderer]
+    unsafe = true
+  
+  [markup.tableOfContents]
+    startLevel = 1
+
   [markup.highlight]
     codeFences = true
     guessSyntax = false
