@@ -1,18 +1,34 @@
 baseURL = "https://sunweiwe.github.io/"
 languageCode = "en-us"
 title = "sunweiwe/blog"
-theme = "research"
+theme = "cactus"
 
-[permalinks]
-  posts = "/:slug"
 
 [params]
-    subtitle = "关于代码，关于生活."
-    dateFmt = "02.01.2006"
-    defaultTheme =  "dark"
-    customCSS = true
+  subtitle = "关于代码，关于生活."
+  dateFmt = "02.01.2006"
+  
+  customCSS = true
+  mainSection = "posts"
+  mainSectionTitle = "Blog"
+  showAllPostsOnHomePage = false
+  postsOnHomePage = 5
+  tocInline = true
 
+  mathjax = true  # not required
+
+  showAllPostsArchive = true
+
+  rss = true
+
+  [[comments]]
+    enabled = true
+  
 [menu]
+  [[menu.main]]
+  name = "Home"
+  url = "/"
+  weight = 1
   [[menu.main]]
     identifier = "posts"
     name = "Posts"
@@ -23,11 +39,7 @@ theme = "research"
     name = "Tags"
     url = "/tags/"
     weight = 2
-  [[menu.main]]
-    identifier = "search"
-    name = "Search"
-    url = "/search/"
-    weight = 3
+
   [[menu.footer]]
     name = "GitHub"
     url = "https://github.com/sunweiwe"
@@ -36,15 +48,12 @@ theme = "research"
 
 [markup]
   [markup.highlight]
-    anchorLineNos = false
     codeFences = true
-    guessSyntax = true
+    guessSyntax = false
     hl_Lines = ""
-    lineAnchors = ""
     lineNoStart = 1
     lineNos = false
-    lineNumbersInTable = false
+    lineNumbersInTable = true
     noClasses = true
-    style = "native"
+    style = "monokai"
     tabWidth = 4
-
