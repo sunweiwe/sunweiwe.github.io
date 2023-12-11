@@ -18,3 +18,5 @@ public
 .DS_Store
 
 .vscode
+
+.hugo_build.lock
