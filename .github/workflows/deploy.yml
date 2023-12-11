@@ -20,7 +20,7 @@ jobs:
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2
         with:
-          hugo-version: '0.91.2'
+          hugo-version: "0.121.0"
           # extended: true
 
       - name: Build
@@ -33,4 +33,4 @@ jobs:
           github_token: ${{ secrets.TOKEN }}
           publish_dir: ./public
           tag_name: ${{ steps.prepare_tag.outputs.DEPLOY_TAG_NAME }}
-          tag_message: 'Deployment ${{ github.ref_name }}'
+          tag_message: "Deployment ${{ github.ref_name }}"
