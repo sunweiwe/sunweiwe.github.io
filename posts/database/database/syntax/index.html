@@ -1,0 +1,220 @@
+<!doctype html><html lang=en-us dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="数据库 # CRUD # Insert # INSERT INTO user VALUES (10,'root','root',&#34;name@163.com&#34;),(11,'user','user',&#34;name@163.com&#34;); INSERT INTO user(username, password, email) VALUES ('admin', 'admin', 'xxxx@163.com'); Update # UPDATE user SET username='root',password='root' WHERE username = 'root'; Delte # DELETE FROM user WHERE username = 'root'; // 清空表数据 TRUNCATE TABLE user; Select # SELECT name FROM user; SELECT id,name FROM user; SELECT * FROM user; SELECT DISINCT id FROM user; SELECT * FROM user LIMIT 5; SELECT * FROM user LIMIT 0,5; SELECT * FROM user LIMIT 2,3; 排序 # // desc 降序 SELECT * FROM user ORDER BY create_time ASC, age DESC 分组 # SELECT name, COUNT(address) AS addr_count FROM user GROUP BY name; SELECT name, COUNT(address) AS addr_count FROM user GROUP BY name ORDER BY name DESC; having # 对汇总的 group by 结果进行过滤 一般和 group by 连用 SELECT name, COUNT(*) AS count FROM user WHERE email IS NOT NULL GROUP BY name HAVING COUNT(*) >= 1; 子查询 # where # select column_name [, column_name ] from table1 [, table2 ] where column_name operator (select column_name [, column_name ] from table1 [, table2 ] [where]) from # select column_name [, column_name ] from (select column_name [, column_name ] from table1 [, table2 ] [where]) as temp_table_name where condition IN,BETWEEN # SELECT * FROM user WHERE id IN ('1', '2'); SELECT * FROM user WHERE age BETWEEN 3 AND 5; AND,OR,NOT # SELECT id, name, address FROM user WHERE name = 'name' AND age >= 18; SELECT id, name, address FROM user WHERE name = 'name' OR age >= 18; SELECT * FROM user WHERE age NOT BETWEEN 8 AND 18; 连接 # 连接表的本质就是将不同表的记录合并起来，形成一张新表。当然，这张新表只是临时的，它仅存在于本次查询期间。"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:title" content="database syntax"><meta property="og:description" content="数据库 # CRUD # Insert # INSERT INTO user VALUES (10,'root','root',&#34;name@163.com&#34;),(11,'user','user',&#34;name@163.com&#34;); INSERT INTO user(username, password, email) VALUES ('admin', 'admin', 'xxxx@163.com'); Update # UPDATE user SET username='root',password='root' WHERE username = 'root'; Delte # DELETE FROM user WHERE username = 'root'; // 清空表数据 TRUNCATE TABLE user; Select # SELECT name FROM user; SELECT id,name FROM user; SELECT * FROM user; SELECT DISINCT id FROM user; SELECT * FROM user LIMIT 5; SELECT * FROM user LIMIT 0,5; SELECT * FROM user LIMIT 2,3; 排序 # // desc 降序 SELECT * FROM user ORDER BY create_time ASC, age DESC 分组 # SELECT name, COUNT(address) AS addr_count FROM user GROUP BY name; SELECT name, COUNT(address) AS addr_count FROM user GROUP BY name ORDER BY name DESC; having # 对汇总的 group by 结果进行过滤 一般和 group by 连用 SELECT name, COUNT(*) AS count FROM user WHERE email IS NOT NULL GROUP BY name HAVING COUNT(*) >= 1; 子查询 # where # select column_name [, column_name ] from table1 [, table2 ] where column_name operator (select column_name [, column_name ] from table1 [, table2 ] [where]) from # select column_name [, column_name ] from (select column_name [, column_name ] from table1 [, table2 ] [where]) as temp_table_name where condition IN,BETWEEN # SELECT * FROM user WHERE id IN ('1', '2'); SELECT * FROM user WHERE age BETWEEN 3 AND 5; AND,OR,NOT # SELECT id, name, address FROM user WHERE name = 'name' AND age >= 18; SELECT id, name, address FROM user WHERE name = 'name' OR age >= 18; SELECT * FROM user WHERE age NOT BETWEEN 8 AND 18; 连接 # 连接表的本质就是将不同表的记录合并起来，形成一张新表。当然，这张新表只是临时的，它仅存在于本次查询期间。"><meta property="og:type" content="article"><meta property="og:url" content="https://sunweiwe.github.io/posts/database/database/syntax/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2023-11-22T07:44:47+00:00"><meta property="article:modified_time" content="2023-12-11T22:13:42+08:00"><title>database syntax | sunweiwe/blog</title><link rel=manifest href=/manifest.json><link rel=icon href=/favicon.png><link rel=stylesheet href=/book.min.4f0117e74e5337280f18eb9641eae520cb4b25adcf5dd64fafad4664145a5957.css integrity="sha256-TwEX505TNygPGOuWQerlIMtLJa3PXdZPr61GZBRaWVc=" crossorigin=anonymous><script defer src=/flexsearch.min.js></script>
+<script defer src=/en.search.min.1b2bf308793e524c7bd66e1d113796241ab6ddb1a1506b85efbaca90f34d339f.js integrity="sha256-GyvzCHk+Ukx71m4dETeWJBq23bGhUGuF77rKkPNNM58=" crossorigin=anonymous></script>
+<script defer src=/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js integrity="sha256-b2+Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC+NdcPIvZhzk=" crossorigin=anonymous></script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/><span>sunweiwe/blog</span></a></h2><div class=book-search><input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><ul><li><a href=/posts/>Blog</a></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/svg/menu.svg class=book-icon alt=Menu></label>
+<strong>database syntax</strong>
+<label for=toc-control><img src=/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><ul><li><a href=#数据库>数据库</a><ul><li><a href=#crud>CRUD</a></li><li><a href=#排序>排序</a></li><li><a href=#分组>分组</a></li><li><a href=#子查询>子查询</a></li><li><a href=#连接>连接</a></li><li><a href=#组合>组合</a></li><li><a href=#函数>函数</a></li><li><a href=#数据库定义>数据库定义</a></li><li><a href=#事务处理>事务处理</a></li><li><a href=#存储过程>存储过程</a></li></ul></li></ul></li></ul></nav></aside></header><article class="markdown book-post"><h1><a href=/posts/database/database/syntax/>database syntax</a></h1><h5>November 22, 2023</h5><div><a href=/tags/Database/>Database</a></div><h2 id=数据库>数据库
+<a class=anchor href=#%e6%95%b0%e6%8d%ae%e5%ba%93>#</a></h2><h3 id=crud>CRUD
+<a class=anchor href=#crud>#</a></h3><h4 id=insert>Insert
+<a class=anchor href=#insert>#</a></h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sql data-lang=sql><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>INSERT</span> <span style=color:#66d9ef>INTO</span> <span style=color:#66d9ef>user</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>VALUES</span> (<span style=color:#ae81ff>10</span>,<span style=color:#e6db74>&#39;root&#39;</span>,<span style=color:#e6db74>&#39;root&#39;</span>,<span style=color:#e6db74>&#34;name@163.com&#34;</span>),(<span style=color:#ae81ff>11</span>,<span style=color:#e6db74>&#39;user&#39;</span>,<span style=color:#e6db74>&#39;user&#39;</span>,<span style=color:#e6db74>&#34;name@163.com&#34;</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>INSERT</span> <span style=color:#66d9ef>INTO</span> <span style=color:#66d9ef>user</span>(username, password, email)
+</span></span><span style=display:flex><span><span style=color:#66d9ef>VALUES</span> (<span style=color:#e6db74>&#39;admin&#39;</span>, <span style=color:#e6db74>&#39;admin&#39;</span>, <span style=color:#e6db74>&#39;xxxx@163.com&#39;</span>);
+</span></span></code></pre></div><h4 id=update>Update
+<a class=anchor href=#update>#</a></h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sql data-lang=sql><span style=display:flex><span><span style=color:#66d9ef>UPDATE</span> <span style=color:#66d9ef>user</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>SET</span> username<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;root&#39;</span>,password<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;root&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>WHERE</span> username <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;root&#39;</span>;
+</span></span></code></pre></div><h4 id=delte>Delte
+<a class=anchor href=#delte>#</a></h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sql data-lang=sql><span style=display:flex><span><span style=color:#66d9ef>DELETE</span> <span style=color:#66d9ef>FROM</span> <span style=color:#66d9ef>user</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>WHERE</span> username <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;root&#39;</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>//</span> <span style=color:#960050;background-color:#1e0010>清空表数据</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>TRUNCATE</span> <span style=color:#66d9ef>TABLE</span> <span style=color:#66d9ef>user</span>;
+</span></span></code></pre></div><h4 id=select>Select
+<a class=anchor href=#select>#</a></h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sql data-lang=sql><span style=display:flex><span><span style=color:#66d9ef>SELECT</span> name <span style=color:#66d9ef>FROM</span> <span style=color:#66d9ef>user</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>SELECT</span> id,name <span style=color:#66d9ef>FROM</span> <span style=color:#66d9ef>user</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>SELECT</span> <span style=color:#f92672>*</span> <span style=color:#66d9ef>FROM</span> <span style=color:#66d9ef>user</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>SELECT</span> DISINCT id <span style=color:#66d9ef>FROM</span> <span style=color:#66d9ef>user</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>SELECT</span> <span style=color:#f92672>*</span> <span style=color:#66d9ef>FROM</span> <span style=color:#66d9ef>user</span> <span style=color:#66d9ef>LIMIT</span> <span style=color:#ae81ff>5</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>SELECT</span> <span style=color:#f92672>*</span> <span style=color:#66d9ef>FROM</span> <span style=color:#66d9ef>user</span> <span style=color:#66d9ef>LIMIT</span> <span style=color:#ae81ff>0</span>,<span style=color:#ae81ff>5</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>SELECT</span> <span style=color:#f92672>*</span> <span style=color:#66d9ef>FROM</span> <span style=color:#66d9ef>user</span> <span style=color:#66d9ef>LIMIT</span> <span style=color:#ae81ff>2</span>,<span style=color:#ae81ff>3</span>;
+</span></span></code></pre></div><h3 id=排序>排序
+<a class=anchor href=#%e6%8e%92%e5%ba%8f>#</a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sql data-lang=sql><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>//</span> <span style=color:#66d9ef>desc</span> <span style=color:#960050;background-color:#1e0010>降序</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>SELECT</span> <span style=color:#f92672>*</span> <span style=color:#66d9ef>FROM</span> <span style=color:#66d9ef>user</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>ORDER</span> <span style=color:#66d9ef>BY</span> create_time <span style=color:#66d9ef>ASC</span>, age <span style=color:#66d9ef>DESC</span>
+</span></span></code></pre></div><h3 id=分组>分组
+<a class=anchor href=#%e5%88%86%e7%bb%84>#</a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sql data-lang=sql><span style=display:flex><span><span style=color:#66d9ef>SELECT</span> name, <span style=color:#66d9ef>COUNT</span>(address) <span style=color:#66d9ef>AS</span> addr_count 
+</span></span><span style=display:flex><span><span style=color:#66d9ef>FROM</span> <span style=color:#66d9ef>user</span> <span style=color:#66d9ef>GROUP</span> <span style=color:#66d9ef>BY</span> name;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>SELECT</span> name, <span style=color:#66d9ef>COUNT</span>(address) <span style=color:#66d9ef>AS</span> addr_count 
+</span></span><span style=display:flex><span><span style=color:#66d9ef>FROM</span> <span style=color:#66d9ef>user</span> <span style=color:#66d9ef>GROUP</span> <span style=color:#66d9ef>BY</span> name
+</span></span><span style=display:flex><span><span style=color:#66d9ef>ORDER</span> <span style=color:#66d9ef>BY</span> name <span style=color:#66d9ef>DESC</span>;
+</span></span></code></pre></div><h4 id=having>having
+<a class=anchor href=#having>#</a></h4><ul><li>对汇总的 <code>group by</code> 结果进行过滤</li><li>一般和 <code>group by</code> 连用</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sql data-lang=sql><span style=display:flex><span><span style=color:#66d9ef>SELECT</span> name, <span style=color:#66d9ef>COUNT</span>(<span style=color:#f92672>*</span>) <span style=color:#66d9ef>AS</span> <span style=color:#66d9ef>count</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>FROM</span> <span style=color:#66d9ef>user</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>WHERE</span> email <span style=color:#66d9ef>IS</span> <span style=color:#66d9ef>NOT</span> <span style=color:#66d9ef>NULL</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>GROUP</span> <span style=color:#66d9ef>BY</span> name
+</span></span><span style=display:flex><span><span style=color:#66d9ef>HAVING</span> <span style=color:#66d9ef>COUNT</span>(<span style=color:#f92672>*</span>) <span style=color:#f92672>&gt;=</span> <span style=color:#ae81ff>1</span>;
+</span></span></code></pre></div><h3 id=子查询>子查询
+<a class=anchor href=#%e5%ad%90%e6%9f%a5%e8%af%a2>#</a></h3><h4 id=where>where
+<a class=anchor href=#where>#</a></h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sql data-lang=sql><span style=display:flex><span><span style=color:#66d9ef>select</span> <span style=color:#66d9ef>column_name</span> [, <span style=color:#66d9ef>column_name</span> ]
+</span></span><span style=display:flex><span><span style=color:#66d9ef>from</span>   table1 [, table2 ]
+</span></span><span style=display:flex><span><span style=color:#66d9ef>where</span>  <span style=color:#66d9ef>column_name</span> <span style=color:#66d9ef>operator</span>
+</span></span><span style=display:flex><span>    (<span style=color:#66d9ef>select</span> <span style=color:#66d9ef>column_name</span> [, <span style=color:#66d9ef>column_name</span> ]
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>from</span> table1 [, table2 ]
+</span></span><span style=display:flex><span>    [<span style=color:#66d9ef>where</span>])
+</span></span></code></pre></div><h4 id=from>from
+<a class=anchor href=#from>#</a></h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sql data-lang=sql><span style=display:flex><span><span style=color:#66d9ef>select</span> <span style=color:#66d9ef>column_name</span> [, <span style=color:#66d9ef>column_name</span> ]
+</span></span><span style=display:flex><span><span style=color:#66d9ef>from</span> (<span style=color:#66d9ef>select</span> <span style=color:#66d9ef>column_name</span> [, <span style=color:#66d9ef>column_name</span> ]
+</span></span><span style=display:flex><span>      <span style=color:#66d9ef>from</span> table1 [, table2 ]
+</span></span><span style=display:flex><span>      [<span style=color:#66d9ef>where</span>]) <span style=color:#66d9ef>as</span> temp_table_name
+</span></span><span style=display:flex><span><span style=color:#66d9ef>where</span>  condition
+</span></span></code></pre></div><h4 id=inbetween>IN,BETWEEN
+<a class=anchor href=#inbetween>#</a></h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sql data-lang=sql><span style=display:flex><span><span style=color:#66d9ef>SELECT</span> <span style=color:#f92672>*</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>FROM</span> <span style=color:#66d9ef>user</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>WHERE</span> id <span style=color:#66d9ef>IN</span> (<span style=color:#e6db74>&#39;1&#39;</span>, <span style=color:#e6db74>&#39;2&#39;</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>SELECT</span> <span style=color:#f92672>*</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>FROM</span> <span style=color:#66d9ef>user</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>WHERE</span> age <span style=color:#66d9ef>BETWEEN</span> <span style=color:#ae81ff>3</span> <span style=color:#66d9ef>AND</span> <span style=color:#ae81ff>5</span>;
+</span></span></code></pre></div><h4 id=andornot>AND,OR,NOT
+<a class=anchor href=#andornot>#</a></h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sql data-lang=sql><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>SELECT</span> id, name, address
+</span></span><span style=display:flex><span><span style=color:#66d9ef>FROM</span> <span style=color:#66d9ef>user</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>WHERE</span> name <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;name&#39;</span> <span style=color:#66d9ef>AND</span> age <span style=color:#f92672>&gt;=</span> <span style=color:#ae81ff>18</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>SELECT</span> id, name, address
+</span></span><span style=display:flex><span><span style=color:#66d9ef>FROM</span> <span style=color:#66d9ef>user</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>WHERE</span> name <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;name&#39;</span> <span style=color:#66d9ef>OR</span> age <span style=color:#f92672>&gt;=</span> <span style=color:#ae81ff>18</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>SELECT</span> <span style=color:#f92672>*</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>FROM</span> <span style=color:#66d9ef>user</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>WHERE</span> age <span style=color:#66d9ef>NOT</span> <span style=color:#66d9ef>BETWEEN</span> <span style=color:#ae81ff>8</span> <span style=color:#66d9ef>AND</span> <span style=color:#ae81ff>18</span>;
+</span></span></code></pre></div><h3 id=连接>连接
+<a class=anchor href=#%e8%bf%9e%e6%8e%a5>#</a></h3><blockquote><p>连接表的本质就是将不同表的记录合并起来，形成一张新表。当然，这张新表只是临时的，它仅存在于本次查询期间。</p></blockquote><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sql data-lang=sql><span style=display:flex><span><span style=color:#f92672>#</span> <span style=color:#66d9ef>join</span>....<span style=color:#66d9ef>on</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>select</span> <span style=color:#66d9ef>c</span>.cust_name, o.order_num
+</span></span><span style=display:flex><span><span style=color:#66d9ef>from</span> Customers <span style=color:#66d9ef>c</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>inner</span> <span style=color:#66d9ef>join</span> Orders o
+</span></span><span style=display:flex><span><span style=color:#66d9ef>on</span> <span style=color:#66d9ef>c</span>.cust_id <span style=color:#f92672>=</span> o.cust_id
+</span></span><span style=display:flex><span><span style=color:#66d9ef>order</span> <span style=color:#66d9ef>by</span> <span style=color:#66d9ef>c</span>.cust_name;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>#</span> <span style=color:#960050;background-color:#1e0010>如果两张表的关联字段名相同，也可以使用</span>USING子句<span style=color:#960050;background-color:#1e0010>：</span><span style=color:#66d9ef>join</span>....<span style=color:#66d9ef>using</span>()
+</span></span><span style=display:flex><span><span style=color:#66d9ef>select</span> <span style=color:#66d9ef>c</span>.cust_name, o.order_num
+</span></span><span style=display:flex><span><span style=color:#66d9ef>from</span> Customers <span style=color:#66d9ef>c</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>inner</span> <span style=color:#66d9ef>join</span> Orders o
+</span></span><span style=display:flex><span><span style=color:#66d9ef>using</span>(cust_id)
+</span></span><span style=display:flex><span><span style=color:#66d9ef>order</span> <span style=color:#66d9ef>by</span> <span style=color:#66d9ef>c</span>.cust_name;
+</span></span></code></pre></div><table><thead><tr><th>连接类型</th><th>说明</th></tr></thead><tbody><tr><td>inner join</td><td>（默认链接方式）只有两个标都存在满足条件的记录才会返回行。</td></tr><tr><td>left join/left outer join</td><td>返回左表的所有行，即使右表中没有满足条件的行也是如此。</td></tr><tr><td>right join/right outer join</td><td>返回右表中的所有行，即使左表没有满足条件的行也是如此。</td></tr><tr><td>full join/full outer join</td><td>返回其中一个表存在满足条件的记录。</td></tr><tr><td>self join</td><td>将一个表连接到自身，就像该表是两个表一样。为了区分两个表，在 SQL 语句中需要至少重命名一个表。</td></tr><tr><td>cross join</td><td>交叉连接，从两个或者多个连接表中返回记录集的笛卡尔积。</td></tr></tbody></table><h3 id=组合>组合
+<a class=anchor href=#%e7%bb%84%e5%90%88>#</a></h3><blockquote><p>UNION 运算符将两个或更多查询的结果组合起来，并生成一个结果集，其中包含来自 UNION 中参与查询的提取行。</p></blockquote><p>UNION 基本规则：</p><ul><li>所有查询的列数和列顺序必须相同。</li><li>每个查询中涉及表的列的数据类型必须相同或兼容。</li><li>通常返回的列名取自第一个查询</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sql data-lang=sql><span style=display:flex><span><span style=color:#66d9ef>SELECT</span> <span style=color:#66d9ef>column_name</span>(s) <span style=color:#66d9ef>FROM</span> table1
+</span></span><span style=display:flex><span><span style=color:#66d9ef>UNION</span> <span style=color:#66d9ef>ALL</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>SELECT</span> <span style=color:#66d9ef>column_name</span>(s) <span style=color:#66d9ef>FROM</span> table2;
+</span></span></code></pre></div><h3 id=函数>函数
+<a class=anchor href=#%e5%87%bd%e6%95%b0>#</a></h3><h3 id=数据库定义>数据库定义
+<a class=anchor href=#%e6%95%b0%e6%8d%ae%e5%ba%93%e5%ae%9a%e4%b9%89>#</a></h3><h4 id=数据库-1>数据库
+<a class=anchor href=#%e6%95%b0%e6%8d%ae%e5%ba%93-1>#</a></h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sql data-lang=sql><span style=display:flex><span><span style=color:#66d9ef>CREATE</span> <span style=color:#66d9ef>DATABASE</span> test;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>DROP</span> <span style=color:#66d9ef>DATABASE</span> test;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>USE test;
+</span></span></code></pre></div><h4 id=数据表>数据表
+<a class=anchor href=#%e6%95%b0%e6%8d%ae%e8%a1%a8>#</a></h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sql data-lang=sql><span style=display:flex><span><span style=color:#66d9ef>CREATE</span> <span style=color:#66d9ef>TABLE</span> <span style=color:#66d9ef>user</span> (
+</span></span><span style=display:flex><span>  id int(<span style=color:#ae81ff>10</span>) unsigned <span style=color:#66d9ef>NOT</span> <span style=color:#66d9ef>NULL</span> <span style=color:#66d9ef>COMMENT</span> <span style=color:#e6db74>&#39;Id&#39;</span>,
+</span></span><span style=display:flex><span>  username varchar(<span style=color:#ae81ff>64</span>) <span style=color:#66d9ef>NOT</span> <span style=color:#66d9ef>NULL</span> <span style=color:#66d9ef>DEFAULT</span> <span style=color:#e6db74>&#39;default&#39;</span> <span style=color:#66d9ef>COMMENT</span> <span style=color:#e6db74>&#39;用户名&#39;</span>,
+</span></span><span style=display:flex><span>  password varchar(<span style=color:#ae81ff>64</span>) <span style=color:#66d9ef>NOT</span> <span style=color:#66d9ef>NULL</span> <span style=color:#66d9ef>DEFAULT</span> <span style=color:#e6db74>&#39;default&#39;</span> <span style=color:#66d9ef>COMMENT</span> <span style=color:#e6db74>&#39;密码&#39;</span>,
+</span></span><span style=display:flex><span>  email varchar(<span style=color:#ae81ff>64</span>) <span style=color:#66d9ef>NOT</span> <span style=color:#66d9ef>NULL</span> <span style=color:#66d9ef>DEFAULT</span> <span style=color:#e6db74>&#39;default&#39;</span> <span style=color:#66d9ef>COMMENT</span> <span style=color:#e6db74>&#39;邮箱&#39;</span>
+</span></span><span style=display:flex><span>) <span style=color:#66d9ef>COMMENT</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#39;用户表&#39;</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>CREATE</span> <span style=color:#66d9ef>TABLE</span> vip_user <span style=color:#66d9ef>AS</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>SELECT</span> <span style=color:#f92672>*</span> <span style=color:#66d9ef>FROM</span> <span style=color:#66d9ef>user</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>DROP</span> <span style=color:#66d9ef>TABLE</span> <span style=color:#66d9ef>user</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>ALTER</span> <span style=color:#66d9ef>TABLE</span> <span style=color:#66d9ef>user</span> 
+</span></span><span style=display:flex><span><span style=color:#66d9ef>ADD</span> age int(<span style=color:#ae81ff>3</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>ALTER</span> <span style=color:#66d9ef>TABLE</span> <span style=color:#66d9ef>user</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>DROP</span> <span style=color:#66d9ef>COLUMN</span> age;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>ALTER</span> <span style=color:#66d9ef>TABLE</span> <span style=color:#f92672>`</span><span style=color:#66d9ef>user</span><span style=color:#f92672>`</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>MODIFY</span> <span style=color:#66d9ef>COLUMN</span> age tinyint;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>ALTER</span> <span style=color:#66d9ef>TABLE</span> <span style=color:#66d9ef>user</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>ADD</span> <span style=color:#66d9ef>PRIMARY</span> <span style=color:#66d9ef>KEY</span> (id);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>ALTER</span> <span style=color:#66d9ef>TABLE</span> <span style=color:#66d9ef>user</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>DROP</span> <span style=color:#66d9ef>PRIMARY</span> <span style=color:#66d9ef>KEY</span>;
+</span></span></code></pre></div><h4 id=视图>视图
+<a class=anchor href=#%e8%a7%86%e5%9b%be>#</a></h4><h5 id=定义>定义
+<a class=anchor href=#%e5%ae%9a%e4%b9%89>#</a></h5><ul><li>视图是基于 SQL 语句的结果集的可视化的表。</li><li>视图是虚拟的表，本身不包含数据，也就不能对其进行索引操作。对视图的操作和对普通表的操作一样。</li></ul><h5 id=作用>作用
+<a class=anchor href=#%e4%bd%9c%e7%94%a8>#</a></h5><ul><li>简化复杂的 SQL 操作，比如复杂的联结；</li><li>只使用实际表的一部分数据；</li><li>通过只给用户访问视图的权限，保证数据的安全性；</li><li>更改数据格式和表示。</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sql data-lang=sql><span style=display:flex><span><span style=color:#66d9ef>CREATE</span>  <span style=color:#66d9ef>VIEW</span> top_10_user_view <span style=color:#66d9ef>AS</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>SELECT</span> id,name
+</span></span><span style=display:flex><span><span style=color:#66d9ef>FROM</span> <span style=color:#66d9ef>user</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>WHERE</span> id <span style=color:#f92672>&lt;</span> <span style=color:#ae81ff>10</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>DROP</span> <span style=color:#66d9ef>VIEW</span> top_10_user_view;
+</span></span></code></pre></div><h4 id=索引>索引
+<a class=anchor href=#%e7%b4%a2%e5%bc%95>#</a></h4><blockquote><p>索引是一种用于快速查询和检索数据的数据结构，其本质可以看成是一种排序好的数据结构。</p></blockquote><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sql data-lang=sql><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>CREATE</span> <span style=color:#66d9ef>INDEX</span> user_index
+</span></span><span style=display:flex><span><span style=color:#66d9ef>ON</span> <span style=color:#66d9ef>user</span> (id);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>ALTER</span> <span style=color:#66d9ef>table</span> <span style=color:#66d9ef>user</span> <span style=color:#66d9ef>ADD</span> <span style=color:#66d9ef>INDEX</span> user_index(id)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>CREATE</span> <span style=color:#66d9ef>UNIQUE</span> <span style=color:#66d9ef>INDEX</span> user_index
+</span></span><span style=display:flex><span><span style=color:#66d9ef>ON</span> <span style=color:#66d9ef>user</span> (id);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>ALTER</span> <span style=color:#66d9ef>TABLE</span> <span style=color:#66d9ef>user</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>DROP</span> <span style=color:#66d9ef>INDEX</span> user_index;
+</span></span></code></pre></div><h4 id=约束>约束
+<a class=anchor href=#%e7%ba%a6%e6%9d%9f>#</a></h4><ul><li>NOT NULL</li><li>UNIQUE</li><li>PRIMARY KEY</li><li>FOREIGN KEY</li><li>CHECK</li><li>DEFAULT</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sql data-lang=sql><span style=display:flex><span><span style=color:#66d9ef>CREATE</span> <span style=color:#66d9ef>TABLE</span> Users (
+</span></span><span style=display:flex><span>  Id INT(<span style=color:#ae81ff>10</span>) UNSIGNED <span style=color:#66d9ef>NOT</span> <span style=color:#66d9ef>NULL</span> AUTO_INCREMENT <span style=color:#66d9ef>COMMENT</span> <span style=color:#e6db74>&#39;自增Id&#39;</span>,
+</span></span><span style=display:flex><span>  Username VARCHAR(<span style=color:#ae81ff>64</span>) <span style=color:#66d9ef>NOT</span> <span style=color:#66d9ef>NULL</span> <span style=color:#66d9ef>UNIQUE</span> <span style=color:#66d9ef>DEFAULT</span> <span style=color:#e6db74>&#39;default&#39;</span> <span style=color:#66d9ef>COMMENT</span> <span style=color:#e6db74>&#39;用户名&#39;</span>,
+</span></span><span style=display:flex><span>  Password VARCHAR(<span style=color:#ae81ff>64</span>) <span style=color:#66d9ef>NOT</span> <span style=color:#66d9ef>NULL</span> <span style=color:#66d9ef>DEFAULT</span> <span style=color:#e6db74>&#39;default&#39;</span> <span style=color:#66d9ef>COMMENT</span> <span style=color:#e6db74>&#39;密码&#39;</span>,
+</span></span><span style=display:flex><span>  Email VARCHAR(<span style=color:#ae81ff>64</span>) <span style=color:#66d9ef>NOT</span> <span style=color:#66d9ef>NULL</span> <span style=color:#66d9ef>DEFAULT</span> <span style=color:#e6db74>&#39;default&#39;</span> <span style=color:#66d9ef>COMMENT</span> <span style=color:#e6db74>&#39;邮箱地址&#39;</span>,
+</span></span><span style=display:flex><span>  Enabled TINYINT(<span style=color:#ae81ff>4</span>) <span style=color:#66d9ef>DEFAULT</span> <span style=color:#66d9ef>NULL</span> <span style=color:#66d9ef>COMMENT</span> <span style=color:#e6db74>&#39;是否有效&#39;</span>,
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>PRIMARY</span> <span style=color:#66d9ef>KEY</span> (Id)
+</span></span><span style=display:flex><span>) ENGINE<span style=color:#f92672>=</span>InnoDB AUTO_INCREMENT<span style=color:#f92672>=</span><span style=color:#ae81ff>2</span> <span style=color:#66d9ef>DEFAULT</span> CHARSET<span style=color:#f92672>=</span>utf8mb4 <span style=color:#66d9ef>COMMENT</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#39;用户表&#39;</span>;
+</span></span></code></pre></div><h3 id=事务处理>事务处理
+<a class=anchor href=#%e4%ba%8b%e5%8a%a1%e5%a4%84%e7%90%86>#</a></h3><ul><li>START TRANSACTION - 指令用于标记事务的起始点。</li><li>SAVEPOINT - 指令用于创建保留点。</li><li>ROLLBACK TO - 指令用于回滚到指定的保留点；如果没有设置保留点，则回退到 START TRANSACTION 语句处。</li><li>COMMIT - 提交事务。</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sql data-lang=sql><span style=display:flex><span><span style=color:#75715e>-- 开始事务
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>START</span> <span style=color:#66d9ef>TRANSACTION</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>-- 插入操作 A
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>INSERT</span> <span style=color:#66d9ef>INTO</span> <span style=color:#f92672>`</span><span style=color:#66d9ef>user</span><span style=color:#f92672>`</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>VALUES</span> (<span style=color:#ae81ff>1</span>, <span style=color:#e6db74>&#39;root1&#39;</span>, <span style=color:#e6db74>&#39;root1&#39;</span>, <span style=color:#e6db74>&#39;xxxx@163.com&#39;</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>-- 创建保留点 updateA
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>SAVEPOINT updateA;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>-- 插入操作 B
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>INSERT</span> <span style=color:#66d9ef>INTO</span> <span style=color:#f92672>`</span><span style=color:#66d9ef>user</span><span style=color:#f92672>`</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>VALUES</span> (<span style=color:#ae81ff>2</span>, <span style=color:#e6db74>&#39;root2&#39;</span>, <span style=color:#e6db74>&#39;root2&#39;</span>, <span style=color:#e6db74>&#39;xxxx@163.com&#39;</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>-- 回滚到保留点 updateA
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>ROLLBACK</span> <span style=color:#66d9ef>TO</span> updateA;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>-- 提交事务，只有操作 A 生效
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>COMMIT</span>;
+</span></span></code></pre></div><h3 id=存储过程>存储过程
+<a class=anchor href=#%e5%ad%98%e5%82%a8%e8%bf%87%e7%a8%8b>#</a></h3><ul><li>代码封装，保证了一定的安全性；</li><li>代码复用；</li><li>由于是预先编译，因此具有很高的性能。</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sql data-lang=sql><span style=display:flex><span><span style=color:#66d9ef>DROP</span> <span style=color:#66d9ef>PROCEDURE</span> <span style=color:#66d9ef>IF</span> <span style=color:#66d9ef>EXISTS</span> <span style=color:#f92672>`</span>proc_adder<span style=color:#f92672>`</span>;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>DELIMITER</span> ;;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>CREATE</span> <span style=color:#66d9ef>DEFINER</span><span style=color:#f92672>=`</span>root<span style=color:#f92672>`@`</span>localhost<span style=color:#f92672>`</span> <span style=color:#66d9ef>PROCEDURE</span> <span style=color:#f92672>`</span>proc_adder<span style=color:#f92672>`</span>(<span style=color:#66d9ef>IN</span> a int, <span style=color:#66d9ef>IN</span> b int, <span style=color:#66d9ef>OUT</span> <span style=color:#66d9ef>sum</span> int)
+</span></span><span style=display:flex><span><span style=color:#66d9ef>BEGIN</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>DECLARE</span> <span style=color:#66d9ef>c</span> int;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> a <span style=color:#66d9ef>is</span> <span style=color:#66d9ef>null</span> <span style=color:#66d9ef>then</span> <span style=color:#66d9ef>set</span> a <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>end</span> <span style=color:#66d9ef>if</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> b <span style=color:#66d9ef>is</span> <span style=color:#66d9ef>null</span> <span style=color:#66d9ef>then</span> <span style=color:#66d9ef>set</span> b <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>end</span> <span style=color:#66d9ef>if</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>set</span> <span style=color:#66d9ef>sum</span>  <span style=color:#f92672>=</span> a <span style=color:#f92672>+</span> b;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>END</span>
+</span></span><span style=display:flex><span>;;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>DELIMITER</span> ;
+</span></span></code></pre></div></article><footer class=book-footer><div class="flex flex-wrap justify-between"></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><ul><li><a href=#数据库>数据库</a><ul><li><a href=#crud>CRUD</a></li><li><a href=#排序>排序</a></li><li><a href=#分组>分组</a></li><li><a href=#子查询>子查询</a></li><li><a href=#连接>连接</a></li><li><a href=#组合>组合</a></li><li><a href=#函数>函数</a></li><li><a href=#数据库定义>数据库定义</a></li><li><a href=#事务处理>事务处理</a></li><li><a href=#存储过程>存储过程</a></li></ul></li></ul></li></ul></nav></div></aside></main></body></html>

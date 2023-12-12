@@ -1,0 +1,86 @@
+<!doctype html><html lang=en-us dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="
+go stand library 基本的知识"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:title" content="sync"><meta property="og:description" content="
+go stand library 基本的知识"><meta property="og:type" content="article"><meta property="og:url" content="https://sunweiwe.github.io/posts/go/go/sync/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2022-10-23T22:55:45+08:00"><meta property="article:modified_time" content="2023-07-20T22:53:08+08:00"><title>sync | sunweiwe/blog</title><link rel=manifest href=/manifest.json><link rel=icon href=/favicon.png><link rel=stylesheet href=/book.min.4f0117e74e5337280f18eb9641eae520cb4b25adcf5dd64fafad4664145a5957.css integrity="sha256-TwEX505TNygPGOuWQerlIMtLJa3PXdZPr61GZBRaWVc=" crossorigin=anonymous><script defer src=/flexsearch.min.js></script>
+<script defer src=/en.search.min.1b2bf308793e524c7bd66e1d113796241ab6ddb1a1506b85efbaca90f34d339f.js integrity="sha256-GyvzCHk+Ukx71m4dETeWJBq23bGhUGuF77rKkPNNM58=" crossorigin=anonymous></script>
+<script defer src=/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js integrity="sha256-b2+Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC+NdcPIvZhzk=" crossorigin=anonymous></script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/><span>sunweiwe/blog</span></a></h2><div class=book-search><input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><ul><li><a href=/posts/>Blog</a></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/svg/menu.svg class=book-icon alt=Menu></label>
+<strong>sync</strong>
+<label for=toc-control><img src=/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><a href=#mutex><strong>Mutex</strong></a><ul><li><a href=#互斥锁的实现>互斥锁的实现</a></li></ul></li><li><a href=#pool>Pool</a><ul><li><a href=#syncpool>sync.Pool</a></li><li><a href=#syncpool-的使用方法>sync.Pool 的使用方法</a><ul><li><a href=#new>new</a></li><li><a href=#get>get</a></li><li><a href=#put>put</a></li></ul></li><li><a href=#buffer-缓冲池>buffer 缓冲池</a></li><li><a href=#实现原理>实现原理</a><ul><li><a href=#get-方法>Get 方法</a></li></ul></li><li><a href=#内存泄露>内存泄露</a></li></ul></li></ul></nav></aside></header><article class="markdown book-post"><h1><a href=/posts/go/go/sync/>sync</a></h1><h5>October 23, 2022</h5><div><a href=/tags/go/>go</a></div><p>go stand library 基本的知识</p><h1 id=mutex><strong>Mutex</strong>
+<a class=anchor href=#mutex>#</a></h1><p>互斥锁</p><h2 id=互斥锁的实现>互斥锁的实现
+<a class=anchor href=#%e4%ba%92%e6%96%a5%e9%94%81%e7%9a%84%e5%ae%9e%e7%8e%b0>#</a></h2><p>互斥锁是控制并发的基础手段。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=display:flex><span><span style=color:#f92672>package</span> <span style=color:#a6e22e>main</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> (
+</span></span><span style=display:flex><span>	<span style=color:#e6db74>&#34;fmt&#34;</span>
+</span></span><span style=display:flex><span>	<span style=color:#e6db74>&#34;sync&#34;</span>
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>func</span> <span style=color:#a6e22e>main</span>() {
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>var</span> <span style=color:#a6e22e>counter</span> <span style=color:#a6e22e>Counter</span>
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>var</span> <span style=color:#a6e22e>wg</span> <span style=color:#a6e22e>sync</span>.<span style=color:#a6e22e>WaitGroup</span>
+</span></span><span style=display:flex><span>	<span style=color:#a6e22e>wg</span>.<span style=color:#a6e22e>Add</span>(<span style=color:#ae81ff>10</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>for</span> <span style=color:#a6e22e>i</span> <span style=color:#f92672>:=</span> <span style=color:#ae81ff>0</span>; <span style=color:#a6e22e>i</span> &lt; <span style=color:#ae81ff>10</span>; <span style=color:#a6e22e>i</span><span style=color:#f92672>++</span> {
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>go</span> <span style=color:#66d9ef>func</span>() {
+</span></span><span style=display:flex><span>			<span style=color:#66d9ef>defer</span> <span style=color:#a6e22e>wg</span>.<span style=color:#a6e22e>Done</span>()
+</span></span><span style=display:flex><span>			<span style=color:#66d9ef>for</span> <span style=color:#a6e22e>j</span> <span style=color:#f92672>:=</span> <span style=color:#ae81ff>0</span>; <span style=color:#a6e22e>j</span> &lt; <span style=color:#ae81ff>10000</span>; <span style=color:#a6e22e>j</span><span style=color:#f92672>++</span> {
+</span></span><span style=display:flex><span>				<span style=color:#a6e22e>counter</span>.<span style=color:#a6e22e>Lock</span>()
+</span></span><span style=display:flex><span>				<span style=color:#a6e22e>counter</span>.<span style=color:#a6e22e>Count</span><span style=color:#f92672>++</span>
+</span></span><span style=display:flex><span>				<span style=color:#a6e22e>counter</span>.<span style=color:#a6e22e>Unlock</span>()
+</span></span><span style=display:flex><span>			}
+</span></span><span style=display:flex><span>		}()
+</span></span><span style=display:flex><span>	}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>	<span style=color:#a6e22e>wg</span>.<span style=color:#a6e22e>Wait</span>()
+</span></span><span style=display:flex><span>	<span style=color:#a6e22e>fmt</span>.<span style=color:#a6e22e>Println</span>(<span style=color:#a6e22e>counter</span>.<span style=color:#a6e22e>Count</span>)
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>type</span> <span style=color:#a6e22e>Counter</span> <span style=color:#66d9ef>struct</span> {
+</span></span><span style=display:flex><span>	<span style=color:#a6e22e>sync</span>.<span style=color:#a6e22e>Mutex</span>
+</span></span><span style=display:flex><span>	<span style=color:#a6e22e>Count</span> <span style=color:#66d9ef>uint64</span>
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h1 id=pool>Pool
+<a class=anchor href=#pool>#</a></h1><p>创建池化的对象</p><h2 id=syncpool>sync.Pool
+<a class=anchor href=#syncpool>#</a></h2><p>sync.Pool 数据类型用来保存一组可独立访问的临时对象。</p><ul><li>sync.Pool 本身线程安全，多个 goroutine 可以并发地调用它的方法存取对象。</li><li>sync.Pool 不可在使用之后在复制使用。</li></ul><h2 id=syncpool-的使用方法>sync.Pool 的使用方法
+<a class=anchor href=#syncpool-%e7%9a%84%e4%bd%bf%e7%94%a8%e6%96%b9%e6%b3%95>#</a></h2><h3 id=new>new
+<a class=anchor href=#new>#</a></h3><p>pool struct 包含一个 new 字段，这个字段的类型是函数 func() interface{}。当调用 get 方法从池中获取元素的时候，没有空闲的元素可返回时，便会调用 new 新建一个元素返回。</p><h3 id=get>get
+<a class=anchor href=#get>#</a></h3><p>调用此方法从池中取走一个元素。</p><h3 id=put>put
+<a class=anchor href=#put>#</a></h3><p>此方法将一个元素返还给 pool，pool 将这个元素保存到池中并且可以复用。</p><h2 id=buffer-缓冲池>buffer 缓冲池
+<a class=anchor href=#buffer-%e7%bc%93%e5%86%b2%e6%b1%a0>#</a></h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=display:flex><span><span style=color:#66d9ef>var</span> <span style=color:#a6e22e>buffers</span> ={
+</span></span><span style=display:flex><span>	<span style=color:#a6e22e>New</span>: <span style=color:#66d9ef>func</span>() <span style=color:#66d9ef>interface</span>{}{
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>return</span> new(<span style=color:#a6e22e>bytes</span>.<span style=color:#a6e22e>Buffer</span>)
+</span></span><span style=display:flex><span>	},
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>func</span> <span style=color:#a6e22e>GetBuffer</span>() <span style=color:#f92672>*</span><span style=color:#a6e22e>bytes</span>.<span style=color:#a6e22e>Buffer</span>{
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>return</span> <span style=color:#a6e22e>buffers</span>.<span style=color:#a6e22e>Get</span>().(<span style=color:#f92672>*</span><span style=color:#a6e22e>bytes</span>.<span style=color:#a6e22e>Buffer</span>)
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>func</span> <span style=color:#a6e22e>PutBuffer</span>(<span style=color:#a6e22e>buf</span> <span style=color:#f92672>*</span><span style=color:#a6e22e>bytes</span>.<span style=color:#a6e22e>Buffer</span>){
+</span></span><span style=display:flex><span>	<span style=color:#a6e22e>buf</span>.<span style=color:#a6e22e>Reset</span>()
+</span></span><span style=display:flex><span>	<span style=color:#a6e22e>buffers</span>.<span style=color:#a6e22e>Put</span>(<span style=color:#a6e22e>buf</span>)
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h2 id=实现原理>实现原理
+<a class=anchor href=#%e5%ae%9e%e7%8e%b0%e5%8e%9f%e7%90%86>#</a></h2><h3 id=get-方法>Get 方法
+<a class=anchor href=#get-%e6%96%b9%e6%b3%95>#</a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=display:flex><span><span style=color:#66d9ef>func</span> (<span style=color:#a6e22e>p</span> <span style=color:#f92672>*</span><span style=color:#a6e22e>Pool</span>) <span style=color:#a6e22e>Get</span>() <span style=color:#66d9ef>interface</span>{} {
+</span></span><span style=display:flex><span>	<span style=color:#75715e>// 把当前 goroutine 固定在当前的p上
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>	<span style=color:#a6e22e>l</span>, <span style=color:#a6e22e>pid</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>p</span>.<span style=color:#a6e22e>pin</span>()
+</span></span><span style=display:flex><span>	<span style=color:#a6e22e>x</span> <span style=color:#f92672>:=</span><span style=color:#a6e22e>l</span>.<span style=color:#a6e22e>private</span>  <span style=color:#75715e>//优先从local 的 private字段取，快速
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>	<span style=color:#a6e22e>l</span>.<span style=color:#a6e22e>private</span> = <span style=color:#66d9ef>nil</span>
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>if</span> <span style=color:#a6e22e>x</span> <span style=color:#f92672>==</span> <span style=color:#66d9ef>nil</span> {
+</span></span><span style=display:flex><span>		<span style=color:#a6e22e>x</span>,<span style=color:#a6e22e>_</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>l</span>.<span style=color:#a6e22e>shared</span>.<span style=color:#a6e22e>popHead</span>()
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>if</span> <span style=color:#a6e22e>x</span> <span style=color:#f92672>==</span> <span style=color:#66d9ef>nil</span>{
+</span></span><span style=display:flex><span>			<span style=color:#a6e22e>x</span> = <span style=color:#a6e22e>p</span>.<span style=color:#a6e22e>getSlow</span>(<span style=color:#a6e22e>pid</span>)
+</span></span><span style=display:flex><span>		}
+</span></span><span style=display:flex><span>	}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>	<span style=color:#a6e22e>runtime_procUnpin</span>()
+</span></span><span style=display:flex><span>	<span style=color:#75715e>// 如果没有获取到，尝试使用new函数生成一个新的
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>	<span style=color:#66d9ef>if</span> <span style=color:#a6e22e>x</span> = <span style=color:#66d9ef>nil</span> <span style=color:#f92672>&amp;&amp;</span> <span style=color:#a6e22e>p</span>.<span style=color:#a6e22e>New</span> <span style=color:#f92672>!=</span> <span style=color:#66d9ef>nil</span> {
+</span></span><span style=display:flex><span>		<span style=color:#a6e22e>x</span> = <span style=color:#a6e22e>p</span>.<span style=color:#a6e22e>New</span>()
+</span></span><span style=display:flex><span>	}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>return</span> <span style=color:#a6e22e>x</span>
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h2 id=内存泄露>内存泄露
+<a class=anchor href=#%e5%86%85%e5%ad%98%e6%b3%84%e9%9c%b2>#</a></h2><p>使用 sync.Pool 回收 buffer 的时候，一定要检查回收的对象的大小。</p></article><footer class=book-footer><div class="flex flex-wrap justify-between"></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#mutex><strong>Mutex</strong></a><ul><li><a href=#互斥锁的实现>互斥锁的实现</a></li></ul></li><li><a href=#pool>Pool</a><ul><li><a href=#syncpool>sync.Pool</a></li><li><a href=#syncpool-的使用方法>sync.Pool 的使用方法</a><ul><li><a href=#new>new</a></li><li><a href=#get>get</a></li><li><a href=#put>put</a></li></ul></li><li><a href=#buffer-缓冲池>buffer 缓冲池</a></li><li><a href=#实现原理>实现原理</a><ul><li><a href=#get-方法>Get 方法</a></li></ul></li><li><a href=#内存泄露>内存泄露</a></li></ul></li></ul></nav></div></aside></main></body></html>

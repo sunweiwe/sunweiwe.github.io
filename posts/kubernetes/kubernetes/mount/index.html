@@ -1,0 +1,80 @@
+<!doctype html><html lang=en-us dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="
+使用 kubeadm 在 linux 上安装 kubernetes"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:title" content="kubernetes 部署"><meta property="og:description" content="
+使用 kubeadm 在 linux 上安装 kubernetes"><meta property="og:type" content="article"><meta property="og:url" content="https://sunweiwe.github.io/posts/kubernetes/kubernetes/mount/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2022-10-26T22:11:15+08:00"><meta property="article:modified_time" content="2023-07-20T22:53:08+08:00"><title>kubernetes 部署 | sunweiwe/blog</title><link rel=manifest href=/manifest.json><link rel=icon href=/favicon.png><link rel=stylesheet href=/book.min.4f0117e74e5337280f18eb9641eae520cb4b25adcf5dd64fafad4664145a5957.css integrity="sha256-TwEX505TNygPGOuWQerlIMtLJa3PXdZPr61GZBRaWVc=" crossorigin=anonymous><script defer src=/flexsearch.min.js></script>
+<script defer src=/en.search.min.1b2bf308793e524c7bd66e1d113796241ab6ddb1a1506b85efbaca90f34d339f.js integrity="sha256-GyvzCHk+Ukx71m4dETeWJBq23bGhUGuF77rKkPNNM58=" crossorigin=anonymous></script>
+<script defer src=/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js integrity="sha256-b2+Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC+NdcPIvZhzk=" crossorigin=anonymous></script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/><span>sunweiwe/blog</span></a></h2><div class=book-search><input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><ul><li><a href=/posts/>Blog</a></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/svg/menu.svg class=book-icon alt=Menu></label>
+<strong>kubernetes 部署</strong>
+<label for=toc-control><img src=/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><ul><li><a href=#关闭防火墙>关闭防火墙</a></li><li><a href=#关闭-selinux>关闭 selinux</a></li><li><a href=#关闭-swap>关闭 swap</a></li><li><a href=#添加主机名与-ip-对应的关系>添加主机名与 IP 对应的关系</a></li><li><a href=#将桥接的-ipv4-流量传递到-iptables-的链>将桥接的 IPV4 流量传递到 iptables 的链</a></li><li><a href=#yum>yum</a></li><li><a href=#基础包>基础包</a></li><li><a href=#docker>docker</a><ul><li><a href=#docker-config>docker config</a></li></ul></li><li><a href=#kubernetes-组件>kubernetes 组件</a></li><li><a href=#初始化>初始化</a></li><li><a href=#kubectl-config>kubectl config</a></li><li><a href=#污点>污点</a></li></ul></li></ul></nav></aside></header><article class="markdown book-post"><h1><a href=/posts/kubernetes/kubernetes/mount/>kubernetes 部署</a></h1><h5>October 26, 2022</h5><div><a href=/tags/go/>go</a>,
+<a href=/tags/kubernetes/>kubernetes</a></div><p>使用 kubeadm 在 linux 上安装 kubernetes</p><h2 id=关闭防火墙>关闭防火墙
+<a class=anchor href=#%e5%85%b3%e9%97%ad%e9%98%b2%e7%81%ab%e5%a2%99>#</a></h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>systemctl disable firewalld
+</span></span><span style=display:flex><span>systemctl stop firewalld
+</span></span></code></pre></div><h2 id=关闭-selinux>关闭 selinux
+<a class=anchor href=#%e5%85%b3%e9%97%ad-selinux>#</a></h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>setenforce <span style=color:#ae81ff>0</span>
+</span></span><span style=display:flex><span>sed -i <span style=color:#e6db74>&#39;s/SELINUX=permissive/SELINUX=disabled/&#39;</span> /etc/sysconfig/selinux
+</span></span><span style=display:flex><span>sed -i <span style=color:#e6db74>&#34;s/SELINUX=enforcing/SELINUX=disabled/g&#34;</span> /etc/selinux/config
+</span></span></code></pre></div><h2 id=关闭-swap>关闭 swap
+<a class=anchor href=#%e5%85%b3%e9%97%ad-swap>#</a></h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>swapoff -a
+</span></span><span style=display:flex><span>sed -i <span style=color:#e6db74>&#39;s/.*swap.*/#&amp;/&#39;</span> /etc/fstab
+</span></span></code></pre></div><h2 id=添加主机名与-ip-对应的关系>添加主机名与 IP 对应的关系
+<a class=anchor href=#%e6%b7%bb%e5%8a%a0%e4%b8%bb%e6%9c%ba%e5%90%8d%e4%b8%8e-ip-%e5%af%b9%e5%ba%94%e7%9a%84%e5%85%b3%e7%b3%bb>#</a></h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>hostnamectl set-hostname k8s-master
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>vim /etc/hosts
+</span></span><span style=display:flex><span><span style=color:#75715e>#添加如下内容：</span>
+</span></span><span style=display:flex><span>10.0.24.13    k8s-master
+</span></span></code></pre></div><h2 id=将桥接的-ipv4-流量传递到-iptables-的链>将桥接的 IPV4 流量传递到 iptables 的链
+<a class=anchor href=#%e5%b0%86%e6%a1%a5%e6%8e%a5%e7%9a%84-ipv4-%e6%b5%81%e9%87%8f%e4%bc%a0%e9%80%92%e5%88%b0-iptables-%e7%9a%84%e9%93%be>#</a></h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>cat &gt; /etc/sysctl.d/k8s.conf <span style=color:#e6db74>&lt;&lt; EOF
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>net.bridge.bridge-nf-call-ip6tables = 1
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>net.bridge.bridge-nf-call-iptables = 1
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>EOF</span>
+</span></span><span style=display:flex><span>sysctl --system
+</span></span></code></pre></div><h2 id=yum>yum
+<a class=anchor href=#yum>#</a></h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>**rm -rfv /etc/yum.repos.d/*
+</span></span><span style=display:flex><span>curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-8.repo
+</span></span><span style=display:flex><span>yum install -y yum-utils
+</span></span><span style=display:flex><span>yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 配置k8s阿里云源</span>
+</span></span><span style=display:flex><span>cat <span style=color:#e6db74>&lt;&lt;EOF &gt; /etc/yum.repos.d/kubernetes.repo
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>[kubernetes]
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>name=Kubernetes
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>baseurl=https://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64/
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>enabled=1
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>gpgcheck=1
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>repo_gpgcheck=1
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>gpgkey=https://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg https://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>EOF</span>**
+</span></span></code></pre></div><h2 id=基础包>基础包
+<a class=anchor href=#%e5%9f%ba%e7%a1%80%e5%8c%85>#</a></h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>yum install vim bash-completion net-tools gcc -y
+</span></span></code></pre></div><h2 id=docker>docker
+<a class=anchor href=#docker>#</a></h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>yum install docker-ce
+</span></span><span style=display:flex><span>systemctl start docker <span style=color:#75715e># 启动Docker</span>
+</span></span><span style=display:flex><span>systemctl enable docker <span style=color:#75715e># 设置自动启动</span>
+</span></span></code></pre></div><h3 id=docker-config>docker config
+<a class=anchor href=#docker-config>#</a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>/etc/docker/daemon.json
+</span></span><span style=display:flex><span><span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>	<span style=color:#e6db74>&#34;registry-mirrors&#34;</span>: <span style=color:#f92672>[</span>
+</span></span><span style=display:flex><span>		<span style=color:#e6db74>&#34;https://56tyyl4k.mirror.aliyuncs.com&#34;</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>]</span>,
+</span></span><span style=display:flex><span>  <span style=color:#e6db74>&#34;exec-opts&#34;</span>: <span style=color:#f92672>[</span><span style=color:#e6db74>&#34;native.cgroupdriver=systemd&#34;</span><span style=color:#f92672>]</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>systemctl daemon-reload
+</span></span><span style=display:flex><span>systemctl restart docker
+</span></span></code></pre></div><h2 id=kubernetes-组件>kubernetes 组件
+<a class=anchor href=#kubernetes-%e7%bb%84%e4%bb%b6>#</a></h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>yum install -y kubectl kubeadm kubelet
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>systemctl enable kubelet <span style=color:#f92672>&amp;&amp;</span> systemctl start kubelet
+</span></span></code></pre></div><h2 id=初始化>初始化
+<a class=anchor href=#%e5%88%9d%e5%a7%8b%e5%8c%96>#</a></h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>kubeadm init  --image-repository registry.aliyuncs.com/google_containers --kubernetes-version v1.23.1 --pod-network-cidr<span style=color:#f92672>=</span>10.0.24.13/16
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
+</span></span></code></pre></div><h2 id=kubectl-config>kubectl config
+<a class=anchor href=#kubectl-config>#</a></h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>mkdir -p $HOME/.kube
+</span></span><span style=display:flex><span>sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+</span></span><span style=display:flex><span>sudo chown <span style=color:#66d9ef>$(</span>id -u<span style=color:#66d9ef>)</span>:<span style=color:#66d9ef>$(</span>id -g<span style=color:#66d9ef>)</span> $HOME/.kube/config
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>source &lt;<span style=color:#f92672>(</span>kubectl completion bash<span style=color:#f92672>)</span>
+</span></span></code></pre></div><h2 id=污点>污点
+<a class=anchor href=#%e6%b1%a1%e7%82%b9>#</a></h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>kubectl taint nodes k8s-master node-role.kubernetes.io/master:NoSchedule-
+</span></span></code></pre></div></article><footer class=book-footer><div class="flex flex-wrap justify-between"></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><ul><li><a href=#关闭防火墙>关闭防火墙</a></li><li><a href=#关闭-selinux>关闭 selinux</a></li><li><a href=#关闭-swap>关闭 swap</a></li><li><a href=#添加主机名与-ip-对应的关系>添加主机名与 IP 对应的关系</a></li><li><a href=#将桥接的-ipv4-流量传递到-iptables-的链>将桥接的 IPV4 流量传递到 iptables 的链</a></li><li><a href=#yum>yum</a></li><li><a href=#基础包>基础包</a></li><li><a href=#docker>docker</a><ul><li><a href=#docker-config>docker config</a></li></ul></li><li><a href=#kubernetes-组件>kubernetes 组件</a></li><li><a href=#初始化>初始化</a></li><li><a href=#kubectl-config>kubectl config</a></li><li><a href=#污点>污点</a></li></ul></li></ul></nav></div></aside></main></body></html>
