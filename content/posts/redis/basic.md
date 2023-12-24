@@ -7,7 +7,9 @@ tags:
 title: basic
 draft: true
 ---
-
+<!--abstract-->
+redis基本数据类型和用法
+<!--more-->
 
 ## 字符串
 

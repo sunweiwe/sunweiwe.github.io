@@ -12,6 +12,7 @@ autoSwitchAppearance = true
 enableSearch = true
 enableCodeCopy = true
 enableImageLazyLoading = true
+summaryLength = 10
 
 # robots = ""
 fingerprintAlgorithm = "sha256"
@@ -47,17 +48,16 @@ fingerprintAlgorithm = "sha256"
   invertPagination = false
   showReadingTime = true
   showTableOfContents = true
-  showTaxonomies = false
-  showWordCount = false
-  showComments = false
+  showTaxonomies = true
+  showWordCount = true
   # sharingLinks = ["facebook", "twitter", "mastodon", "pinterest", "reddit", "linkedin", "email"]
 
 [list]
   showBreadcrumbs = true
-  showSummary = false
+  showSummary = true
   showTableOfContents = true
-  showTaxonomies = false
-  groupByYear = false
+  showTaxonomies = true
+  groupByYear = true
   paginationWidth = 1
 
 [sitemap]

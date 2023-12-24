@@ -6,9 +6,11 @@ tags:
   - Java
   - Collection
 title: basic
-draft: true
+draft: false
 ---
-
+<!--abstract-->
+Java 集合
+<!--more-->
 
 ## 集合(容器)
 

@@ -5,8 +5,12 @@ slug: /java/basic
 tags:
   - Java
 title: basic
-draft: true
+draft: false
 ---
+<!--abstract-->
+Spring boot注解基本用法
+<!--more-->
+
 
 ## 注解
 

@@ -5,8 +5,12 @@ slug: /java/class
 tags:
   - Java
 title: class
-draft: true
+draft: false
 ---
+<!--abstract-->
+类的使用
+<!--more-->
+
 
 ## 面向对象
 - 封装

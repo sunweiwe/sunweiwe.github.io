@@ -5,8 +5,10 @@ slug: /database/syntax
 tags:
   - Database
 title: database syntax
-description: ""
+description: "数据库的基本语法使用"
+summary: "数据库的基本语法使用"
 ---
+
 
 ## 数据库
 

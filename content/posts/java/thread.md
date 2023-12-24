@@ -5,9 +5,12 @@ slug: /java/thread
 tags:
   - Java
 title: thread
-draft: true
+draft: false
 ---
 
+<!--abstract-->
+Java thread 相关知识点
+<!--more-->
 
 ## 并发
 

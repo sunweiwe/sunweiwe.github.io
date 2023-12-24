@@ -1,14 +1,16 @@
 ---
 date: 2023-11-15T03:07:11Z
 toc: true
-slug: /java/synatx
+slug: /java/syntax
 tags:
   - Java
-  - Synatx
-title: synatx
-draft: true
+  - Syntax·
+title: syntax
+draft: false
 ---
-
+<!--abstract-->
+Java的基本数据类型
+<!--more-->
 
 ## 数据类型
 

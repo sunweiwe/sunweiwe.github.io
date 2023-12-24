@@ -6,8 +6,11 @@ tags:
   - Java
   - Stream
 title: stream
-draft: true
+draft: false
 ---
+<!--abstract-->
+Java流的概念和用法
+<!--more-->
 
 ## 从迭代到流的操作
 
