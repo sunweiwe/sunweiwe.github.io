@@ -2,7 +2,7 @@ all:
 	hugo
 	
 server:
-	hugo server -D
+	hugo server -D --disableFastRender
 
 post:
 	hugo new posts/

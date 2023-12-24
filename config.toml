@@ -1,40 +1,33 @@
 baseURL = "https://sunweiwe.github.io/"
 languageCode = "en-us"
 title = "sunweiwe/blog"
-theme = 'hugo-book'
+theme = 'congo'
 
-disablePathToLower = true
-enableGitInfo = true
+defaultContentLanguage = 'zh-cn'
+autoSwitchAppearance = true
+
+
+[article]
+  showTaxonomies = true
+  showSummary = true
+
+# config/_default/languages.en.toml
+
+title = "My awesome website"
+
+[author]
+  name = "sunweiwe"
+  headline = "A generally awesome human"
+
+locale = false
 
 
 [params]
-  subtitle = "关于代码，关于生活."
-  dateFmt = "02.01.2006"
-   
-  BookTheme = 'dark'
+  description = "关于代码，关于生活."
+  dateFormat = "02.01.2006"
 
-  BookToC = true
-
-  BookMenuBundle = '/menu'
-
-  BookSearch = true
-
-  BookDateFormat = 'January 2, 2006'
-
-  BookComments = true
-
-  BookPortableLinks = true
+[header]
   
-  BookServiceWorker = true
-
-  mathjax = true  # not required
-
-  showAllPostsArchive = true
-
-  rss = true
-
-  [[comments]]
-    enabled = true
   
 [menu]
   [[menu.main]]
