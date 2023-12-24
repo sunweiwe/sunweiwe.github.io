@@ -1,6 +1,6 @@
 ---
 date: 2022-10-23T15:46:14+08:00
-toc: true
+
 slug: /kubernetes/basic
 tags:
   - kubernetes

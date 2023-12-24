@@ -1,6 +1,6 @@
 ---
 date: 2023-11-15T02:28:38Z
-toc: true
+
 slug: /java/reflect
 tags:
   - Java

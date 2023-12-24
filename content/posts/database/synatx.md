@@ -1,6 +1,6 @@
 ---
 date: 2023-11-22T07:44:47Z
-toc: true
+
 slug: /database/syntax
 tags:
   - Database

@@ -1,6 +1,6 @@
 ---
 date: 2023-06-01T11:46:14+08:00
-toc: true
+
 slug: /image/basic
 tags:
   - image

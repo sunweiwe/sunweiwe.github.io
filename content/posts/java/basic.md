@@ -1,6 +1,6 @@
 ---
 date: 2023-11-14T03:37:48Z
-toc: true
+
 slug: /java/basic
 tags:
   - Java

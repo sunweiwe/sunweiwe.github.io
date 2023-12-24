@@ -1,6 +1,6 @@
 ---
 date: 2023-11-15T03:07:11Z
-toc: true
+
 slug: /java/syntax
 tags:
   - Java

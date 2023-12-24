@@ -1,6 +1,6 @@
 ---
 date: 2023-11-15T06:51:00Z
-toc: true
+
 slug: /java/class
 tags:
   - Java

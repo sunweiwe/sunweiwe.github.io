@@ -1,6 +1,6 @@
 ---
 date: 2023-11-15T22:38:31+08:00
-toc: true
+
 slug: /redis/basic
 tags:
   - Redis

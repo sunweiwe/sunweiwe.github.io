@@ -1,6 +1,6 @@
 ---
 date: 2022-10-24T21:39:36+08:00
-toc: true
+
 slug: /kubernetes/mysql
 tags:
   - kubernetes

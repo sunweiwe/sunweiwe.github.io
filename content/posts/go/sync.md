@@ -1,6 +1,6 @@
 ---
 date: 2022-10-23T22:55:45+08:00
-toc: true
+
 slug: /go/sync
 tags:
   - go

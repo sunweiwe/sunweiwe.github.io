@@ -1,6 +1,6 @@
 ---
 date: 2022-10-23T22:58:31+08:00
-toc: true
+
 slug: /linux/command
 tags:
   - linux

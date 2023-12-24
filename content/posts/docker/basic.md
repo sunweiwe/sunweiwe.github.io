@@ -1,6 +1,6 @@
 ---
 date: 2022-10-24T16:42:20+08:00
-toc: true
+
 slug: /docker/basic
 tags:
   - docker

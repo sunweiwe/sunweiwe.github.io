@@ -1,6 +1,6 @@
 ---
 date: 2022-10-26T22:11:15+08:00
-toc: true
+
 slug: /kubernetes/mount
 tags:
   - Go

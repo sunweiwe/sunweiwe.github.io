@@ -1,6 +1,6 @@
 ---
 date: 2023-02-24T15:46:14+08:00
-toc: true
+
 slug: /kubernetes/scheduler 
 tags:
   - kubernetes

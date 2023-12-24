@@ -1,6 +1,6 @@
 ---
 date: 2022-10-23T22:53:58+08:00
-toc: true
+
 slug: /mysql/basic
 tags:
   - mysql
