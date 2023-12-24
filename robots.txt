@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://sunweiwe.github.io/sitemap.xml
