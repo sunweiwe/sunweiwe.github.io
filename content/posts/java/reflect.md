@@ -1,18 +1,13 @@
 ---
 date: 2023-11-15T02:28:38Z
-
 slug: /java/reflect
 tags:
   - Java
   - Reflect
 title: reflect
 draft: false
+summary: Java 反射基本使用
 ---
-<!--abstract-->
-Java 反射基本使用
-<!--more-->
-
-
 ## 使用场景
 
 > 比如下面是通过 JDK 实现动态代理的示例代码，其中就使用了反射类 Method 来调用指定的方法。

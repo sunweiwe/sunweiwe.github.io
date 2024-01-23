@@ -20,3 +20,5 @@ public
 .vscode
 
 .hugo_build.lock
+
+content/**/.obsidian/*

@@ -1,11 +1,11 @@
 ---
 date: 2023-01-20T16:09:28+08:00
-
 slug: /go/clientgo
 tags:
   - Go
 title: clientgo
 draft: true
+summary: client go for kubernets
 ---
 
 # 模块

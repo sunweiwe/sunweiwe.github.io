@@ -1,20 +1,12 @@
 ---
 date: 2023-03-14T20:19:47+08:00
-
 slug: /linux/cgroup
 tags:
   - linux
   - cgroup
 title: cgroup
+summary: for linux cgroup
 ---
-
-<!--abstract-->
-
-for linux [cgroup](https://docs.kernel.org/admin-guide/cgroup-v2.html)
-
-<!--more-->
-
-
 ## cgroup
 
 ### mount

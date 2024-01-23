@@ -1,17 +1,12 @@
 ---
 date: 2023-11-14T03:37:48Z
-
 slug: /java/basic
 tags:
   - Java
 title: basic
 draft: false
+summary: Spring boot注解基本用法
 ---
-<!--abstract-->
-Spring boot注解基本用法
-<!--more-->
-
-
 ## 注解
 
 ### SpringBootApplication

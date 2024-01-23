@@ -1,19 +1,12 @@
 ---
 date: 2022-10-29T22:31:14+08:00
-
 slug: /docker/create
 tags:
   - docker
   - go
 title: 从零开始实现一个可用的 docker
+summary: 通过使用 go 实现一个可用的 docker 来了解 docker 的工作原理。
 ---
-
-<!--abstract-->
-
-通过使用 go 实现一个可用的 docker 来了解 docker 的工作原理。
-
-<!--more-->
-
 ## basic
 
 - 初始化

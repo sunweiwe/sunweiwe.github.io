@@ -1,17 +1,12 @@
 ---
 date: 2023-11-16T05:25:33Z
-
 slug: /java/thread
 tags:
   - Java
 title: thread
 draft: false
+summary: Java thread 相关知识点
 ---
-
-<!--abstract-->
-Java thread 相关知识点
-<!--more-->
-
 ## 并发
 
 

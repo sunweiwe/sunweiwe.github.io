@@ -1,24 +1,17 @@
 ---
 date: 2022-10-23T22:58:31+08:00
-
 slug: /linux/command
 tags:
   - linux
 title: command
-draft: true
+draft: false
+summary: for linux command
 ---
-
-<!--abstract-->
-
-for linux command
-
-<!--more-->
-
 ### 查看子进程
 
 - pstree
 - 第一个进程是 systemd
--
+
 
 ### 脚本文件可执行权限
 

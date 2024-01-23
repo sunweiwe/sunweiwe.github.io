@@ -1,17 +1,11 @@
 ---
 date: 2022-10-24T21:39:36+08:00
-
 slug: /kubernetes/mysql
 tags:
   - kubernetes
 title: stateful 部署 mysql
+summary: kubernetes 使用 stateful 方式部署 mysql
 ---
-
-<!--abstract-->
-
-kubernetes 使用 stateful 方式部署 mysql
-
-<!--more-->
 
 ## 部署 nfs server
 

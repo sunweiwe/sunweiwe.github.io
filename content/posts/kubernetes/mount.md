@@ -1,19 +1,12 @@
 ---
 date: 2022-10-26T22:11:15+08:00
-
 slug: /kubernetes/mount
 tags:
   - Go
   - kubernetes
 title: kubernetes 部署
+summary: 使用 kubeadm 在 liunx 上安装 kubernetes
 ---
-
-<!--abstract-->
-
-使用 kubeadm 在 linux 上安装 kubernetes
-
-<!--more-->
-
 ## 关闭防火墙
 
 ```bash

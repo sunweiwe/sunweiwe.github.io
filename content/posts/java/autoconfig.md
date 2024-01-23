@@ -1,16 +1,12 @@
 ---
 date: 2023-11-14T03:37:48Z
-
 slug: /java/autoconfig
 tags:
   - Java
 title: SpringBoot 自动装配原理
-draft: true 
+draft: false
+summary: Spring boot 自动转配的概念和原理
 ---
-
-<!--abstract-->
-Spring boot 自动转配的概念和原理
-<!--more-->
 
 ## 什么是 SpringBoot 自动装配？
 

@@ -1,17 +1,12 @@
 ---
 date: 2023-03-14T20:19:47+08:00
-
 slug: /linux/ubuntu
 tags:
   - docker
   - ubuntu
 title: Ubuntu in docker
+summary: ubuntu in docker
 ---
-
-<!--abstract-->
-
-<!--more-->
-
 ## 拉取镜像
 
 ```bash

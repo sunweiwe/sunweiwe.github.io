@@ -1,18 +1,11 @@
 ---
 date: 2022-10-23T22:55:45+08:00
-
 slug: /go/sync
 tags:
   - go
 title: sync
+summary: go stand library 基本的知识
 ---
-
-<!--abstract-->
-
-go stand library 基本的知识
-
-<!--more-->
-
 # **Mutex**
 
 互斥锁

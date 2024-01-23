@@ -1,17 +1,12 @@
 ---
 date: 2023-11-15T06:51:00Z
-
 slug: /java/class
 tags:
   - Java
 title: class
 draft: false
+summary: 类的使用
 ---
-<!--abstract-->
-类的使用
-<!--more-->
-
-
 ## 面向对象
 - 封装
 - 继承

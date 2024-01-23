@@ -1,17 +1,13 @@
 ---
 date: 2023-11-15T03:07:11Z
-
 slug: /java/syntax
 tags:
   - Java
   - Syntax·
 title: syntax
 draft: false
+summary: Java的基本数据类型
 ---
-<!--abstract-->
-Java的基本数据类型
-<!--more-->
-
 ## 数据类型
 
 > 八种基本类型，其中四种整型，两种浮点类型，1种字符串类型和一种真值类型

@@ -1,17 +1,11 @@
 ---
 date: 2022-10-24T16:42:20+08:00
-
 slug: /docker/basic
 tags:
   - docker
 title: docker basic
+summary: docker 基本的知识
 ---
-
-<!--abstract-->
-
-docker 基本的知识
-
-<!--more-->
 
 ## 构建镜像
 

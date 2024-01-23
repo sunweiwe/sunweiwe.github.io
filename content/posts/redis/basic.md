@@ -1,16 +1,12 @@
 ---
 date: 2023-11-15T22:38:31+08:00
-
 slug: /redis/basic
 tags:
   - Redis
 title: basic
-draft: true
+draft: false
+summary: redis基本数据类型和用法
 ---
-<!--abstract-->
-redis基本数据类型和用法
-<!--more-->
-
 ## 字符串
 
 - 缓存功能

@@ -1,17 +1,13 @@
 ---
 date: 2023-11-15T19:50:55+08:00
-
 slug: /java/stream
 tags:
   - Java
   - Stream
 title: stream
 draft: false
+summary: Java流的概念和用法
 ---
-<!--abstract-->
-Java流的概念和用法
-<!--more-->
-
 ## 从迭代到流的操作
 
 ```java

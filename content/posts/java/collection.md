@@ -1,17 +1,13 @@
 ---
 date: 2023-11-14T03:37:48Z
-
 slug: /java/collection
 tags:
   - Java
   - Collection
 title: basic
 draft: false
+summary: Java 集合
 ---
-<!--abstract-->
-Java 集合
-<!--more-->
-
 ## 集合(容器)
 
 ### 接口和实现分离

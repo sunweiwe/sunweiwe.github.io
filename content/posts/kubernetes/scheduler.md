@@ -1,20 +1,12 @@
 ---
 date: 2023-02-24T15:46:14+08:00
-
-slug: /kubernetes/scheduler 
+slug: /kubernetes/scheduler
 tags:
   - kubernetes
   - scheduler
 title: kubernetes scheduler
+summary: kubernetes scheduler
 ---
-
-<!--abstract-->
-
-kubernetes scheduler
-
-<!--more-->
-
-
 ## 调度器配置
 你可以通过编写配置文件，并将其路径传给 kube-scheduler 的命令行参数，定制 kube-scheduler 的行为。
 

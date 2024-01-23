@@ -1,19 +1,12 @@
 ---
 date: 2022-10-23T22:53:58+08:00
-
 slug: /mysql/basic
 tags:
   - mysql
 title: mysql basic
-draft: true
+draft: false
+summary: mysql basic concept
 ---
-
-<!--abstract-->
-
-mysql basic
-
-<!--more-->
-
 ### 覆盖索引
 
 - 就是 select 的数据列只用从索引中就能够取得，不必读取数据行，MySQL 可以利用索引返回 select 列表中的字段，而不必根据索引再次读取数据文件，换句话说**查询列要被所建的索引覆盖**。
